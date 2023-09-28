@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      logo_src: '/img/files.png',
+      logo_src: '/img/logo.png',
       app_name: 'Papers Project'
     }
   }  

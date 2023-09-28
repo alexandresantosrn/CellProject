@@ -5,6 +5,7 @@
         </router-link>
 
         <router-link to="/">Home</router-link> |
+        <router-link to="/atendimentos">Atendimentos</router-link> 
         <router-link to="/sair">Sair</router-link>
     </div>    
 </template>
@@ -32,8 +33,8 @@ export default {
     }
 
     #logo {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
     }
 
     #nav a {
