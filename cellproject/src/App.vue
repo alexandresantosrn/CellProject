@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar :logo="logo_src" :alt="app_name"/>
-    <router-view/>
+    <Navbar :logo="logo_src" :alt="app_name" :allowLinks="viewLinks"/>
+    <HomeView v-on:showLinks="linksOn"/>    
     <Footer />
   </div>
   
@@ -10,17 +10,25 @@
 <script>
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
+import HomeView from './views/HomeView.vue';
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Footer
+    Footer,
+    HomeView
   },
   data() {
     return {
-      logo_src: '/img/logo.png',
-      app_name: 'Papers Project'
+      logo_src: '/img/logo2.png',
+      app_name: 'Cell Project',
+      viewLinks: false
+    }
+  },
+  methods: {
+    linksOn(value) {
+      this.viewLinks = true;
     }
   }  
 }

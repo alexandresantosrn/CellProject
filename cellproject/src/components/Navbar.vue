@@ -4,17 +4,23 @@
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
 
-        <router-link to="/">Home</router-link> |
-        <router-link to="/atendimentos">Área do Usuário</router-link> 
-        <router-link to="/atendimentos">Atendimentos</router-link> 
-        <router-link to="/sair">Sair</router-link>
+        <div id="links" v-show="allowLinks">
+            <router-link to="/">Home</router-link> |
+            <router-link to="/atendimentos">Área do Usuário</router-link> 
+            <router-link to="/atendimentos">Atendimentos</router-link> 
+            <router-link to="/sair">Sair</router-link>
+        </div>
     </div>    
 </template>
 
 <script>
 export default {
-    name: 'Navbar',
-    props: ['logo', 'alt']
+    name: 'Navbar',        
+    props: {
+        logo: String,
+        alt: String,
+        allowLinks: Boolean  
+    }, 
 }
 </script>
 
@@ -31,12 +37,7 @@ export default {
     #nav #logo-url {
         margin: auto;
         margin-left: 0;
-    }
-
-    #logo {
-        width: 60px;
-        height: 60px;
-    }
+    }    
 
     #nav a {
         color: #fcba03;
