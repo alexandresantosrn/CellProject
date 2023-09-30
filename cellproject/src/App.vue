@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Navbar :logo="logo_src" :alt="app_name" :allowLinks="viewLinks"/>
-    <HomeView v-on:showLinks="linksOn"/>    
+    <router-view/>
+    <router-link to="/atendimentos"></router-link>
     <Footer />
   </div>
   
@@ -21,7 +22,7 @@ export default {
   },
   data() {
     return {
-      logo_src: '/img/logo2.png',
+      logo_src: '/img/logo.png',
       app_name: 'Cell Project',
       viewLinks: false
     }
