@@ -49,8 +49,7 @@ export default {
             }
             
             else {                
-                this.msg = 'Usuário ou senha incorretos. Tente outra vez!'
-                console.log(this.msg);
+                this.msg = 'Usuário ou senha incorretos. Tente outra vez!'                
             }
         }
     }

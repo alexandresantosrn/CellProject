@@ -2,7 +2,11 @@
   <div class="main-container">
    <div v-show="logoff">     
     <LogonVue v-on:realizarLogin="authenticated"/>
-  </div>  
+  </div> 
+  
+    <div v-show="linksOn">
+      <p>Usuário autenticado com sucesso! Clique <router-link to="/usuario">aqui</router-link> para acessar a área de usuário.</p>
+    </div>
   </div> 
 </template>
 
@@ -32,3 +36,16 @@ export default {
   }  
 }
 </script>
+
+<style scoped>
+  p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  a{
+    color: #FCBA03;
+    text-decoration: solid;
+  }   
+</style>
