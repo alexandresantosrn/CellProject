@@ -11,7 +11,7 @@
 
             <router-link to="/usuario">
                 <div id="list-agendamentos" @click="listarAgendamentos(), mudarCorAgendamentos()" :style="{ backgroundColor: corListagemAgendamento}">
-                    <img :src="list_agendamentos_src" :alt="list_agendamento_alt" class="img-user"> 
+                    <img :src="list_agendamentos_src" :alt="list_agendamentos_alt" class="img-user"> 
                     <p>LISTAR</p> 
                     <p>AGENDAMENTOS</p>
                 </div>
@@ -51,15 +51,13 @@ export default {
         adicionarAgendamento() {
             this.showFormAgendamentos = true;
             this.showListarAgendamentos = false;
-            this.showListarOs = false;
-            
+            this.showListarOs = false;           
             this.$emit('adicionarAgendamento', this.showFormAgendamentos);
         },
         listarAgendamentos(){
             this.showFormAgendamentos = false;
             this.showListarAgendamentos = true;
-            this.showListarOs = false;          
-
+            this.showListarOs = false;                  
             this.$emit('listarAgendamentos', this.showListarAgendamentos);
         },
         listarOs(){

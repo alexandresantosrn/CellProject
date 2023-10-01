@@ -9,7 +9,11 @@
         
         <div v-show="exibirFormAgendamento">
             <AgendarAtendimento />
-        </div>    
+        </div>   
+        
+        <div v-show="exibirListagemAgendamento">
+            <ListagemAgendamentos />
+        </div> 
     </div>    
 </template>
 
@@ -17,28 +21,34 @@
 
 import UserBanner from '@/components/UserBanner.vue';
 import AgendarAtendimento from '@/components/AgendarAtendimento.vue';
+import ListagemAgendamentos from '@/components/ListagemAgendamentos.vue';
 
 export default {
     name: 'Usuario',
     data() {
         return {
-            exibirFormAgendamento: false
+            exibirFormAgendamento: false,
+            exibirListagemAgendamento: false
         }
     },            
     components: {
         UserBanner,
-        AgendarAtendimento
+        AgendarAtendimento,
+        ListagemAgendamentos
     },
     methods: {
-        showFormAgendamentos(value) {
+        showFormAgendamentos(value) {            
             this.exibirFormAgendamento = value;
+            this.exibirListagemAgendamento = false;
         },
         showListarAgendamentos(value) {
             this.exibirFormAgendamento = false;
-            console.log(this.exibirFormAgendamento);
+            this.exibirListagemAgendamento = value;     
+            console.log(this.exibirListagemAgendamento);      
         },
         showListarOs(value) {
             this.exibirFormAgendamento = false;
+            this.exibirListagemAgendamento = false;
         }
     }
 }
