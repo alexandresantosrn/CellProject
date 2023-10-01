@@ -4,20 +4,42 @@
         <div id="descricao">
             <p>Prezado usuário, selecione abaixo uma das opções desejadas:</p>
         </div>
-
-        <UserBanner />
-
+        
+        <UserBanner v-on:adicionarAgendamento="showFormAgendamentos" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
+        
+        <div v-show="exibirFormAgendamento">
+            <AgendarAtendimento />
+        </div>    
     </div>    
 </template>
 
 <script>
 
-import UserBanner
- from '@/components/UserBanner.vue';
+import UserBanner from '@/components/UserBanner.vue';
+import AgendarAtendimento from '@/components/AgendarAtendimento.vue';
+
 export default {
     name: 'Usuario',
+    data() {
+        return {
+            exibirFormAgendamento: false
+        }
+    },            
     components: {
-        UserBanner
+        UserBanner,
+        AgendarAtendimento
+    },
+    methods: {
+        showFormAgendamentos(value) {
+            this.exibirFormAgendamento = value;
+        },
+        showListarAgendamentos(value) {
+            this.exibirFormAgendamento = false;
+            console.log(this.exibirFormAgendamento);
+        },
+        showListarOs(value) {
+            this.exibirFormAgendamento = false;
+        }
     }
 }
 </script>
@@ -26,7 +48,7 @@ export default {
 
     .usuario {
         margin: 20px;
-        text-align: center;
+        text-align: center;        
     }  
 
     #descricao {
@@ -35,5 +57,7 @@ export default {
         height: 20px;
         background-color: #FFFFE0;
         text-align: center;
+        font-size: 16px;
+        font-weight: bold;
     }
 </style>

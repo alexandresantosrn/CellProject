@@ -2,24 +2,24 @@
     <div id="banner">
         <div class="sessions">            
             <router-link to="/usuario">
-                <div id="users-list" @click="listUsers(), mudarCorUsers()" :style="{ backgroundColor: colorUsers}">                    
-                    <img :src="users_list_src" :alt="users_list_alt" class="img-users-list">                
+                <div id="add-agendamento" @click="adicionarAgendamento(), mudarCorAgendamento()" :style="{ backgroundColor: corAgendamento}">                    
+                    <img :src="add_agendamento_src" :alt="add_agendamento_alt" class="img-user">                
                     <p>AGENDAR</p>
                     <p>ATENDIMENTOS</p>                                
                 </div>
             </router-link>
 
             <router-link to="/usuario">
-                <div id="create-users" @click="createUsers(), mudarCorUser()" :style="{ backgroundColor: colorUser}">
-                    <img :src="add_user_src" :alt="add_user_alt" class="img-users-list"> 
+                <div id="list-agendamentos" @click="listarAgendamentos(), mudarCorAgendamentos()" :style="{ backgroundColor: corListagemAgendamento}">
+                    <img :src="list_agendamentos_src" :alt="list_agendamento_alt" class="img-user"> 
                     <p>LISTAR</p> 
                     <p>AGENDAMENTOS</p>
                 </div>
             </router-link>
 
             <router-link to="/usuario">
-                <div id="create-papers" @click="createPapers(), mudarCorPapers()" :style="{ backgroundColor: colorPaper}">
-                    <img :src="add_paper_src" :alt="add_paper_alt" class="img-users-list"> 
+                <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
+                    <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
                     <p>LISTAR</p>
                     <p>ORDENS DE SERVIÇO</p>
                 </div>
@@ -33,56 +33,56 @@ export default {
     name: 'UserBanner',
     data() {
         return {
-            users_list_src: '/img/agendamento.png',
-            users_list_alt: 'Agendar Atendimentos',
-            add_user_src: '/img/listar-agendamentos.png',
-            add_user_alt: 'Listar Agendamentos',
-            add_paper_src: '/img/listar-os.png',
-            add_paper_alt: 'Listar Ordens de Serviço',
-            show_users: false,
-            show_add_user: false,
-            show_add_paper: false,
-            colorUsers: 'white',
-            colorUser: 'white',
-            colorPaper: 'white'           
+            add_agendamento_src: '/img/agendamento.png',
+            add_agendamento_alt: 'Agendar Atendimentos',
+            list_agendamentos_src: '/img/listar-agendamentos.png',
+            list_agendamentos_alt: 'Listar Agendamentos',
+            list_os_src: '/img/listar-os.png',
+            list_os_alt: 'Listar Ordens de Serviço',
+            showFormAgendamentos: false,
+            showListarAgendamentos: false,
+            showListarOs: false,
+            corAgendamento: 'white',
+            corListagemAgendamento: 'white',
+            corListagemOs: 'white'           
         }
     },
     methods: {
-        listUsers() {
-            this.show_users = true;
-            this.show_add_user = false;
-            this.show_add_paper = false;
+        adicionarAgendamento() {
+            this.showFormAgendamentos = true;
+            this.showListarAgendamentos = false;
+            this.showListarOs = false;
             
-            this.$emit('list_users', this.show_users);
+            this.$emit('adicionarAgendamento', this.showFormAgendamentos);
         },
-        createUsers(){
-            this.show_users = false;
-            this.show_add_user = true;
-            this.show_add_paper = false;          
+        listarAgendamentos(){
+            this.showFormAgendamentos = false;
+            this.showListarAgendamentos = true;
+            this.showListarOs = false;          
 
-            this.$emit('create_users', this.show_add_user);
+            this.$emit('listarAgendamentos', this.showListarAgendamentos);
         },
-        createPapers(){
-            this.show_users = false;
-            this.show_add_user = false;
-            this.show_add_paper = true; 
+        listarOs(){
+            this.showFormAgendamentos = false;
+            this.showListarAgendamentos = false;
+            this.showListarOs = true; 
             
-            this.$emit('create_papers', this.show_add_paper);
+            this.$emit('listarOs', this.showListarOs);
         },
-        mudarCorUsers() {
-            this.colorUsers = '#FFFFE0', 
-            this.colorUser = 'White',
-            this.colorPaper = 'White'          
+        mudarCorAgendamento() {
+            this.corAgendamento = '#FFFFE0', 
+            this.corListagemAgendamento = 'White',
+            this.corListagemOs = 'White'          
         },
-        mudarCorUser() {
-            this.colorUsers = 'White',
-            this.colorUser = '#FFFFE0', 
-            this.colorPaper = 'White'          
+        mudarCorAgendamentos() {
+            this.corAgendamento = 'White',
+            this.corListagemAgendamento = '#FFFFE0', 
+            this.corListagemOs = 'White'          
         },
-        mudarCorPapers() {
-            this.colorUsers = 'White', 
-            this.colorUser = 'White',
-            this.colorPaper = '#FFFFE0'          
+        mudarCorOs() {
+            this.corAgendamento = 'White', 
+            this.corListagemAgendamento = 'White',
+            this.corListagemOs = '#FFFFE0'          
         }
     }
 }
@@ -102,15 +102,14 @@ export default {
         margin: auto;
         display: flex;
     }
-
     .sessions a {
         color: black;
         text-decoration: none;
     }      
 
-    #users-list, 
-    #create-users,
-    #create-papers {
+    #add-agendamento, 
+    #list-agendamentos,
+    #list-os {
         border: 2px solid black;
         border-radius: 10px;
         height: 140px;
@@ -121,8 +120,7 @@ export default {
         line-height: 8px;  
         margin: 10px;     
     }
-
-    .img-users-list {
+    .img-user {
         height: 80px;
         margin: 15px;
     }       
