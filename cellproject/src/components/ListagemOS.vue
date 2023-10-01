@@ -1,73 +1,72 @@
 <template>
     <div>
-        <h2>Listagem de Ordens de Serviço</h2>
-        <table class="table">
+      <h2>Listagem de Ordens de Serviço</h2>
+      <table class="table">
         <thead>
-            <tr>
-            <th>N&#186 Ordem de Serviço</th>
+          <tr>
+            <th>N. Ordem de Serviço</th>
             <th>Data de Entrada</th>
             <th>Modelo</th>
-            <th>Status do Reparo</th>
+            <th>Status de Reparo</th>
             <th>Preço Total</th>
             <th>Ações</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
-            <tr v-for="ordem in ordens" :key="ordem.id">
+          <tr v-for="ordem in ordens" :key="ordem.id">
             <td>{{ ordem.numero }}</td>
             <td>{{ ordem.dataEntrada }}</td>
             <td>{{ ordem.modelo }}</td>
             <td>{{ ordem.statusReparo }}</td>
             <td>{{ ordem.precoTotal }}</td>
             <td>
-                <button class="btn btn-danger" @click="cancelarOrdem(ordem.id)">
-                Cancelar Ordem
-                </button>
+              <button class="btn btn-info" @click="visualizarDetalhes(ordem.id)">
+                Visualizar Detalhes
+              </button>
             </td>
-            </tr>
+          </tr>
         </tbody>
-        </table>
+      </table>
     </div>
-</template>
+  </template>
   
-<script>
-export default {
-    name: 'Listagem de Ordens de Serviço',
+  <script>
+  export default {
     data() {
-        return {
+      return {
         ordens: [
-            {
+          {
             id: 1,
             numero: 'OS2023001',
             dataEntrada: '2023-08-30',
             modelo: 'Smartphone XYZ',
             statusReparo: 'Em andamento',
             precoTotal: 100.00
-            },
-            {
+          },
+          {
             id: 2,
             numero: 'OS2023002',
             dataEntrada: '2023-08-31',
             modelo: 'Laptop ABC',
             statusReparo: 'Concluída',
             precoTotal: 250.00
-            },
-            // Adicione mais objetos de ordem de serviço conforme necessário
+          },
+          // Adicione mais objetos de ordem de serviço conforme necessário
         ]
-        };
-},
-methods: {
-    cancelarOrdem(ordemId) {
-    // Lógica para cancelar a ordem com base no ID
-    console.log(`Cancelar ordem com ID: ${ordemId}`);
+      };
+    },
+    methods: {
+      visualizarDetalhes(ordemId) {
+        // Lógica para visualizar os detalhes da ordem com base no ID
+        console.log(`Visualizar detalhes da ordem com ID: ${ordemId}`);
+      }
     }
-}
-};
-</script>
+  };
+  </script>
 
 <style scoped>
-  .table {
-    width: 1000px;       
-    margin: auto;  
-  }
+.table {
+  width: 1000px;       
+  margin: auto;  
+}
 </style>

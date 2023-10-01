@@ -48,9 +48,17 @@ export default {
                 this.$emit('realizarLogin', this.authenticated);
             }
             
+            //mensagem de apresentção após falha na autenticação
             else {                
                 this.msg = 'Usuário ou senha incorretos. Tente outra vez!'                
             }
+
+            //limpar msg após 5 segundos
+            setTimeout(() => this.msg = "", 5000);
+
+            //limpar os campos
+            this.username = "";
+            this.password = "";
         }
     }
 }
