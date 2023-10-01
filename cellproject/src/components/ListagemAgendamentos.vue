@@ -4,7 +4,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th>N. Agendamento</th>
+          <th>N&#186 Agendamento</th>
           <th>Data de Agendamento</th>
           <th>Horário de Agendamento</th>
           <th>Status do Agendamento</th>
@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'Listagem Agendamentos',
   data() {
     return {
       agendamentos: [
