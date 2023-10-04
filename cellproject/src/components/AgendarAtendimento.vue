@@ -14,10 +14,9 @@
         </div>
 
         <div class="form-group">
-            <label for="tipoAgendamento">Tipo de Agendamento:</label>
-            <select class="form-control" id="tipoAgendamento" v-model="tipoAgendamento">
-            <option value="Conserto em Garantia">Conserto em Garantia</option>
-            <option value="Conserto Fora de Garantia">Conserto Fora de Garantia</option>
+            <label for="tipoServico">Tipo de Serviço:</label>
+            <select class="form-control" id="tipoServico" v-model="selectedTipoServico">
+              <option v-for="tipo in comboTipoServico" :key="tipo.id" :value="tipo.descricao">{{ tipo.descricao }}</option>           
             </select>
         </div>
 
@@ -43,16 +42,26 @@
       return {
         nomeCompleto: '',
         cpf: '',
-        tipoAgendamento: 'Conserto em Garantia',
+        selectedTipoServico: '',
+        comboTipoServico: [],
         dataAgendamento: '',
         horarioAgendamento: ''
       };
     },
     methods: {
+      async getTipoServico() {
+        const req = await fetch('http://localhost:8080/tiposervico');              
+        const data = await req.json();
+        this.comboTipoServico = data; 
+        console.log(data);
+      },
       agendar() {
         // Aqui você pode adicionar a lógica para processar o agendamento
         console.log('Agendamento enviado');
       }
+    },
+    mounted() {
+      this.getTipoServico();
     }
   };
  </script>
