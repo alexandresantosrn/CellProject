@@ -64,7 +64,6 @@ export default {
 </script>
   
 <style scoped>
-
     .usuario {
         margin: 20px;
         text-align: center;        
