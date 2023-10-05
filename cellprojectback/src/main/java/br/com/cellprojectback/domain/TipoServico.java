@@ -2,8 +2,8 @@ package br.com.cellprojectback.domain;
 
 public class TipoServico {
 
-	int id;
-	String descricao;
+	private int id;
+	private String descricao;
 
 	public TipoServico(int id, String descricao) {
 		super();

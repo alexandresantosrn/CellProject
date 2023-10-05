@@ -1,21 +1,12 @@
 package br.com.cellprojectback.domain;
 
-import java.util.Date;
-
 public class Pessoa {
 
-	int id;
+	private int id;
 	private String cpf;
 	private String nome;
-	private Date dataNascimento;
-
-	public Pessoa(int id, String cpf, String nome, Date dataNascimento) {
-		super();
-		this.id = id;
-		this.cpf = cpf;
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
-	}
+	private String email;
+	private int telefone;
 
 	public int getId() {
 		return id;
@@ -41,12 +32,20 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public Date getDataNascimento() {
-		return dataNascimento;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(int telefone) {
+		this.telefone = telefone;
 	}
 
 }
