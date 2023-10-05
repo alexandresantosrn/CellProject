@@ -21,6 +21,9 @@
                         </form>
                     </div>
                 </div>
+                <p class="mt-3 text-center">
+                    Caso ainda não possua cadastro, <router-link to="/formcadastro">clique aqui.</router-link>
+                </p>
             </div>
         </div>  
     </div>

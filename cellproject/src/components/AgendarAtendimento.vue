@@ -53,7 +53,6 @@
         const req = await fetch('http://localhost:8080/tiposervico');              
         const data = await req.json();
         this.comboTipoServico = data; 
-        console.log(data);
       },
       agendar() {
         // Aqui você pode adicionar a lógica para processar o agendamento
@@ -72,8 +71,7 @@
         margin: auto;        
     }
 
-    label {  
-        font-weight: bold;      
+    label {              
         margin-bottom: 5px;
         margin-top: 5px;
         color: #222;        

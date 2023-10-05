@@ -37,7 +37,7 @@ export default {
 
 <style>
   * {
-    font-family: HELVETICA;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;

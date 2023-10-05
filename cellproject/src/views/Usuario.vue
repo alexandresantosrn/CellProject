@@ -75,7 +75,6 @@ export default {
         height: 20px;
         background-color: #FFFFE0;
         text-align: center;
-        font-size: 16px;
-        font-weight: bold;
+        font-size: 16px;     
     }
 </style>
