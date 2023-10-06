@@ -1,6 +1,7 @@
 <template>   
     <div id="logon">
         <Message :msg="msg" v-show="msg" />
+
         <div class="row">
             <div class="col-md-4 offset-md-4">
                 <div class="card">
@@ -24,8 +25,13 @@
                 <p class="mt-3 text-center">
                     Caso ainda não possua cadastro, <router-link to="/formcadastro">clique aqui.</router-link>
                 </p>
+
+                <p class="mt-3 text-center">
+                    <router-link to="/formsenha">Clique aqui</router-link>, para recuperar sua senha.
+                </p>
             </div>
         </div>  
+        
     </div>
 </template>
 

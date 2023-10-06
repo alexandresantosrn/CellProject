@@ -1,9 +1,7 @@
 <template>
     <div class="formcadastro">
       
-      <div id="descricao">
-            <p>Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:</p>
-      </div>
+      <Instrucoes :texto="texto" />
 
       <form @submit.prevent="submitForm" id="form">
         <div class="form-group">
@@ -42,7 +40,13 @@
   </template>
   
   <script>
+  import Instrucoes from '@/components/Instrucoes.vue';
+  
   export default {
+    name: 'FormCadastro',   
+    components: {
+        Instrucoes
+    }, 
     data() {
       return {
         formData: {
@@ -51,8 +55,9 @@
           email: '',
           phone: '',
           login: '',
-          password: '',
-        }
+          password: '',         
+        },
+        texto: 'Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:'
       };
     },
     methods: {
@@ -80,18 +85,7 @@
         text-align: left;
         padding: 8px;
     }
-
-    #descricao {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: auto;
-        height: auto;
-        background-color: #FFFFE0;
-        text-align: center;
-        font-size: 16px;
-        
-    }
-
+    
     input, button {
         margin-bottom: 10px;
     } 
