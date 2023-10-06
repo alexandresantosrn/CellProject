@@ -16,6 +16,6 @@ public class TipoServicoController {
 	@RequestMapping("/tiposervico")
 	public List<TipoServico> getTiposServico() {
 		return TipoServicoRepository.getTiposServico();
-	}
-
+	}	
+	
 }

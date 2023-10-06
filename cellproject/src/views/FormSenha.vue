@@ -16,6 +16,7 @@
 
 <script>
 import Instrucoes from '@/components/Instrucoes.vue'
+import axios from 'axios';
 
 export default {
     name: 'FormSenha',
@@ -24,12 +25,31 @@ export default {
     },
     data() {
         return {
+            email: '',
             texto: 'Prezado usuário, informe abaixo o e-mail utilizado durante cadastro:'   
         }
     },
     methods: {
         submitForm() {
+            email = this.email;
             
+            axios.get('http://localhost:8080/recupera-senha?email='+email)
+                .then(response => {
+                // Verificar a resposta do servidor
+                if (response.status === 200) {
+                    // Email encontrado - prosseguir com a recuperação da senha
+                    // Normalmente, você redirecionaria o usuário para uma página de confirmação
+                    // ou exibiria uma mensagem de sucesso.
+                    console.log('E-mail encontrado. Enviando e-mail de recuperação de senha.');
+                } else {
+                    // Email não encontrado - exibir mensagem de erro
+                    console.error('E-mail não encontrado.');
+                }
+            })
+            .catch(error => {
+                // Lidar com erros de solicitação, como problemas de rede ou problemas do servidor
+                console.error('Erro ao verificar o e-mail:', error);
+            });
         }
     }  
 }
