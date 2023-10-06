@@ -47,7 +47,7 @@ export default {
                     
                     if (error.response.status === 404) {
                        // Lida com o status 404 (Not Found)                       
-                       this.msg = error.response.data;
+                       this.msg = error.response.data;                       
                     } else { 
                         //Demais erros                     
                         this.msg = error.response.data;

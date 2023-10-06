@@ -12,9 +12,20 @@ public class PessoaRepository {
 	public static List<Pessoa> getPessoas() {
 		return pessoas;
 	}
-	
+
 	public static Pessoa addPessoa(Pessoa pessoa) {
 		pessoas.add(pessoa);
 		return pessoa;
+	}
+
+	public static boolean hasPessoaByEmail(String email) {
+
+		for (Pessoa pessoa : pessoas) {
+			if (pessoa.getEmail().equals(email)) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 }
