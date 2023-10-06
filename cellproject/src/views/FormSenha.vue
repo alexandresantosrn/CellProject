@@ -46,7 +46,7 @@ export default {
                 .catch(error => {                    
                     
                     if (error.response.status === 404) {
-                        // Lida com o status 404 (Not Found)                       
+                       // Lida com o status 404 (Not Found)                       
                        this.msg = error.response.data;
                     } else { 
                         //Demais erros                     
