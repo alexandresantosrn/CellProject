@@ -36,6 +36,8 @@
   </template>
   
   <script>
+  import axios from 'axios';
+
   export default {
     name: 'Agendar Aterndimento',
     data() {
@@ -49,11 +51,21 @@
       };
     },
     methods: {
+      //async getTipoServico() {
+       // const req = await fetch('http://localhost:8080/tiposervico');              
+      //  const data = await req.json();
+      //  this.comboTipoServico = data; 
+    //  },
+
       async getTipoServico() {
-        const req = await fetch('http://localhost:8080/tiposervico');              
-        const data = await req.json();
-        this.comboTipoServico = data; 
-      },
+        axios.get('http://localhost:8080/tiposervico')
+          .then(response => {
+            this.comboTipoServico = response.data;
+          })
+          .catch(error => {
+            console.error('Erro ao buscar dados:', error);
+          });
+      },  
       agendar() {
         // Aqui você pode adicionar a lógica para processar o agendamento
         console.log('Agendamento enviado');
