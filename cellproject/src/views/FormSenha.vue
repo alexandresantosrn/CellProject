@@ -26,6 +26,11 @@ export default {
         return {
             texto: 'Prezado usuário, informe abaixo o e-mail utilizado durante cadastro:'   
         }
+    },
+    methods: {
+        submitForm() {
+            
+        }
     }  
 }
 </script>
