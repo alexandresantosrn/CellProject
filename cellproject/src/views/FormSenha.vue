@@ -18,8 +18,8 @@
 
 <script>
 import Instrucoes from '@/components/Instrucoes.vue'
+import Message from '@/components/Message.vue'
 import axios from 'axios';
-import Message from '@/components/Message.vue';
 
 export default {
     name: 'FormSenha',

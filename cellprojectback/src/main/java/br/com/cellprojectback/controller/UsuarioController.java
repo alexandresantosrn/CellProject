@@ -27,7 +27,7 @@ public class UsuarioController {
 	public ResponseEntity<String> realizarLogin(@RequestParam String email, String senha) {
 		
 		if (!UsuarioRepository.hasUsuarioByLoginSenha(email, senha)) {
-			return new ResponseEntity<>("Usuário ou senha incorretos. Tente outra vez!'", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("Email ou senha incorretos. Tente outra vez!", HttpStatus.NOT_FOUND);
 		}
 
 		return ResponseEntity.ok("Usuário autenticado com sucesso!");

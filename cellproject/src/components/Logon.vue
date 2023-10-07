@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <form @submit.prevent="realizarLogin">
                             <div class="form-group">
-                                <label for="username">Usuário:</label>
+                                <label for="username">Email:</label>
                                 <input type="text" class="form-control" id="username" v-model="username" required>
                             </div>
                             <div class="form-group">
@@ -37,6 +37,7 @@
 
 <script>
 import Message from './Message.vue';
+import axios from 'axios';
 
 export default {
     name: 'Logon',
@@ -46,21 +47,44 @@ export default {
     data() {
         return {
          authenticated: false,
-         msg: null
+         msg: '',
+         username: '',
+         password: ''
         }
     },
     methods: {
         realizarLogin() {
 
-            if (this.username == this.password) {
-                this.authenticated = true;           
-                this.$emit('realizarLogin', this.authenticated);
-            }
+            // if (this.username == this.password) {
+            //     this.authenticated = true;           
+            //     this.$emit('realizarLogin', this.authenticated);
+            // }
             
-            //mensagem de apresentção após falha na autenticação
-            else {                
-                this.msg = 'Usuário ou senha incorretos. Tente outra vez!'                
-            }
+            // //mensagem de apresentção após falha na autenticação
+            // else {                
+            //     this.msg = 'Usuário ou senha incorretos. Tente outra vez!'                
+            // }
+
+            username = this.username;
+            password = this.password;
+            
+            axios.post('http://localhost:8080/realiza-login?email='+username+'&senha='+password)
+                .then(response => {
+                    // Verifica a resposta do servidor                                   
+                    this.msg = response.data;  
+                    this.authenticated = true;  
+                    this.$emit('realizarLogin', this.authenticated);          
+                })
+                .catch(error => {                    
+                    
+                    if (error.response.status === 404) {
+                       // Lida com o status 404 (Not Found)                       
+                       this.msg = error.response.data;                       
+                    } else { 
+                        //Demais erros                     
+                        this.msg = error.response.data;
+                    }
+                });
 
             //limpar msg após 5 segundos
             setTimeout(() => this.msg = "", 5000);
