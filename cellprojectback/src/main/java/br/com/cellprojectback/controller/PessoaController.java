@@ -10,22 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cellprojectback.domain.Pessoa;
+import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.repository.PessoaRepository;
 
 @CrossOrigin
 @RestController
 public class PessoaController {
-	
-	@PostMapping("/adicionar-pessoa")
-	public ResponseEntity<String> addPessoa(@RequestBody Pessoa pessoa) {			
-		pessoa.setId(1);
-		PessoaRepository.addPessoa(pessoa);
-		return ResponseEntity.ok("Usuário autenticado com sucesso!");
-	}
-	
+
 	@RequestMapping("/get-pessoas")
 	public List<Pessoa> getPessoas() {
 		return PessoaRepository.getPessoas();
+	}
+
+	@PostMapping("/adicionar-pessoa")
+	public ResponseEntity<String> adicionarPessoa(@RequestBody Pessoa pessoa) {
+		pessoa.setId(1);
+		PessoaRepository.addPessoa(pessoa);
+		return ResponseEntity.ok("Cadastro realizado com sucesso!");
 	}
 
 }

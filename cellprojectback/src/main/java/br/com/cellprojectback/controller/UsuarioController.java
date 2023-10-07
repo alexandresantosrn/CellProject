@@ -1,17 +1,44 @@
 package br.com.cellprojectback.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.cellprojectback.domain.Pessoa;
+import br.com.cellprojectback.domain.Usuario;
+import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.UsuarioRepository;
 
 @CrossOrigin
 @RestController
 public class UsuarioController {
+
+	@RequestMapping("/get-usuarios")
+	public List<Usuario> getUsuarios() {
+		return UsuarioRepository.getUsuarios();
+	}
+
+	@PostMapping("/cadastra-usuario")
+	public ResponseEntity<String> adicionarUsuario(@RequestParam String email, String senha, String cpf) {
+
+		Pessoa pessoa = PessoaRepository.getPessoabyCpf(cpf);
+
+		if (pessoa != null) {
+			Usuario user = new Usuario(2, email, senha, pessoa, new Date(), true);
+			UsuarioRepository.addUsuario(user);
+
+			return ResponseEntity.ok("Cadastro realizado com sucesso!");
+		}
+
+		return ResponseEntity.ok("Cadastro realizado com sucesso!");
+	}
 
 	@PostMapping("/recupera-senha")
 	public ResponseEntity<String> recuperarSenha(@RequestParam String email) {
@@ -25,7 +52,7 @@ public class UsuarioController {
 
 	@PostMapping("/realiza-login")
 	public ResponseEntity<String> realizarLogin(@RequestParam String email, String senha) {
-		
+
 		if (!UsuarioRepository.hasUsuarioByLoginSenha(email, senha)) {
 			return new ResponseEntity<>("Email ou senha incorretos. Tente outra vez!", HttpStatus.NOT_FOUND);
 		}

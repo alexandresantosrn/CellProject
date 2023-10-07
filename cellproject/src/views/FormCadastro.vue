@@ -1,7 +1,8 @@
 <template>
-    <div class="formcadastro">
-      
+    <div class="formcadastro">      
       <Instrucoes :texto="texto" />
+      
+      <Message :msg="msg" v-show="msg" />
 
       <form @submit.prevent="realizarCadastro" id="form">
         <div class="form-group">
@@ -34,77 +35,107 @@
     </div>
   </template>
   
-  <script>
-  import Instrucoes from '@/components/Instrucoes.vue';
-  import axios from 'axios';
-  
-  export default {
-    name: 'FormCadastro',   
-    components: {
-        Instrucoes
-    }, 
-    data() {
-      return {         
-        nome: '',
-        cpf: '',
-        email: '',
-        telefone: '',         
-        senha: '',       
-        texto: 'Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:'
-      };
+<script>
+import Instrucoes from '@/components/Instrucoes.vue';
+import axios from 'axios';
+import Message from '@/components/Message.vue';
+
+
+export default {
+  name: 'FormCadastro',   
+  components: {
+      Instrucoes,
+      Message
+  }, 
+  data() {
+    return {         
+      nome: '',
+      cpf: '',
+      email: '',
+      telefone: '',         
+      senha: '',          
+      texto: 'Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:',
+      msg: ''
+    };
+  },
+  methods: {
+    realizarCadastro() {
+
+      const pessoa = {
+        nome: this.nome,
+        cpf: this.cpf,
+        email: this.email,
+        telefone: this.telefone       
+      }          
+      
+      senha: this.senha;
+      cpf: this.cpf;
+      
+      axios.post('http://localhost:8080/adicionar-pessoa', pessoa)
+        .then(response => {
+            // Verifica a resposta do servidor                                   
+            this.msg = response.data;  
+            this.cadastrarUsuario();           
+        })
+        .catch(error => {                    
+            
+            if (error.response.status === 404) {
+                // Lida com o status 404 (Not Found)                       
+                this.msg = error.response.data;                       
+            } else { 
+                //Demais erros                     
+                this.msg = error.response.data; 
+            }
+        });
     },
-    methods: {
-      realizarCadastro() {
+    cadastrarUsuario() {      
 
-        const pessoa = {
-          nome: this.nome,
-          cpf: this.cpf,
-          email: this.email,
-          telefone: this.telefone
-        }        
-        
-        axios.post('http://localhost:8080/adicionar-pessoa', pessoa)
-          .then(response => {
-              // Verifica a resposta do servidor                                   
-              this.msg = response.data;             
-          })
-          .catch(error => {                    
-              
-              if (error.response.status === 404) {
-                  // Lida com o status 404 (Not Found)                       
-                  this.msg = error.response.data;                       
-              } else { 
-                  //Demais erros                     
-                  this.msg = error.response.data;
-              }
-          });
-      }
+      email = this.email;
+      senha = this.senha;
+      cpf = this.cpf;
+
+      axios.post('http://localhost:8080/cadastra-usuario?email='+email+'&senha='+senha+'&cpf='+cpf)
+        .then(response => {
+            // Verifica a resposta do servidor                                   
+            this.msg = response.data;
+        })
+        .catch(error => {                    
+            
+            if (error.response.status === 404) {
+                // Lida com o status 404 (Not Found)                       
+                this.msg = error.response.data;                       
+            } else { 
+                //Demais erros                     
+                this.msg = error.response.data;
+            }
+        });  
     }
-  };
-  </script>
+  }
+};
+</script>
 
-  <style scoped>
-    .formcadastro {
-        width: 500px;       
-        margin: auto;        
-        text-align: center;       
-    }
+<style scoped>
+  .formcadastro {
+      width: 500px;       
+      margin: auto;        
+      text-align: center;       
+  }
 
-    label {             
-        margin-bottom: 5px;
-        margin-top: 5px;
-        color: #222;        
-        border-left: 4px solid ;
-        width: 500px;
-        text-align: left;
-        padding: 8px;
-    }
-    
-    input {
-        margin-bottom: 10px;
-    } 
+  label {             
+      margin-bottom: 5px;
+      margin-top: 5px;
+      color: #222;        
+      border-left: 4px solid ;
+      width: 500px;
+      text-align: left;
+      padding: 8px;
+  }
+  
+  input {
+      margin-bottom: 10px;
+  } 
 
-    button {
-        margin-bottom: 20px;
-    } 
-  </style>
+  button {
+      margin-bottom: 20px;
+  } 
+</style>

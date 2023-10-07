@@ -18,4 +18,14 @@ public class PessoaRepository {
 		return pessoa;
 	}
 
+	public static Pessoa getPessoabyCpf(String cpf) {
+
+		for (Pessoa pessoa : pessoas) {
+			if (pessoa.getCpf().equals(cpf)) {
+				return pessoa;
+			}
+		}
+		return null;
+	}
+
 }

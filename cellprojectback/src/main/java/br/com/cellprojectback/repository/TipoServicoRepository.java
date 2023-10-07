@@ -12,7 +12,7 @@ public class TipoServicoRepository {
 	public static List<TipoServico> getTiposServico() {
 		return tiposServico;
 	}
-	
+
 	public static TipoServico addTipoServico(TipoServico tipo) {
 		tiposServico.add(tipo);
 		return tipo;
