@@ -58,7 +58,7 @@ export default {
       senha: '',          
       texto: 'Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:',
       msg: '',
-      msg_failure
+      msg_failure: ''
     };
   },
   methods: {

@@ -1,10 +1,10 @@
 <template>
     <div class="usuario">
       <h2>Área do Cliente/Usuário</h2>
-        <div id="descricao">
-            <p>Prezado usuário, selecione abaixo uma das opções desejadas:</p>
-        </div>
-        
+        <div id = "instrucoes">
+            <Instrucoes :texto="texto" />
+        </div>   
+
         <UserBanner v-on:adicionarAgendamento="showFormAgendamentos" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
         
         <div v-show="exibirFormAgendamento">
@@ -27,6 +27,7 @@ import UserBanner from '@/components/UserBanner.vue';
 import AgendarAtendimento from '@/components/AgendarAtendimento.vue';
 import ListagemAgendamentos from '@/components/ListagemAgendamentos.vue';
 import ListagemOS from '@/components/ListagemOS.vue';
+import Instrucoes from '@/components/Instrucoes.vue';
 
 export default {
     name: 'Usuario',
@@ -34,14 +35,16 @@ export default {
         return {
             exibirFormAgendamento: false,
             exibirListagemAgendamento: false,
-            exibirListagemOS: false
+            exibirListagemOS: false,
+            texto: 'Prezado usuário, selecione abaixo uma das opções desejadas:'
         }
     },            
     components: {
         UserBanner,
         AgendarAtendimento,
         ListagemAgendamentos,
-        ListagemOS
+        ListagemOS,
+        Instrucoes
     },
     methods: {
         showFormAgendamentos(value) {            
@@ -64,17 +67,13 @@ export default {
 </script>
   
 <style scoped>
-    .usuario {
-        margin: 20px;
-        text-align: center;        
+    .usuario {   
+        margin: auto;        
+        text-align: center;       
     }  
 
-    #descricao {
-        margin: auto;
+    #instrucoes {
         width: 500px;
-        height: 20px;
-        background-color: #FFFFE0;
-        text-align: center;
-        font-size: 16px;     
+        margin: auto;        
     }
 </style>
