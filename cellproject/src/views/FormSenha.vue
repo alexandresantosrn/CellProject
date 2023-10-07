@@ -4,7 +4,7 @@
         
         <Message :msg="msg" v-show="msg" />
 
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="recuperarSenha">
             <div class="form-group">
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" v-model="email" class="form-control" required>
@@ -35,7 +35,7 @@ export default {
         }
     },
     methods: {
-        submitForm() {
+        recuperarSenha() {
             email = this.email;
             
             axios.post('http://localhost:8080/recupera-senha?email='+email)

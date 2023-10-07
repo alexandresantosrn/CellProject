@@ -12,10 +12,10 @@ import br.com.cellprojectback.repository.TipoServicoRepository;
 @CrossOrigin
 @RestController
 public class TipoServicoController {
-	
+
 	@RequestMapping("/tiposervico")
 	public List<TipoServico> getTiposServico() {
 		return TipoServicoRepository.getTiposServico();
-	}	
-	
+	}
+
 }

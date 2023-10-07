@@ -12,22 +12,22 @@ import br.com.cellprojectback.repository.UsuarioRepository;
 public class Data {
 
 	public static void carregarDados() {
-		
-		//Adicionando tipos de serviços
+
+		// Adicionando tipos de serviços
 		TipoServico tipoServico1 = new TipoServico(1, "Conserto em Garantia");
 		TipoServico tipoServico2 = new TipoServico(2, "Conserto Fora de Garantia");
 
 		TipoServicoRepository.addTipoServico(tipoServico1);
 		TipoServicoRepository.addTipoServico(tipoServico2);
-		
-		//Adicionando pessoa
-		Pessoa pessoa1 = new Pessoa(1, "05641479403", "Alexandre Dantas dos Santos", "allexsantosrn@gmail.com", "84999494971");
+
+		// Adicionando pessoa
+		Pessoa pessoa1 = new Pessoa(1, "05641479403", "Alexandre Dantas dos Santos", "allexsantosrn@gmail.com",
+				"84999494971");
 		PessoaRepository.addPessoa(pessoa1);
-		
-		//Adicionando usuário
+
+		// Adicionando usuário
 		Usuario usuario1 = new Usuario(1, "allexsantosrn@gmail.com", "123456", pessoa1, new Date(), true);
 		UsuarioRepository.addUsuario(usuario1);
-		
-		
+
 	}
 }

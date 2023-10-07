@@ -14,29 +14,23 @@ import br.com.cellprojectback.repository.UsuarioRepository;
 public class UsuarioController {
 
 	@PostMapping("/recupera-senha")
-	public ResponseEntity<String> recuperarSenha(@RequestParam String email) {	 
-		
-		if (!UsuarioRepository.hasUsuarioByEmail(email)) {			
-			return new ResponseEntity<>("E-mail não localizado na base de dados.", HttpStatus.NOT_FOUND);		
-		}		
-		
-	    return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
+	public ResponseEntity<String> recuperarSenha(@RequestParam String email) {
+
+		if (!UsuarioRepository.hasUsuarioByEmail(email)) {
+			return new ResponseEntity<>("E-mail não localizado na base de dados.", HttpStatus.NOT_FOUND);
+		}
+
+		return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
 	}
-	
-	@PostMapping("/realizar-login")
-	public ResponseEntity<String> realizarLogin(@RequestParam String email, String senha) {	 
+
+	@PostMapping("/realiza-login")
+	public ResponseEntity<String> realizarLogin(@RequestParam String email, String senha) {
 		
-		
-		
-	    return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
+		if (!UsuarioRepository.hasUsuarioByLoginSenha(email, senha)) {
+			return new ResponseEntity<>("Usuário ou senha incorretos. Tente outra vez!'", HttpStatus.NOT_FOUND);
+		}
+
+		return ResponseEntity.ok("Usuário autenticado com sucesso!");
 	}
-	
-	
-	
-	
-		
-//	@RequestMapping("/minha-rota")
-//    public String minhaRota(@RequestParam String minhaString) {
-//        return "Esta é uma resposta de texto simples." + minhaString;
-//    }
+
 }
