@@ -1,6 +1,7 @@
 <template>   
     <div id="logon">
         <Message :msg="msg" v-show="msg" />
+        <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
 
         <div class="row">
             <div class="col-md-4 offset-md-4">
@@ -38,16 +39,19 @@
 <script>
 import Message from './Message.vue';
 import axios from 'axios';
+import MessageFailure from './MessageFailure.vue';
 
 export default {
     name: 'Logon',
     components: {
-        Message
+        Message,
+        MessageFailure
     },
     data() {
         return {
          authenticated: false,
          msg: '',
+         msg_failure: '',
          usuario: '',
          senha: ''
         }
@@ -70,7 +74,8 @@ export default {
             
             axios.post('http://localhost:8080/realiza-login?email='+usuario+'&senha='+senha)
                 .then(response => {
-                    // Verifica a resposta do servidor                                   
+                    // Verifica a resposta do servidor    
+                    this.msg_failure = '';                               
                     this.msg = response.data;  
                     this.authenticated = true;  
                     this.$emit('realizarLogin', this.authenticated);          
@@ -78,20 +83,23 @@ export default {
                 .catch(error => {                    
                     
                     if (error.response.status === 404) {
-                       // Lida com o status 404 (Not Found)                       
-                       this.msg = error.response.data;                       
+                       // Lida com o status 404 (Not Found)
+                       this.msg = '';                       
+                       this.msg_failure = error.response.data;                       
                     } else { 
-                        //Demais erros                     
+                        //Demais erros   
+                        this.msg = '';                   
                         this.msg = error.response.data;
                     }
                 });
 
             //limpar msg após 5 segundos
             setTimeout(() => this.msg = "", 5000);
+            setTimeout(() => this.msg_failure = "", 5000);
 
             //limpar os campos
-            this.username = "";
-            this.password = "";
+            this.usuario = "";
+            this.senha = "";
         }
     }
 }

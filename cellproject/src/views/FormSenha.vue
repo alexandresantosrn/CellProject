@@ -3,6 +3,7 @@
         <Instrucoes :texto="texto" />
         
         <Message :msg="msg" v-show="msg" />
+        <MessageFailure :msg_failure ="msg_failure" v-show="msg_failure"/>          
 
         <form @submit.prevent="recuperarSenha">
             <div class="form-group">
@@ -18,18 +19,21 @@
 <script>
 import Instrucoes from '@/components/Instrucoes.vue';
 import Message from '@/components/Message.vue';
+import MessageFailure from '@/components/MessageFailure.vue';
 import axios from 'axios';
 
 export default {
     name: 'FormSenha',
     components: {
         Instrucoes,
-        Message
+        Message,
+        MessageFailure
     },
     data() {
         return {
             email: '',
             msg: '',
+            msg_failure: '',
             texto: 'Prezado usuário, informe abaixo o e-mail utilizado durante cadastro:'   
         }
     },
@@ -39,17 +43,20 @@ export default {
             
             axios.post('http://localhost:8080/recupera-senha?email='+email)
                 .then(response => {
-                    // Verifica a resposta do servidor                                   
-                    this.msg = response.data;             
+                    // Verifica a resposta do servidor  
+                    this.msg_failure = '';                                  
+                    this.msg = response.data;   
                 })
                 .catch(error => {                    
                     
                     if (error.response.status === 404) {
-                       // Lida com o status 404 (Not Found)                       
-                       this.msg = error.response.data;                       
+                       // Lida com o status 404 (Not Found)   
+                       this.msg = '';                      
+                       this.msg_failure = error.response.data;                                            
                     } else { 
-                        //Demais erros                     
-                        this.msg = error.response.data;
+                        //Demais erros
+                        this.msg = '';                     
+                        this.msg_failure = error.response.data;                        
                     }
                 });
         }

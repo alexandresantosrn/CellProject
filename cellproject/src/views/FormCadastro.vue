@@ -3,6 +3,7 @@
       <Instrucoes :texto="texto" />
       
       <Message :msg="msg" v-show="msg" />
+      <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
 
       <form @submit.prevent="realizarCadastro" id="form">
         <div class="form-group">
@@ -39,13 +40,14 @@
 import Instrucoes from '@/components/Instrucoes.vue';
 import axios from 'axios';
 import Message from '@/components/Message.vue';
-
+import MessageFailure from '@/components/MessageFailure.vue';
 
 export default {
   name: 'FormCadastro',   
   components: {
       Instrucoes,
-      Message
+      Message,
+      MessageFailure
   }, 
   data() {
     return {         
@@ -55,7 +57,8 @@ export default {
       telefone: '',         
       senha: '',          
       texto: 'Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:',
-      msg: ''
+      msg: '',
+      msg_failure
     };
   },
   methods: {
@@ -73,18 +76,21 @@ export default {
       
       axios.post('http://localhost:8080/adicionar-pessoa', pessoa)
         .then(response => {
-            // Verifica a resposta do servidor                                   
+            // Verifica a resposta do servidor 
+            this.msg_failure == '';                                  
             this.msg = response.data;  
             this.cadastrarUsuario();           
         })
         .catch(error => {                    
             
             if (error.response.status === 404) {
-                // Lida com o status 404 (Not Found)                       
-                this.msg = error.response.data;                       
+                // Lida com o status 404 (Not Found)
+                this.msg = '';                       
+                this.msg_failure = error.response.data;                       
             } else { 
-                //Demais erros                     
-                this.msg = error.response.data; 
+                //Demais erros  
+                this.msg = '';                    
+                this.msg_failure = error.response.data; 
             }
         });
     },
