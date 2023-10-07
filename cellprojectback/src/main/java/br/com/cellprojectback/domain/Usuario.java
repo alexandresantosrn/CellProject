@@ -6,13 +6,17 @@ import java.util.Objects;
 public class Usuario {
 
 	private int id;
+	String usuario;
+	String senha;
 	Pessoa pessoa;
 	private Date dataCadastro;
 	boolean autorizado;
 
-	public Usuario(int id, Pessoa pessoa, Date dataCadastro, boolean autorizado) {
+	public Usuario(int id, String usuario, String senha, Pessoa pessoa, Date dataCadastro, boolean autorizado) {
 		super();
 		this.id = id;
+		this.usuario = usuario;
+		this.senha = senha;
 		this.pessoa = pessoa;
 		this.dataCadastro = dataCadastro;
 		this.autorizado = autorizado;
@@ -24,6 +28,22 @@ public class Usuario {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public Pessoa getPessoa() {
@@ -52,7 +72,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(autorizado, dataCadastro, id, pessoa);
+		return Objects.hash(autorizado, dataCadastro, id, pessoa, senha, usuario);
 	}
 
 	@Override
@@ -65,7 +85,8 @@ public class Usuario {
 			return false;
 		Usuario other = (Usuario) obj;
 		return autorizado == other.autorizado && Objects.equals(dataCadastro, other.dataCadastro) && id == other.id
-				&& Objects.equals(pessoa, other.pessoa);
+				&& Objects.equals(pessoa, other.pessoa) && Objects.equals(senha, other.senha)
+				&& Objects.equals(usuario, other.usuario);
 	}
 
 }

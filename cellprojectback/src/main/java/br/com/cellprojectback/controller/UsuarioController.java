@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cellprojectback.repository.PessoaRepository;
+import br.com.cellprojectback.repository.UsuarioRepository;
 
 @CrossOrigin
 @RestController
@@ -16,12 +16,24 @@ public class UsuarioController {
 	@PostMapping("/recupera-senha")
 	public ResponseEntity<String> recuperarSenha(@RequestParam String email) {	 
 		
-		if (!PessoaRepository.hasPessoaByEmail(email)) {			
+		if (!UsuarioRepository.hasUsuarioByEmail(email)) {			
 			return new ResponseEntity<>("E-mail não localizado na base de dados.", HttpStatus.NOT_FOUND);		
 		}		
 		
 	    return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
 	}
+	
+	@PostMapping("/realizar-login")
+	public ResponseEntity<String> realizarLogin(@RequestParam String email, String senha) {	 
+		
+		
+		
+	    return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
+	}
+	
+	
+	
+	
 		
 //	@RequestMapping("/minha-rota")
 //    public String minhaRota(@RequestParam String minhaString) {

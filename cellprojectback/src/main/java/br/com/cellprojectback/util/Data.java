@@ -25,7 +25,7 @@ public class Data {
 		PessoaRepository.addPessoa(pessoa1);
 		
 		//Adicionando usuário
-		Usuario usuario1 = new Usuario(1, pessoa1, new Date(), true);
+		Usuario usuario1 = new Usuario(1, "allexsantosrn@gmail.com", "123456", pessoa1, new Date(), true);
 		UsuarioRepository.addUsuario(usuario1);
 		
 		
