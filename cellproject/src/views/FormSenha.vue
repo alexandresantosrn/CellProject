@@ -38,7 +38,7 @@ export default {
         submitForm() {
             email = this.email;
             
-            axios.get('http://localhost:8080/recupera-senha?email='+email)
+            axios.post('http://localhost:8080/recupera-senha?email='+email)
                 .then(response => {
                     // Verifica a resposta do servidor                                   
                     this.msg = response.data;             

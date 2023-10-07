@@ -3,7 +3,7 @@ package br.com.cellprojectback.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +13,8 @@ import br.com.cellprojectback.repository.PessoaRepository;
 @RestController
 public class UsuarioController {
 
-	@RequestMapping("/recupera-senha")
+	@PostMapping("/recupera-senha")
 	public ResponseEntity<String> recuperarSenha(@RequestParam String email) {	 
-		System.out.println(email);
 		
 		if (!PessoaRepository.hasPessoaByEmail(email)) {			
 			return new ResponseEntity<>("E-mail não localizado na base de dados.", HttpStatus.NOT_FOUND);		
