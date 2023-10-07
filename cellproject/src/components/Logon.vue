@@ -12,11 +12,11 @@
                         <form @submit.prevent="realizarLogin">
                             <div class="form-group">
                                 <label for="username">Email:</label>
-                                <input type="text" class="form-control" id="username" v-model="username" required>
+                                <input type="email" class="form-control" id="usuario" v-model="usuario" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Senha:</label>
-                                <input type="password" class="form-control" id="password" v-model="password" required>
+                                <input type="password" class="form-control" id="senha" v-model="senha" required>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                         </form>
@@ -48,8 +48,8 @@ export default {
         return {
          authenticated: false,
          msg: '',
-         username: '',
-         password: ''
+         usuario: '',
+         senha: ''
         }
     },
     methods: {
@@ -65,10 +65,10 @@ export default {
             //     this.msg = 'Usuário ou senha incorretos. Tente outra vez!'                
             // }
 
-            username = this.username;
-            password = this.password;
+            usuario = this.usuario;
+            senha = this.senha;
             
-            axios.post('http://localhost:8080/realiza-login?email='+username+'&senha='+password)
+            axios.post('http://localhost:8080/realiza-login?email='+usuario+'&senha='+senha)
                 .then(response => {
                     // Verifica a resposta do servidor                                   
                     this.msg = response.data;  

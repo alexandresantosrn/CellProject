@@ -12,13 +12,12 @@
 
             <button type="submit" class="btn btn-primary">Recuperar Senha</button>
         </form>
-
     </div>    
 </template>
 
 <script>
-import Instrucoes from '@/components/Instrucoes.vue'
-import Message from '@/components/Message.vue'
+import Instrucoes from '@/components/Instrucoes.vue';
+import Message from '@/components/Message.vue';
 import axios from 'axios';
 
 export default {
@@ -75,9 +74,13 @@ export default {
         padding: 8px;
     }
     
-    input, button {
+    input {
         margin-bottom: 10px;
     } 
+
+    button {
+        margin-bottom: 20px;
+    }
 
     .form-group {
         width:  400px;

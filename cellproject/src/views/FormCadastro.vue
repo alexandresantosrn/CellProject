@@ -3,35 +3,30 @@
       
       <Instrucoes :texto="texto" />
 
-      <form @submit.prevent="submitForm" id="form">
+      <form @submit.prevent="realizarCadastro" id="form">
         <div class="form-group">
           <label for="name">Nome Completo:</label>
-          <input type="text" id="name" v-model="formData.name" class="form-control" required>
+          <input type="text" id="name" v-model="nome" class="form-control" required>
         </div>
   
         <div class="form-group">
           <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" v-model="formData.cpf" class="form-control" required>
+          <input type="text" id="cpf" v-model="cpf" class="form-control" required>
         </div>
   
         <div class="form-group">
           <label for="email">E-mail:</label>
-          <input type="email" id="email" v-model="formData.email" class="form-control" required>
+          <input type="email" id="email" v-model="email" class="form-control" required>
         </div>
   
         <div class="form-group">
           <label for="phone">Telefone:</label>
-          <input type="tel" id="phone" v-model="formData.phone" class="form-control" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="login">Usuário:</label>
-          <input type="text" id="login" v-model="formData.login" class="form-control" required>
-        </div>
+          <input type="tel" id="telefone" v-model="telefone" class="form-control" required>
+        </div>       
   
         <div class="form-group">
           <label for="password">Senha:</label>
-          <input type="password" id="password" v-model="formData.password" class="form-control" required>
+          <input type="password" id="senha" v-model="senha" class="form-control" required>
         </div>
   
         <button type="submit" class="btn btn-primary">Confirmar Cadastro</button>
@@ -41,6 +36,7 @@
   
   <script>
   import Instrucoes from '@/components/Instrucoes.vue';
+  import axios from 'axios';
   
   export default {
     name: 'FormCadastro',   
@@ -48,22 +44,40 @@
         Instrucoes
     }, 
     data() {
-      return {
-        formData: {
-          name: '',
-          cpf: '',
-          email: '',
-          phone: '',
-          login: '',
-          password: '',         
-        },
+      return {         
+        nome: '',
+        cpf: '',
+        email: '',
+        telefone: '',         
+        senha: '',       
         texto: 'Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:'
       };
     },
     methods: {
-      submitForm() {
-        // Enviar dados para o backend (usando uma chamada Axios, por exemplo)
-        // Limpar o formulário ou executar qualquer ação desejada após o envio
+      realizarCadastro() {
+
+        const pessoa = {
+          nome: this.nome,
+          cpf: this.cpf,
+          email: this.email,
+          telefone: this.telefone
+        }        
+        
+        axios.post('http://localhost:8080/adicionar-pessoa', pessoa)
+          .then(response => {
+              // Verifica a resposta do servidor                                   
+              this.msg = response.data;             
+          })
+          .catch(error => {                    
+              
+              if (error.response.status === 404) {
+                  // Lida com o status 404 (Not Found)                       
+                  this.msg = error.response.data;                       
+              } else { 
+                  //Demais erros                     
+                  this.msg = error.response.data;
+              }
+          });
       }
     }
   };
@@ -86,7 +100,11 @@
         padding: 8px;
     }
     
-    input, button {
+    input {
         margin-bottom: 10px;
+    } 
+
+    button {
+        margin-bottom: 20px;
     } 
   </style>

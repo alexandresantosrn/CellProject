@@ -13,9 +13,8 @@ import br.com.cellprojectback.repository.TipoServicoRepository;
 @RestController
 public class TipoServicoController {
 
-	@RequestMapping("/tiposervico")
+	@RequestMapping("/get-tipos-servico")
 	public List<TipoServico> getTiposServico() {
 		return TipoServicoRepository.getTiposServico();
 	}
-
 }
