@@ -13,7 +13,7 @@
   
         <div class="form-group">
           <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" v-model="cpf" class="form-control" required>
+          <input type="text" id="cpf" v-model="cpf" class="form-control" placeholder="___.___.___-__" maxlength = "11" required>
         </div>
   
         <div class="form-group">
@@ -23,7 +23,7 @@
   
         <div class="form-group">
           <label for="phone">Telefone:</label>
-          <input type="tel" id="telefone" v-model="telefone" class="form-control" required>
+          <input type="tel" id="telefone" v-model="telefone" class="form-control" placeholder="(  )" maxlength = "11" required>
         </div>       
   
         <div class="form-group">
@@ -77,9 +77,11 @@ export default {
       axios.post('http://localhost:8080/adiciona-pessoa', pessoa)
         .then(response => {
             // Verifica a resposta do servidor 
-            this.msg_failure == '';                                  
-            this.msg = response.data;  
-            this.cadastrarUsuario();           
+            this.msg_failure = '';                                  
+            this.msg = response.data;          
+            
+            this.cadastrarUsuario(); 
+            this.limparCampos();          
         })
         .catch(error => {                    
             
@@ -102,22 +104,36 @@ export default {
 
       axios.post('http://localhost:8080/cadastra-usuario?email='+email+'&senha='+senha+'&cpf='+cpf)
         .then(response => {
-            // Verifica a resposta do servidor                                   
+            // Verifica a resposta do servidor 
+            this.msg_failure = '';                                  
             this.msg = response.data;
         })
         .catch(error => {                    
             
             if (error.response.status === 404) {
-                // Lida com o status 404 (Not Found)                       
-                this.msg = error.response.data;                       
+                // Lida com o status 404 (Not Found) 
+                this.msg = '';                       
+                this.msg_failure = error.response.data;                       
             } else { 
-                //Demais erros                     
+                //Demais erros  
+                this.msg = '';                    
                 this.msg = error.response.data;
             }
-        });  
-    }
+        });                
+   },
+   limparCampos() {
+
+    setTimeout(() => this.msg = "", 5000);
+
+    this.nome = "";
+    this.cpf = "";
+    this.telefone = "";
+    this.senha = "";
+    this.email = "";  
+    
+   }
   }
-};
+}
 </script>
 
 <style scoped>

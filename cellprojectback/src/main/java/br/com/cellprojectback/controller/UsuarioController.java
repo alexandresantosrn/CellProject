@@ -32,7 +32,7 @@ public class UsuarioController {
 			return ResponseEntity.ok("Cadastro realizado com sucesso!");
 		}
 
-		return ResponseEntity.ok("Cadastro realizado com sucesso!");
+		return new ResponseEntity<>("Erro na criação do usuário!", HttpStatus.NOT_FOUND);
 	}
 
 	@PostMapping("/recupera-senha")

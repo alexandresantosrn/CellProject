@@ -75,7 +75,7 @@ export default {
         axios.post('http://localhost:8080/adiciona-agendamento', agendamento)
         .then(response => {
             // Verifica a resposta do servidor 
-            this.msg_failure == '';                                  
+            this.msg_failure = '';                                  
             this.msg = response.data;                      
         })
         .catch(error => {                    

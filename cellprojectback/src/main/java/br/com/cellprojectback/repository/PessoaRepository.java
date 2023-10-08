@@ -27,5 +27,24 @@ public class PessoaRepository {
 		}
 		return null;
 	}
+	
+	public static boolean hasPessoabyCpf(String cpf) {
 
+		for (Pessoa pessoa : pessoas) {
+			if (pessoa.getCpf().equals(cpf)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean hasPessoabyEmail(String email) {
+
+		for (Pessoa pessoa : pessoas) {
+			if (pessoa.getEmail().equals(email)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
