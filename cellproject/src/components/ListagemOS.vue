@@ -5,9 +5,9 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Data de Entrada</th>
-          <th>N&#186 Ordem de Serviço</th>
-          <th>Tipo de Serviço</th>          
+          <th>N&#186 Ordem de Serviço</th>                  
+          <th>Tipo de Serviço</th>
+          <th>Data de Entrada</th>            
           <th>Modelo</th>
           <th>Status do Conserto</th>
           <th>Preço Total</th>            
@@ -15,9 +15,9 @@
       </thead>
       <tbody>
         <tr v-for="ordem in ordens" :key="ordem.id">
-          <td>{{ ordem.dataCadastro }}</td>
           <td>{{ ordem.codigo }}</td>
-          <td>{{ ordem.tipoServico.descricao }}</td>         
+          <td>{{ ordem.tipoServico.descricao }}</td>  
+          <td>{{ ordem.dataCadastro }}</td>     
           <td>{{ ordem.smartphone.modelo }}</td>
           <td>{{ ordem.statusReparo.descricao }}</td>
           <td>R$ {{ ordem.precoTotal }}</td>
@@ -58,10 +58,10 @@
       };
     },
     methods: {
-      async getOrdensServico() {
+      async getOrdensServico() {        
         axios.get('http://localhost:8080/get-ordens-servico')
           .then(response => {
-            this.ordens = response.data;            
+            this.ordens = response.data;               
           })
           .catch(error => {
             console.error('Erro ao buscar dados:', error);

@@ -1,22 +1,26 @@
 <template>
   <div>
     <h2>Listagem de Agendamentos</h2>
+
+    <Message :msg="msg" v-show="msg" />
+    <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
+
     <table class="table">
       <thead>
         <tr>
           <th>N&#186 Agendamento</th>
-          <th>Data de Agendamento</th>
-          <th>Horário de Agendamento</th>
+          <th>Data do Agendamento</th>
+          <th>Horário do Agendamento</th>
           <th>Status do Agendamento</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="agendamento in agendamentos" :key="agendamento.id">
-          <td>{{ agendamento.numero }}</td>
-          <td>{{ agendamento.data }}</td>
-          <td>{{ agendamento.horario }}</td>
-          <td>{{ agendamento.status }}</td>
+          <td>{{ agendamento.codigo }}</td>
+          <td>{{ agendamento.dataAgendamento }}</td>
+          <td>{{ agendamento.horarioAgendamento }}</td>
+          <td>{{ agendamento.statusAgendamento.descricao }}</td>
           <td>
             <button class="btn btn-danger" @click="cancelarAgendamento(agendamento.id)">
               Cancelar Agendamento
@@ -29,34 +33,81 @@
 </template>
 
 <script>
+import Message from './Message.vue';
+import axios from 'axios';
+import MessageFailure from './MessageFailure.vue';
+
 export default {
   name: 'Listagem Agendamentos',
+  components: {
+    Message,
+    MessageFailure
+  },
   data() {
     return {
-      agendamentos: [
-        {
-          id: 1,
-          numero: 'AG2023001',
-          data: '2023-08-30',
-          horario: '09:00 AM',
-          status: 'Agendado'
-        },
-        {
-          id: 2,
-          numero: 'AG2023002',
-          data: '2023-08-31',
-          horario: '02:30 PM',
-          status: 'Confirmado'
-        },
+      agendamentos: '',
+      msg: '',
+      msg_failure: ''
+      // agendamentos: [
+      //   {
+      //     id: 1,
+      //     numero: 'AG2023001',
+      //     data: '2023-08-30',
+      //     horario: '09:00 AM',
+      //     status: 'Agendado'
+      //   },
+      //   {
+      //     id: 2,
+      //     numero: 'AG2023002',
+      //     data: '2023-08-31',
+      //     horario: '02:30 PM',
+      //     status: 'Confirmado'
+      //   },
         // Adicione mais objetos de agendamento conforme necessário
-      ]
+      //]
     };
   },
   methods: {
+    async getAgendamentos() {        
+        axios.get('http://localhost:8080/get-agendamentos')
+          .then(response => {
+            this.agendamentos = response.data;               
+          })
+          .catch(error => {
+            this.msg = '';
+            this.msg_failure = error.response.data;
+          });
+      },
     cancelarAgendamento(agendamentoId) {
-      // Lógica para cancelar o agendamento com base no ID
-      console.log(`Cancelar agendamento com ID: ${agendamentoId}`);
-    }
+      axios.post('http://localhost:8080/cancela-agendamento?id='+agendamentoId)
+        .then(response => {
+          // Verifica a resposta do servidor  
+          this.msg_failure = '';                                           
+          this.msg = response.data;  
+                    
+        })
+        .catch(error => {                    
+            
+          if (error.response.status === 404) {
+              // Lida com o status 404 (Not Found)
+              this.msg = '';                       
+              this.msg_failure = error.response.data;            
+          } else { 
+              //Demais erros   
+              this.msg = '';                   
+              this.msg_failure = error.response.data; 
+          }
+        });
+      
+        setTimeout(() => this.msg = "", 5000);
+        setTimeout(() => this.msg_failure = "", 5000);
+    },  
+  },
+  mounted() {
+    this.getAgendamentos();
+  },
+  updated() {
+    this.getAgendamentos();
   }
 };
 </script>

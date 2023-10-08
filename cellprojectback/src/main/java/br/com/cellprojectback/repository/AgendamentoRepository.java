@@ -17,4 +17,15 @@ public class AgendamentoRepository {
 		agendamentos.add(agendamento);
 		return agendamento;
 	}
+
+	public static Agendamento getAgendamentoById(int id) {
+
+		for (Agendamento agendamento : agendamentos) {
+			if (agendamento.getId() == id) {
+				return agendamento;
+			}
+		}
+		return null;
+
+	}
 }

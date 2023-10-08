@@ -6,15 +6,20 @@ import java.util.Objects;
 public class Agendamento {
 
 	private int id;
+	private String codigo;
 	private Pessoa pessoa;
 	private LocalDate dataAgendamento;
+	private String horarioAgendamento;
 	private StatusAgendamento statusAgendamento;
 
-	public Agendamento(int id, Pessoa pessoa, LocalDate dataAgendamento, StatusAgendamento statusAgendamento) {
+	public Agendamento(int id, String codigo, Pessoa pessoa, LocalDate dataAgendamento, String horarioAgendamento,
+			StatusAgendamento statusAgendamento) {
 		super();
 		this.id = id;
+		this.codigo = codigo;
 		this.pessoa = pessoa;
 		this.dataAgendamento = dataAgendamento;
+		this.horarioAgendamento = horarioAgendamento;
 		this.statusAgendamento = statusAgendamento;
 	}
 
@@ -24,6 +29,14 @@ public class Agendamento {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public Pessoa getPessoa() {
@@ -42,6 +55,14 @@ public class Agendamento {
 		this.dataAgendamento = dataAgendamento;
 	}
 
+	public String getHorarioAgendamento() {
+		return horarioAgendamento;
+	}
+
+	public void setHorarioAgendamento(String horarioAgendamento) {
+		this.horarioAgendamento = horarioAgendamento;
+	}
+
 	public StatusAgendamento getStatusAgendamento() {
 		return statusAgendamento;
 	}
@@ -52,7 +73,7 @@ public class Agendamento {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dataAgendamento, id, pessoa, statusAgendamento);
+		return Objects.hash(codigo, dataAgendamento, horarioAgendamento, id, pessoa, statusAgendamento);
 	}
 
 	@Override
@@ -64,7 +85,8 @@ public class Agendamento {
 		if (getClass() != obj.getClass())
 			return false;
 		Agendamento other = (Agendamento) obj;
-		return Objects.equals(dataAgendamento, other.dataAgendamento) && id == other.id
+		return Objects.equals(codigo, other.codigo) && Objects.equals(dataAgendamento, other.dataAgendamento)
+				&& Objects.equals(horarioAgendamento, other.horarioAgendamento) && id == other.id
 				&& Objects.equals(pessoa, other.pessoa) && Objects.equals(statusAgendamento, other.statusAgendamento);
 	}
 
