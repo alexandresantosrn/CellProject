@@ -7,9 +7,8 @@
             <th>N. Ordem de Serviço</th>
             <th>Data de Entrada</th>
             <th>Modelo</th>
-            <th>Status de Reparo</th>
-            <th>Preço Total</th>
-            <th>Ações</th>
+            <th>Status do Reparo</th>
+            <th>Preço Total</th>            
           </tr>
         </thead>
         <tbody>
@@ -19,10 +18,7 @@
             <td>{{ ordem.modelo }}</td>
             <td>{{ ordem.statusReparo }}</td>
             <td>{{ ordem.precoTotal }}</td>
-            <td>
-              <button class="btn btn-info" @click="visualizarDetalhes(ordem.id)">
-                Visualizar Detalhes
-              </button>
+            <td>              
             </td>
           </tr>
         </tbody>

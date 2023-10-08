@@ -1,6 +1,5 @@
 package br.com.cellprojectback.domain;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,10 +11,11 @@ public class OrdemServico {
 	private Pessoa pessoa;
 	private Smartphone smartphone;
 	private TipoServico tipoServico;
-	private BigDecimal precoTotal;
+	private StatusReparo status;
+	private Double precoTotal;
 
 	public OrdemServico(int id, String codigo, Date dataCadastro, Pessoa pessoa, Smartphone smartphone,
-			TipoServico tipoServico, BigDecimal precoTotal) {
+			TipoServico tipoServico, StatusReparo status, Double precoTotal) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -23,6 +23,7 @@ public class OrdemServico {
 		this.pessoa = pessoa;
 		this.smartphone = smartphone;
 		this.tipoServico = tipoServico;
+		this.status = status;
 		this.precoTotal = precoTotal;
 	}
 
@@ -74,17 +75,25 @@ public class OrdemServico {
 		this.tipoServico = tipoServico;
 	}
 
-	public BigDecimal getPrecoTotal() {
+	public StatusReparo getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusReparo status) {
+		this.status = status;
+	}
+
+	public Double getPrecoTotal() {
 		return precoTotal;
 	}
 
-	public void setPrecoTotal(BigDecimal precoTotal) {
+	public void setPrecoTotal(Double precoTotal) {
 		this.precoTotal = precoTotal;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, dataCadastro, id, pessoa, precoTotal, smartphone, tipoServico);
+		return Objects.hash(codigo, dataCadastro, id, pessoa, precoTotal, smartphone, status, tipoServico);
 	}
 
 	@Override
@@ -99,7 +108,7 @@ public class OrdemServico {
 		return Objects.equals(codigo, other.codigo) && Objects.equals(dataCadastro, other.dataCadastro)
 				&& id == other.id && Objects.equals(pessoa, other.pessoa)
 				&& Objects.equals(precoTotal, other.precoTotal) && Objects.equals(smartphone, other.smartphone)
-				&& Objects.equals(tipoServico, other.tipoServico);
+				&& Objects.equals(status, other.status) && Objects.equals(tipoServico, other.tipoServico);
 	}
 
 }
