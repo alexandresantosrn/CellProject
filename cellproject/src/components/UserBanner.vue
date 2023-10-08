@@ -90,7 +90,7 @@ export default {
     #banner {       
         height: 200px;
         width: 100%;
-        display: flex;        
+        display: flex;         
     }
 
     p {

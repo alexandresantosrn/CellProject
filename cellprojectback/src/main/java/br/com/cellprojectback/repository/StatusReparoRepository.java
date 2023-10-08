@@ -13,9 +13,9 @@ public class StatusReparoRepository {
 		return tiposReparo;
 	}
 
-	public static StatusReparo addStatusReparo(StatusReparo status) {
-		tiposReparo.add(status);
-		return status;
+	public static StatusReparo addStatusReparo(StatusReparo statusReparo) {
+		tiposReparo.add(statusReparo);
+		return statusReparo;
 	}
 
 }
