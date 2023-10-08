@@ -5,12 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.repository.PessoaRepository;
@@ -20,7 +15,7 @@ import br.com.cellprojectback.repository.UsuarioRepository;
 @RestController
 public class UsuarioController {
 
-	@RequestMapping("/get-usuarios")
+	@GetMapping("/get-usuarios")
 	public List<Usuario> getUsuarios() {
 		return UsuarioRepository.getUsuarios();
 	}

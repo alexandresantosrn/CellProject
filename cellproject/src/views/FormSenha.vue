@@ -59,6 +59,12 @@ export default {
                         this.msg_failure = error.response.data;                        
                     }
                 });
+            
+            //limpar msg após 5 segundos
+            setTimeout(() => this.msg = "", 5000);
+            setTimeout(() => this.msg_failure = "", 5000);    
+
+            this.email = "";
         }
     }  
 }
