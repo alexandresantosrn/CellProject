@@ -1,5 +1,6 @@
 package br.com.cellprojectback.util;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import br.com.cellprojectback.domain.Fabricante;
@@ -20,7 +21,9 @@ import br.com.cellprojectback.repository.UsuarioRepository;
 public class Data {
 
 	public static void carregarDados() {
-
+		
+		LocalDate dataAtual = LocalDate.now();
+		
 		// Adicionando tipos de serviços
 		TipoServico tipoServico1 = new TipoServico(1, "Conserto em Garantia");
 		TipoServico tipoServico2 = new TipoServico(2, "Conserto Fora de Garantia");
@@ -57,7 +60,7 @@ public class Data {
 		StatusReparoRepository.addStatusReparo(statusReparo5);
 		
 		// Adicionando ordens de serviço
-		OrdemServico os1 = new OrdemServico(1, "OS2023001", new Date(), pessoa1, smart1, tipoServico2, statusReparo5, 70.00);
+		OrdemServico os1 = new OrdemServico(1, "OS2023001", dataAtual, pessoa1, smart1, tipoServico2, statusReparo5, 70.00);
 		OrdemServicoRepository.addOrdemServico(os1);
 	}
 }

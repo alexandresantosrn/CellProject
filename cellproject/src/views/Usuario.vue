@@ -67,7 +67,7 @@ export default {
 </script>
   
 <style scoped>
-    .usuario {   
+    .usuario {         
         margin: auto;        
         text-align: center;
         margin-bottom: 20px;       
@@ -76,5 +76,8 @@ export default {
     #instrucoes {
         width: 500px;
         margin: auto;        
+    }
+    h2{
+        margin-top: 10px;
     }
 </style>

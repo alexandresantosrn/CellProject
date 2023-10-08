@@ -5,19 +5,21 @@
     <table class="table">
       <thead>
         <tr>
-          <th>N. Ordem de Serviço</th>
           <th>Data de Entrada</th>
+          <th>N&#186 Ordem de Serviço</th>
+          <th>Tipo de Serviço</th>          
           <th>Modelo</th>
-          <th>Status do Reparo</th>
+          <th>Status do Conserto</th>
           <th>Preço Total</th>            
         </tr>
       </thead>
       <tbody>
         <tr v-for="ordem in ordens" :key="ordem.id">
-          <td>{{ ordem.codigo }}</td>
           <td>{{ ordem.dataCadastro }}</td>
+          <td>{{ ordem.codigo }}</td>
+          <td>{{ ordem.tipoServico.descricao }}</td>         
           <td>{{ ordem.smartphone.modelo }}</td>
-          <td>{{ ordem.status.descricao }}</td>
+          <td>{{ ordem.statusReparo.descricao }}</td>
           <td>R$ {{ ordem.precoTotal }}</td>
           <td>              
           </td>

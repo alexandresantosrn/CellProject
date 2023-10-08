@@ -1,21 +1,21 @@
 package br.com.cellprojectback.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class OrdemServico {
 
 	private int id;
 	private String codigo;
-	private Date dataCadastro;
+	private LocalDate dataCadastro;
 	private Pessoa pessoa;
 	private Smartphone smartphone;
 	private TipoServico tipoServico;
-	private StatusReparo status;
+	private StatusReparo statusReparo;
 	private Double precoTotal;
 
-	public OrdemServico(int id, String codigo, Date dataCadastro, Pessoa pessoa, Smartphone smartphone,
-			TipoServico tipoServico, StatusReparo status, Double precoTotal) {
+	public OrdemServico(int id, String codigo, LocalDate dataCadastro, Pessoa pessoa, Smartphone smartphone,
+			TipoServico tipoServico, StatusReparo statusReparo, Double precoTotal) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -23,7 +23,7 @@ public class OrdemServico {
 		this.pessoa = pessoa;
 		this.smartphone = smartphone;
 		this.tipoServico = tipoServico;
-		this.status = status;
+		this.statusReparo = statusReparo;
 		this.precoTotal = precoTotal;
 	}
 
@@ -43,11 +43,11 @@ public class OrdemServico {
 		this.codigo = codigo;
 	}
 
-	public Date getDataCadastro() {
+	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -75,12 +75,12 @@ public class OrdemServico {
 		this.tipoServico = tipoServico;
 	}
 
-	public StatusReparo getStatus() {
-		return status;
+	public StatusReparo getStatusReparo() {
+		return statusReparo;
 	}
 
-	public void setStatus(StatusReparo status) {
-		this.status = status;
+	public void setStatusReparo(StatusReparo statusReparo) {
+		this.statusReparo = statusReparo;
 	}
 
 	public Double getPrecoTotal() {
@@ -93,7 +93,7 @@ public class OrdemServico {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, dataCadastro, id, pessoa, precoTotal, smartphone, status, tipoServico);
+		return Objects.hash(codigo, dataCadastro, id, pessoa, precoTotal, smartphone, statusReparo, tipoServico);
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class OrdemServico {
 		return Objects.equals(codigo, other.codigo) && Objects.equals(dataCadastro, other.dataCadastro)
 				&& id == other.id && Objects.equals(pessoa, other.pessoa)
 				&& Objects.equals(precoTotal, other.precoTotal) && Objects.equals(smartphone, other.smartphone)
-				&& Objects.equals(status, other.status) && Objects.equals(tipoServico, other.tipoServico);
+				&& Objects.equals(statusReparo, other.statusReparo) && Objects.equals(tipoServico, other.tipoServico);
 	}
 
 }
