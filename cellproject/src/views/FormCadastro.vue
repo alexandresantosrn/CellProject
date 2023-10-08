@@ -129,8 +129,7 @@ export default {
     this.cpf = "";
     this.telefone = "";
     this.senha = "";
-    this.email = "";  
-    
+    this.email = "";
    }
   }
 }
