@@ -6,7 +6,7 @@ import java.util.List;
 import br.com.cellprojectback.domain.StatusReparo;
 
 public class StatusReparoRepository {
-	
+
 	private static List<StatusReparo> tiposReparo = new ArrayList<StatusReparo>();
 
 	public static List<StatusReparo> getStatusReparo() {

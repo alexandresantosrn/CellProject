@@ -3,6 +3,7 @@ package br.com.cellprojectback.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.domain.TipoServico;
 
 public class TipoServicoRepository {
@@ -16,5 +17,16 @@ public class TipoServicoRepository {
 	public static TipoServico addTipoServico(TipoServico tipo) {
 		tiposServico.add(tipo);
 		return tipo;
+	}
+	
+	public static TipoServico getTipoServicoById(int id) {
+
+		for (TipoServico tipo : tiposServico) {
+			if (tipo.getId() == id) {
+				return tipo;
+			}
+		}
+		return null;
+
 	}
 }

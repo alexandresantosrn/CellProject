@@ -74,7 +74,7 @@ export default {
       senha: this.senha;
       cpf: this.cpf;
       
-      axios.post('http://localhost:8080/adicionar-pessoa', pessoa)
+      axios.post('http://localhost:8080/adiciona-pessoa', pessoa)
         .then(response => {
             // Verifica a resposta do servidor 
             this.msg_failure == '';                                  

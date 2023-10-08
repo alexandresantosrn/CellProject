@@ -21,7 +21,7 @@ public class PessoaController {
 		return PessoaRepository.getPessoas();
 	}
 
-	@PostMapping("/adicionar-pessoa")
+	@PostMapping("/adiciona-pessoa")
 	public ResponseEntity<String> adicionarPessoa(@RequestBody Pessoa pessoa) {
 		pessoa.setId(1);
 		PessoaRepository.addPessoa(pessoa);

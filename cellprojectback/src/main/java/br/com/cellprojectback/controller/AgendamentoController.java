@@ -6,13 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cellprojectback.domain.Agendamento;
+import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.repository.AgendamentoRepository;
+import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.StatusAgendamentoRepository;
 import br.com.cellprojectback.service.AgendamentoService;
 
@@ -44,5 +47,25 @@ public class AgendamentoController {
 		}
 
 		return new ResponseEntity<>("Agendamento não localizado!", HttpStatus.NOT_FOUND);
+	}
+	
+	@PostMapping("/adiciona-agendamento")
+	public ResponseEntity<String> adicionarAgendamento(@RequestBody Agendamento agendamento) {		
+		agendamento.setId(2);
+		agendamento.setCodigo("AG2023002");
+		Pessoa pessoa = PessoaRepository.getPessoabyCpf("05641479403");
+		
+		if (pessoa != null) {
+			agendamento.setPessoa(pessoa);
+		}
+		
+		StatusAgendamento statusAgendamento = StatusAgendamentoRepository.getStatusAgendamentoById(1);
+		
+		if (statusAgendamento != null) {
+			agendamento.setStatusAgendamento(statusAgendamento);
+		}
+		
+		AgendamentoRepository.addAgendamentos(agendamento);
+		return ResponseEntity.ok("Agendamento realizado com sucesso!");
 	}
 }
