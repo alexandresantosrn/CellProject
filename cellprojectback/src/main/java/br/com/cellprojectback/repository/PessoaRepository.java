@@ -27,7 +27,7 @@ public class PessoaRepository {
 		}
 		return null;
 	}
-	
+
 	public static boolean hasPessoabyCpf(String cpf) {
 
 		for (Pessoa pessoa : pessoas) {
@@ -37,7 +37,7 @@ public class PessoaRepository {
 		}
 		return false;
 	}
-	
+
 	public static boolean hasPessoabyEmail(String email) {
 
 		for (Pessoa pessoa : pessoas) {

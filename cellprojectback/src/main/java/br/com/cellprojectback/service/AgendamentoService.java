@@ -36,13 +36,13 @@ public class AgendamentoService {
 		for (Agendamento agendamentoLocal : agendamentos) {
 
 			if (agendamentoLocal.getDataAgendamento().isEqual(agendamento.getDataAgendamento())) {
-				
-				if(agendamentoLocal.getHorarioAgendamento().equals(agendamento.getHorarioAgendamento())) {
+
+				if (agendamentoLocal.getHorarioAgendamento().equals(agendamento.getHorarioAgendamento())) {
 					return false;
 				}
 			}
 		}
-		
+
 		return true;
 
 	}

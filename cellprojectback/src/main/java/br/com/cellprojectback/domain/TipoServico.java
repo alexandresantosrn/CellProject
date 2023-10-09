@@ -5,19 +5,19 @@ import java.util.Objects;
 public class TipoServico {
 
 	private int id;
-	private String descricao;	
+	private String descricao;
 
 	public TipoServico(int id) {
 		super();
-		
-		if(id == 1 ) {
+
+		if (id == 1) {
 			this.descricao = "Conserto em Garantia";
 		}
-		
-		else if (id == 2){
+
+		else if (id == 2) {
 			this.descricao = "Conserto Fora de Garantia";
 		}
-		
+
 		this.id = id;
 	}
 

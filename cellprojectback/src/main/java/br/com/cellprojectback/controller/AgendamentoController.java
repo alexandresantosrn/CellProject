@@ -12,6 +12,7 @@ import br.com.cellprojectback.repository.AgendamentoRepository;
 import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.StatusAgendamentoRepository;
 import br.com.cellprojectback.service.AgendamentoService;
+import br.com.cellprojectback.util.AgendamentoUtil;
 
 @RestController
 @CrossOrigin
@@ -56,13 +57,13 @@ public class AgendamentoController {
 		}
 
 		else if (!agendamentoService.isPeriodoAgendamentoHabilitado(agendamento)) {
-			
+
 			return new ResponseEntity<>("Data/Horário indisponíveis para agendamento.",
 					HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 
 		else {
-			agendamento.setId(2);
+			agendamento.setId(AgendamentoUtil.getNextId());
 			agendamento.setCodigo("AG2023002");
 			Pessoa pessoa = PessoaRepository.getPessoabyCpf("05641479403");
 

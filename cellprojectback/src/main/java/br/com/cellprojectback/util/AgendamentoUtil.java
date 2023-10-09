@@ -1,15 +1,15 @@
 package br.com.cellprojectback.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cellprojectback.domain.Agendamento;
+import br.com.cellprojectback.repository.AgendamentoRepository;
 
 public class AgendamentoUtil {
 
 	public static int getNextId() {
 
-		List<Agendamento> agendamentos = new ArrayList<Agendamento>();
+		List<Agendamento> agendamentos = AgendamentoRepository.getAgendamentos();
 
 		int var = 0;
 		int temp = 0;

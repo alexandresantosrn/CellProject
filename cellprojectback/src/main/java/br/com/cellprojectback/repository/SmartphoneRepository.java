@@ -6,7 +6,7 @@ import java.util.List;
 import br.com.cellprojectback.domain.Smartphone;
 
 public class SmartphoneRepository {
-	
+
 	private static List<Smartphone> smartphones = new ArrayList<Smartphone>();
 
 	public static List<Smartphone> getSmartphones() {

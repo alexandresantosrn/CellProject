@@ -10,7 +10,6 @@ import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.UsuarioRepository;
-import br.com.cellprojectback.util.PessoaUtil;
 import br.com.cellprojectback.util.UsuarioUtil;
 
 @CrossOrigin

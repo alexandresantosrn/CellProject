@@ -77,7 +77,8 @@ public class Data {
 		StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento3);
 
 		// Adicionando agendamentos
-		Agendamento agendamento = new Agendamento(1, "AG2023001", pessoa1, dataAtual, "15:00", tipoServico1, statusAgendamento1);
+		Agendamento agendamento = new Agendamento(1, "AG2023001", pessoa1, dataAtual, "15:00", tipoServico1,
+				statusAgendamento1);
 		AgendamentoRepository.addAgendamentos(agendamento);
 
 	}

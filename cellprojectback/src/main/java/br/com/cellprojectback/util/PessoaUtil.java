@@ -1,9 +1,9 @@
 package br.com.cellprojectback.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cellprojectback.domain.Pessoa;
+import br.com.cellprojectback.repository.PessoaRepository;
 
 public class PessoaUtil {
 
@@ -55,7 +55,7 @@ public class PessoaUtil {
 
 	public static int getNextId() {
 
-		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		List<Pessoa> pessoas = PessoaRepository.getPessoas();
 
 		int var = 0;
 		int temp = 0;

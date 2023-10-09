@@ -17,7 +17,7 @@ public class TipoServicoRepository {
 		tiposServico.add(tipo);
 		return tipo;
 	}
-	
+
 	public static TipoServico getTipoServicoById(int id) {
 
 		for (TipoServico tipo : tiposServico) {

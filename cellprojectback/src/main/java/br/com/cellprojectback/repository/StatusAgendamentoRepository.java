@@ -17,7 +17,7 @@ public class StatusAgendamentoRepository {
 		tiposAgendamento.add(statusAgendamento);
 		return statusAgendamento;
 	}
-	
+
 	public static StatusAgendamento getStatusAgendamentoById(int id) {
 
 		for (StatusAgendamento statusAgendamento : tiposAgendamento) {
