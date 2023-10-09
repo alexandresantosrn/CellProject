@@ -3,7 +3,6 @@ package br.com.cellprojectback.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.domain.TipoServico;
 
 public class TipoServicoRepository {

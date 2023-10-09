@@ -10,16 +10,18 @@ public class Agendamento {
 	private Pessoa pessoa;
 	private LocalDate dataAgendamento;
 	private String horarioAgendamento;
+	private TipoServico tipoServico;
 	private StatusAgendamento statusAgendamento;
 
 	public Agendamento(int id, String codigo, Pessoa pessoa, LocalDate dataAgendamento, String horarioAgendamento,
-			StatusAgendamento statusAgendamento) {
+			TipoServico tipoServico, StatusAgendamento statusAgendamento) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.pessoa = pessoa;
 		this.dataAgendamento = dataAgendamento;
 		this.horarioAgendamento = horarioAgendamento;
+		this.tipoServico = tipoServico;
 		this.statusAgendamento = statusAgendamento;
 	}
 
@@ -63,6 +65,14 @@ public class Agendamento {
 		this.horarioAgendamento = horarioAgendamento;
 	}
 
+	public TipoServico getTipoServico() {
+		return tipoServico;
+	}
+
+	public void setTipoServico(TipoServico tipoServico) {
+		this.tipoServico = tipoServico;
+	}
+
 	public StatusAgendamento getStatusAgendamento() {
 		return statusAgendamento;
 	}
@@ -73,7 +83,7 @@ public class Agendamento {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, dataAgendamento, horarioAgendamento, id, pessoa, statusAgendamento);
+		return Objects.hash(codigo, dataAgendamento, horarioAgendamento, id, pessoa, statusAgendamento, tipoServico);
 	}
 
 	@Override
@@ -87,7 +97,8 @@ public class Agendamento {
 		Agendamento other = (Agendamento) obj;
 		return Objects.equals(codigo, other.codigo) && Objects.equals(dataAgendamento, other.dataAgendamento)
 				&& Objects.equals(horarioAgendamento, other.horarioAgendamento) && id == other.id
-				&& Objects.equals(pessoa, other.pessoa) && Objects.equals(statusAgendamento, other.statusAgendamento);
+				&& Objects.equals(pessoa, other.pessoa) && Objects.equals(statusAgendamento, other.statusAgendamento)
+				&& Objects.equals(tipoServico, other.tipoServico);
 	}
 
 }
