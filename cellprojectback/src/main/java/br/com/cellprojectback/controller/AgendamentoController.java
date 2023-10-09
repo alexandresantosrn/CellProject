@@ -64,7 +64,7 @@ public class AgendamentoController {
 
 		else {
 			agendamento.setId(AgendamentoUtil.getNextId());
-			agendamento.setCodigo("AG2023002");
+			agendamento.setCodigo(AgendamentoUtil.gerarCodigoAgendamento());
 			Pessoa pessoa = PessoaRepository.getPessoabyCpf("05641479403");
 
 			if (pessoa != null) {

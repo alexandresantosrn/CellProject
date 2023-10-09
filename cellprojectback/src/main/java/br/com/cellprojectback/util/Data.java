@@ -64,7 +64,7 @@ public class Data {
 		StatusReparoRepository.addStatusReparo(statusReparo5);
 
 		// Adicionando ordens de serviço
-		OrdemServico os1 = new OrdemServico(1, "OS2023001", dataAtual, pessoa1, smart1, tipoServico2, statusReparo5,
+		OrdemServico os1 = new OrdemServico(1, "OS202300001", dataAtual, pessoa1, smart1, tipoServico2, statusReparo5,
 				70.00);
 		OrdemServicoRepository.addOrdemServico(os1);
 
@@ -77,7 +77,7 @@ public class Data {
 		StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento3);
 
 		// Adicionando agendamentos
-		Agendamento agendamento = new Agendamento(1, "AG2023001", pessoa1, dataAtual, "15:00", tipoServico1,
+		Agendamento agendamento = new Agendamento(1, "AG202300001", pessoa1, dataAtual, "15:00", tipoServico1,
 				statusAgendamento1);
 		AgendamentoRepository.addAgendamentos(agendamento);
 
