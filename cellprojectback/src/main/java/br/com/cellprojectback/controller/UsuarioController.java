@@ -10,6 +10,8 @@ import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.UsuarioRepository;
+import br.com.cellprojectback.util.PessoaUtil;
+import br.com.cellprojectback.util.UsuarioUtil;
 
 @CrossOrigin
 @RestController
@@ -26,7 +28,7 @@ public class UsuarioController {
 		Pessoa pessoa = PessoaRepository.getPessoabyCpf(cpf);
 
 		if (pessoa != null) {
-			Usuario user = new Usuario(2, email, senha, pessoa, new Date(), true);
+			Usuario user = new Usuario(UsuarioUtil.getNextId(), email, senha, pessoa, new Date(), true);
 			UsuarioRepository.addUsuario(user);
 
 			return ResponseEntity.ok("Cadastro realizado com sucesso!");

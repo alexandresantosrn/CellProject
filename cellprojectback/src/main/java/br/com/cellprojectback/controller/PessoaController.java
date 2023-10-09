@@ -35,7 +35,7 @@ public class PessoaController {
 		}
 
 		else {
-			pessoa.setId(1);
+			pessoa.setId(PessoaUtil.getNextId());
 			PessoaRepository.addPessoa(pessoa);
 
 			return ResponseEntity.ok("Cadastro realizado com sucesso!");

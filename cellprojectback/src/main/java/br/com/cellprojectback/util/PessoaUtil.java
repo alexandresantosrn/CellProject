@@ -1,5 +1,10 @@
 package br.com.cellprojectback.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.cellprojectback.domain.Pessoa;
+
 public class PessoaUtil {
 
 	public static boolean isCPFValido(String cpf) {
@@ -46,5 +51,23 @@ public class PessoaUtil {
 		}
 
 		return true;
+	}
+
+	public static int getNextId() {
+
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+
+		int var = 0;
+		int temp = 0;
+
+		for (Pessoa pessoa : pessoas) {
+			temp = pessoa.getId();
+
+			if (temp > var) {
+				var = temp;
+			}
+		}
+
+		return var + 1;
 	}
 }
