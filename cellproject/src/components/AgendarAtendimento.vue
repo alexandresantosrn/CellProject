@@ -5,25 +5,25 @@
       <Message :msg="msg" v-show="msg" />
       <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
 
-      <form>       
-      <div class="form-group">
-          <label for="tipoServico">Tipo de Serviço:</label>
-          <select class="form-control" id="tipoServico" v-model="selectedTipoServico">
-            <option v-for="tipo in comboTipoServico" :key="tipo.id" :value="tipo.id">{{ tipo.descricao }}</option>           
-          </select>
-      </div>
+      <form @submit.prevent="agendarAtendimento" id="form">       
+        <div class="form-group">
+            <label for="tipoServico">Tipo de Serviço:</label>
+            <select class="form-control" id="tipoServico" v-model="selectedTipoServico" required>
+              <option v-for="tipo in comboTipoServico" :key="tipo.id" :value="tipo.id">{{ tipo.descricao }}</option>           
+            </select>
+        </div>
 
-      <div class="form-group">
-          <label for="dataAgendamento">Data de Agendamento:</label>
-          <input type="date" class="form-control" id="dataAgendamento" v-model="dataAgendamento">
-      </div>
+        <div class="form-group">
+            <label for="dataAgendamento">Data de Agendamento:</label>
+            <input type="date" class="form-control" id="dataAgendamento" v-model="dataAgendamento" required>
+        </div>
 
-      <div class="form-group">
-          <label for="horarioAgendamento">Horário de Agendamento:</label>
-          <input type="time" class="form-control" id="horarioAgendamento" v-model="horarioAgendamento">
-      </div>
+        <div class="form-group">
+            <label for="horarioAgendamento">Horário de Agendamento:</label>
+            <input type="time" class="form-control" id="horarioAgendamento" v-model="horarioAgendamento" required>
+        </div>
 
-      <button type="button" class="btn btn-primary" @click="agendarAtendimento">Agendar</button>
+        <button type="submit" class="btn btn-primary" >Agendar</button>
       </form>
   </div>
 </template>
