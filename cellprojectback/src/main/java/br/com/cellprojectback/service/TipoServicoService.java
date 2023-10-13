@@ -15,7 +15,7 @@ public class TipoServicoService {
 	private TipoServicoRepository tipoServicoRepository;
 	
 	/**
-	 * Retorna a listagem de todos os tipos de serviço ativos.
+	 * Retorna a listagem de todos os tipos de serviço disponíveis.
 	 * 
 	 * @return List<TipoServico> - Todos os tipos de serviço existentes.
 	 */

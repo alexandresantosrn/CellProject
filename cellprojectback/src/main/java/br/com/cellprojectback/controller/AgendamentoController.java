@@ -12,6 +12,7 @@ import br.com.cellprojectback.repository.AgendamentoRepository;
 import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.StatusAgendamentoRepository;
 import br.com.cellprojectback.service.AgendamentoService;
+import br.com.cellprojectback.service.StatusAgendamentoService;
 import br.com.cellprojectback.util.AgendamentoUtil;
 
 @RestController
@@ -29,7 +30,7 @@ public class AgendamentoController {
 		Agendamento agendamento = AgendamentoRepository.getAgendamentoById(id);
 
 		if (agendamento != null) {
-			StatusAgendamento statusAgendamento = StatusAgendamentoRepository.getStatusAgendamentoById(3);
+			StatusAgendamento statusAgendamento = new StatusAgendamento(3, "Cancelado");
 			AgendamentoService agendamentoService = new AgendamentoService();
 
 			if (agendamentoService.isAgendamentoAptoCancelamento(agendamento)) {
@@ -70,8 +71,8 @@ public class AgendamentoController {
 			if (pessoa != null) {
 				agendamento.setPessoa(pessoa);
 			}
-
-			StatusAgendamento statusAgendamento = StatusAgendamentoRepository.getStatusAgendamentoById(1);
+			
+			StatusAgendamento statusAgendamento = new StatusAgendamento(1, "Confirmado");
 
 			if (statusAgendamento != null) {
 				agendamento.setStatusAgendamento(statusAgendamento);

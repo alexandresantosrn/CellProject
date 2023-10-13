@@ -2,8 +2,18 @@ package br.com.cellprojectback.domain;
 
 import java.util.Objects;
 
-public class StatusAgendamento {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "statusagendamento")
+public class StatusAgendamento {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String descricao;
 

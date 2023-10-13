@@ -69,9 +69,9 @@ public class Data {
 		StatusAgendamento statusAgendamento1 = new StatusAgendamento(1, "Agendado");
 		StatusAgendamento statusAgendamento2 = new StatusAgendamento(2, "Atendido");
 		StatusAgendamento statusAgendamento3 = new StatusAgendamento(3, "Cancelado");
-		StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento1);
-		StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento2);
-		StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento3);
+		//StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento1);
+		//StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento2);
+		//StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento3);
 
 		// Adicionando agendamentos
 		Agendamento agendamento = new Agendamento(1, "AG202300001", pessoa1, LocalDate.now(), "15:00", tipoServico1,

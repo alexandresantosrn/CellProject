@@ -1,32 +1,12 @@
 package br.com.cellprojectback.repository;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.cellprojectback.domain.StatusAgendamento;
 
-public class StatusAgendamentoRepository {
+public interface StatusAgendamentoRepository extends JpaRepository<StatusAgendamento, Integer> {
 
-	private static List<StatusAgendamento> tiposAgendamento = new ArrayList<StatusAgendamento>();
-
-	public static List<StatusAgendamento> getStatusAgendamento() {
-		return tiposAgendamento;
-	}
-
-	public static StatusAgendamento addStatusAgendamento(StatusAgendamento statusAgendamento) {
-		tiposAgendamento.add(statusAgendamento);
-		return statusAgendamento;
-	}
-
-	public static StatusAgendamento getStatusAgendamentoById(int id) {
-
-		for (StatusAgendamento statusAgendamento : tiposAgendamento) {
-			if (statusAgendamento.getId() == id) {
-				return statusAgendamento;
-			}
-		}
-		return null;
-
-	}
-
+	List<StatusAgendamento> findByDescricao(String descricao);
 }
