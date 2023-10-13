@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     async getTipoServico() {
-      axios.get('http://localhost:8080/get-tipos-servico')
+      axios.get('http://localhost:8080/tiposervico')
         .then(response => {
           this.comboTipoServico = response.data;
         })

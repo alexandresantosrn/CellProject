@@ -1,7 +1,6 @@
 package br.com.cellprojectback.util;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.Fabricante;
@@ -29,8 +28,8 @@ public class Data {
 		// Adicionando tipos de serviços
 		TipoServico tipoServico1 = new TipoServico(1, "Conserto em Garantia");
 		TipoServico tipoServico2 = new TipoServico(2, "Conserto Fora de Garantia");
-		TipoServicoRepository.addTipoServico(tipoServico1);
-		TipoServicoRepository.addTipoServico(tipoServico2);
+		//TipoServicoRepository.addTipoServico(tipoServico1);
+		//TipoServicoRepository.addTipoServico(tipoServico2);
 
 		// Adicionando pessoa
 		Pessoa pessoa1 = new Pessoa(1, "05641479403", "Alexandre Dantas dos Santos", "allexsantosrn@gmail.com",

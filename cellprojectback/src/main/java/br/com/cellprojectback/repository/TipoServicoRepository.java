@@ -1,31 +1,9 @@
 package br.com.cellprojectback.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.cellprojectback.domain.TipoServico;
 
-public class TipoServicoRepository {
+public interface TipoServicoRepository extends JpaRepository<TipoServico, Integer> {
 
-	private static List<TipoServico> tiposServico = new ArrayList<TipoServico>();
-
-	public static List<TipoServico> getTiposServico() {
-		return tiposServico;
-	}
-
-	public static TipoServico addTipoServico(TipoServico tipo) {
-		tiposServico.add(tipo);
-		return tipo;
-	}
-
-	public static TipoServico getTipoServicoById(int id) {
-
-		for (TipoServico tipo : tiposServico) {
-			if (tipo.getId() == id) {
-				return tipo;
-			}
-		}
-		return null;
-
-	}
 }
