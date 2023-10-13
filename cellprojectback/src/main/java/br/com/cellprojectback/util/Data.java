@@ -24,9 +24,7 @@ import br.com.cellprojectback.repository.UsuarioRepository;
 
 public class Data {
 
-	public static void carregarDados() {
-
-		LocalDate dataAtual = LocalDate.now();
+	public static void carregarDados() {		
 
 		// Adicionando tipos de serviços
 		TipoServico tipoServico1 = new TipoServico(1, "Conserto em Garantia");
@@ -40,7 +38,7 @@ public class Data {
 		PessoaRepository.addPessoa(pessoa1);
 
 		// Adicionando usuário
-		Usuario usuario1 = new Usuario(1, "allexsantosrn@gmail.com", "123456", pessoa1, new Date(), true);
+		Usuario usuario1 = new Usuario(1, "allexsantosrn@gmail.com", "123456", pessoa1, LocalDate.now(), true);
 		UsuarioRepository.addUsuario(usuario1);
 
 		// Adicionando marcas de smartphone
@@ -64,7 +62,7 @@ public class Data {
 		StatusReparoRepository.addStatusReparo(statusReparo5);
 
 		// Adicionando ordens de serviço
-		OrdemServico os1 = new OrdemServico(1, "OS202300001", dataAtual, pessoa1, smart1, tipoServico2, statusReparo5,
+		OrdemServico os1 = new OrdemServico(1, "OS202300001", LocalDate.now(), pessoa1, smart1, tipoServico2, statusReparo5,
 				70.00);
 		OrdemServicoRepository.addOrdemServico(os1);
 
@@ -77,7 +75,7 @@ public class Data {
 		StatusAgendamentoRepository.addStatusAgendamento(statusAgendamento3);
 
 		// Adicionando agendamentos
-		Agendamento agendamento = new Agendamento(1, "AG202300001", pessoa1, dataAtual, "15:00", tipoServico1,
+		Agendamento agendamento = new Agendamento(1, "AG202300001", pessoa1, LocalDate.now(), "15:00", tipoServico1,
 				statusAgendamento1);
 		AgendamentoRepository.addAgendamentos(agendamento);
 

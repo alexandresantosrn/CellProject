@@ -75,25 +75,16 @@ export default {
       cpf: this.cpf;
       
       axios.post('http://localhost:8080/adiciona-pessoa', pessoa)
-        .then(response => {
-            // Verifica a resposta do servidor 
-            this.msg_failure = '';                                  
-            this.msg = response.data;          
-            
-            this.cadastrarUsuario(); 
-            this.limparCampos();          
+        .then(response => {         
+          this.msg_failure = '';                                  
+          this.msg = response.data;          
+          
+          this.cadastrarUsuario(); 
+          this.limparCampos();          
         })
         .catch(error => {                    
-            
-            if (error.response.status === 404) {
-                // Lida com o status 404 (Not Found)
-                this.msg = '';                       
-                this.msg_failure = error.response.data;                       
-            } else { 
-                //Demais erros  
-                this.msg = '';                    
-                this.msg_failure = error.response.data; 
-            }
+          this.msg = '';                    
+          this.msg_failure = error.response.data;   
         });
     },
     cadastrarUsuario() {      
@@ -103,22 +94,14 @@ export default {
       cpf = this.cpf;
 
       axios.post('http://localhost:8080/cadastra-usuario?email='+email+'&senha='+senha+'&cpf='+cpf)
-        .then(response => {
-            // Verifica a resposta do servidor 
+        .then(response => {           
             this.msg_failure = '';                                  
             this.msg = response.data;
         })
-        .catch(error => {                    
+        .catch(error => {      
+          this.msg = '';                    
+          this.msg = error.response.data;
             
-            if (error.response.status === 404) {
-                // Lida com o status 404 (Not Found) 
-                this.msg = '';                       
-                this.msg_failure = error.response.data;                       
-            } else { 
-                //Demais erros  
-                this.msg = '';                    
-                this.msg = error.response.data;
-            }
         });                
    },
    limparCampos() {

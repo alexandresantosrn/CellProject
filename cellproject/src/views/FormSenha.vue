@@ -41,33 +41,24 @@ export default {
         recuperarSenha() {
             email = this.email;
             
-            axios.post('http://localhost:8080/recupera-senha?email='+email)
-                .then(response => {
-                    // Verifica a resposta do servidor  
+            axios.post('http://localhost:8080/enviar-email?email='+email)
+                .then(response => {                    
                     this.msg_failure = '';                                  
                     this.msg = response.data;   
+                    this.limparCampos();
                 })
-                .catch(error => {                    
-                    
-                    if (error.response.status === 404) {
-                       // Lida com o status 404 (Not Found)   
-                       this.msg = '';                      
-                       this.msg_failure = error.response.data;                                            
-                    } else { 
-                        //Demais erros
-                        this.msg = '';                     
-                        this.msg_failure = error.response.data;                        
-                    }
-                });
-            
-            //limpar msg após 5 segundos
-            setTimeout(() => this.msg = "", 5000);
-            setTimeout(() => this.msg_failure = "", 5000);    
-
+                .catch(error => {                 
+                    this.msg = '';                      
+                    this.msg_failure = error.response.data;                                           
+                });          
+           
+        },
+        limparCampos() {
+            setTimeout(() => this.msg = "", 10000); 
             this.email = "";
-        }
-    }  
-}
+        }  
+    }
+}    
 </script>
 
 <style scoped>

@@ -57,50 +57,30 @@ export default {
         }
     },
     methods: {
-        realizarLogin() {
-
-            // if (this.username == this.password) {
-            //     this.authenticated = true;           
-            //     this.$emit('realizarLogin', this.authenticated);
-            // }
-            
-            // //mensagem de apresentção após falha na autenticação
-            // else {                
-            //     this.msg = 'Usuário ou senha incorretos. Tente outra vez!'                
-            // }
-
+        realizarLogin() {         
             usuario = this.usuario;
             senha = this.senha;
             
-            axios.post('http://localhost:8080/realiza-login?email='+usuario+'&senha='+senha)
-                .then(response => {
-                    // Verifica a resposta do servidor    
+            axios.post('http://localhost:8080/realizar-login?email='+usuario+'&senha='+senha)
+                .then(response => {                     
                     this.msg_failure = '';                               
                     this.msg = response.data;  
                     this.authenticated = true;  
+                    this.limparCampos();
                     this.$emit('realizarLogin', this.authenticated);          
                 })
-                .catch(error => {                    
-                    
-                    if (error.response.status === 404) {
-                       // Lida com o status 404 (Not Found)
-                       this.msg = '';                       
-                       this.msg_failure = error.response.data;                       
-                    } else { 
-                        //Demais erros   
-                        this.msg = '';                   
-                        this.msg = error.response.data;
-                    }
-                });
-
-            //limpar msg após 5 segundos
-            setTimeout(() => this.msg = "", 5000);
-            setTimeout(() => this.msg_failure = "", 5000);
-
-            //limpar os campos
+                .catch(error => {                              
+                    this.msg = '';                   
+                    this.msg_failure = error.response.data;       
+                    this.limparCampos();        
+                });            
+        },
+        limparCampos() {
+            setTimeout(() => this.msg = "", 10000); 
+            setTimeout(() => this.msg_failure = "", 10000); 
             this.usuario = "";
             this.senha = "";
-        }
+        }  
     }
 }
 </script>

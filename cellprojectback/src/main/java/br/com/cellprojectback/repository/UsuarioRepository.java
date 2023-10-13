@@ -17,7 +17,13 @@ public class UsuarioRepository {
 		usuarios.add(usuario);
 		return usuario;
 	}
-
+	
+	/**
+	 * Verifica se há algum usuário com o e-mail informado.
+	 * 
+	 * @param email<String> - E-mail do usuário.
+	 * @return Boolean - True ou false.
+	 */
 	public static boolean hasUsuarioByEmail(String email) {
 
 		for (Usuario usuario : usuarios) {
@@ -28,6 +34,13 @@ public class UsuarioRepository {
 		return false;
 	}
 
+	/**
+	 * Verifica se há algum usuário com o login/email e senha informados.
+	 * 
+	 * @param email<String> - Email do usuário.
+	 * @param senha Boolean - True ou false.
+	 * @return
+	 */
 	public static boolean hasUsuarioByLoginSenha(String email, String senha) {
 		for (Usuario usuario : usuarios) {
 			if (usuario.getUsuario().equals(email)) {

@@ -50,12 +50,6 @@ export default {
     };
   },
   methods: {
-    //async getTipoServico() {
-      // const req = await fetch('http://localhost:8080/tiposervico');              
-    //  const data = await req.json();
-    //  this.comboTipoServico = data; 
-  //  },
-
     async getTipoServico() {
       axios.get('http://localhost:8080/get-tipos-servico')
         .then(response => {
@@ -73,22 +67,13 @@ export default {
         tipoServico: this.selectedTipoServico 
       }  
         axios.post('http://localhost:8080/adiciona-agendamento', agendamento)
-        .then(response => {
-            // Verifica a resposta do servidor 
-            this.msg_failure = '';                                  
-            this.msg = response.data;                      
+        .then(response => {          
+          this.msg_failure = '';                                  
+          this.msg = response.data;                      
         })
-        .catch(error => {                    
-            
-            if (error.response.status === 404) {
-                // Lida com o status 404 (Not Found)
-                this.msg = '';                       
-                this.msg_failure = error.response.data;                       
-            } else { 
-                //Demais erros  
-                this.msg = '';                    
-                this.msg_failure = error.response.data; 
-            }
+        .catch(error => {                
+          this.msg = '';                       
+          this.msg_failure = error.response.data;                 
         });
        
         //limpar msg após 5 segundos

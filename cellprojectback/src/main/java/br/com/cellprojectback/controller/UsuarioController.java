@@ -1,6 +1,6 @@
 package br.com.cellprojectback.controller;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -10,11 +10,14 @@ import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.UsuarioRepository;
+import br.com.cellprojectback.service.UsuarioService;
 import br.com.cellprojectback.util.UsuarioUtil;
 
 @CrossOrigin
 @RestController
 public class UsuarioController {
+
+	UsuarioService usuarioService = new UsuarioService();
 
 	@GetMapping("/get-usuarios")
 	public List<Usuario> getUsuarios() {
@@ -27,7 +30,7 @@ public class UsuarioController {
 		Pessoa pessoa = PessoaRepository.getPessoabyCpf(cpf);
 
 		if (pessoa != null) {
-			Usuario user = new Usuario(UsuarioUtil.getNextId(), email, senha, pessoa, new Date(), true);
+			Usuario user = new Usuario(UsuarioUtil.getNextId(), email, senha, pessoa, LocalDate.now(), true);
 			UsuarioRepository.addUsuario(user);
 
 			return ResponseEntity.ok("Cadastro realizado com sucesso!");
@@ -36,24 +39,37 @@ public class UsuarioController {
 		return new ResponseEntity<>("Erro na criação do usuário!", HttpStatus.NOT_FOUND);
 	}
 
-	@PostMapping("/recupera-senha")
-	public ResponseEntity<String> recuperarSenha(@RequestParam String email) {
+	/**
+	 * Envia um e-mail de recuperação de senha para o usuário.
+	 * 
+	 * @param email<String> - E-mail informado pelo usuário.
+	 * @return ResponseEntity<String> - Retorna mensagem de sucesso ou falha.
+	 */
+	@PostMapping("/enviar-email")
+	public ResponseEntity<String> enviarEmailRecuperacaoSenha(@RequestParam String email) {
 
-		if (!UsuarioRepository.hasUsuarioByEmail(email)) {
-			return new ResponseEntity<>("E-mail não localizado na base de dados.", HttpStatus.NOT_FOUND);
+		if (usuarioService.hasUsuarioByEmail(email)) {
+			return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
 		}
 
-		return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
+		return new ResponseEntity<>("E-mail não localizado na base de dados.", HttpStatus.NOT_FOUND);
 	}
 
-	@PostMapping("/realiza-login")
+	/**
+	 * Realiza o registro do login do usuário no sistema.
+	 * 
+	 * @param email<String> - E-mail informado pelo usuário.
+	 * @param senha<String> - Senha informada pelo usuário.
+	 * @return
+	 */
+	@PostMapping("/realizar-login")
 	public ResponseEntity<String> realizarLogin(@RequestParam String email, String senha) {
 
-		if (!UsuarioRepository.hasUsuarioByLoginSenha(email, senha)) {
-			return new ResponseEntity<>("Email ou senha incorretos. Tente outra vez!", HttpStatus.NOT_FOUND);
+		if (usuarioService.hasUsuarioByLoginSenha(email, senha)) {
+			return ResponseEntity.ok("Usuário autenticado com sucesso!");
 		}
 
-		return ResponseEntity.ok("Usuário autenticado com sucesso!");
+		return new ResponseEntity<>("Email ou senha incorretos. Tente outra vez!", HttpStatus.NOT_FOUND);
 	}
 
 }

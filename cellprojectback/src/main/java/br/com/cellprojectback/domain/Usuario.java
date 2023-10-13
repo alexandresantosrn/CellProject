@@ -1,6 +1,6 @@
 package br.com.cellprojectback.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Usuario {
@@ -9,10 +9,10 @@ public class Usuario {
 	String usuario;
 	String senha;
 	Pessoa pessoa;
-	private Date dataCadastro;
+	private LocalDate dataCadastro;
 	boolean autorizado;
 
-	public Usuario(int id, String usuario, String senha, Pessoa pessoa, Date dataCadastro, boolean autorizado) {
+	public Usuario(int id, String usuario, String senha, Pessoa pessoa, LocalDate dataCadastro, boolean autorizado) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -54,11 +54,11 @@ public class Usuario {
 		this.pessoa = pessoa;
 	}
 
-	public Date getDataCadastro() {
+	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
