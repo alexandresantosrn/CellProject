@@ -13,7 +13,12 @@ public class TipoServicoService {
 
 	@Autowired
 	private TipoServicoRepository tipoServicoRepository;
-
+	
+	/**
+	 * Retorna a listagem de todos os tipos de serviço ativos.
+	 * 
+	 * @return List<TipoServico> - Todos os tipos de serviço existentes.
+	 */
 	public List<TipoServico> listarTiposServico() {
 		return tipoServicoRepository.findAll();
 	}
