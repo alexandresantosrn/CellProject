@@ -1,18 +1,45 @@
 package br.com.cellprojectback.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name = "usuario")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "usuario")
 	String usuario;
+	
+	@Column(name = "senha")
 	String senha;
+	
+	@OneToOne
+	@JoinColumn(name = "pessoa_id")
 	Pessoa pessoa;
-	private LocalDate dataCadastro;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_cadastro")
+	private Date dataCadastro;
+	
+	@Column(name = "autorizado")
 	boolean autorizado;
 
-	public Usuario(int id, String usuario, String senha, Pessoa pessoa, LocalDate dataCadastro, boolean autorizado) {
+	public Usuario(int id, String usuario, String senha, Pessoa pessoa, Date dataCadastro, boolean autorizado) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -54,11 +81,11 @@ public class Usuario {
 		this.pessoa = pessoa;
 	}
 
-	public LocalDate getDataCadastro() {
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 

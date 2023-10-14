@@ -2,13 +2,27 @@ package br.com.cellprojectback.domain;
 
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table
 public class Pessoa {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String cpf;
 	private String nome;
 	private String email;
 	private String telefone;
+
+	public Pessoa() {
+		super();
+	}
 
 	public Pessoa(int id, String cpf, String nome, String email, String telefone) {
 		super();

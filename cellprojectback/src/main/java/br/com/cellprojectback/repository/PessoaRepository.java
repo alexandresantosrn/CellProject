@@ -1,50 +1,13 @@
 package br.com.cellprojectback.repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.cellprojectback.domain.Pessoa;
 
-public class PessoaRepository {
+public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
 
-	private static List<Pessoa> pessoas = new ArrayList<Pessoa>();
+	Pessoa findByCpf(String cpf);
 
-	public static List<Pessoa> getPessoas() {
-		return pessoas;
-	}
+	Pessoa findByEmail(String email);
 
-	public static Pessoa addPessoa(Pessoa pessoa) {
-		pessoas.add(pessoa);
-		return pessoa;
-	}
-
-	public static Pessoa getPessoabyCpf(String cpf) {
-
-		for (Pessoa pessoa : pessoas) {
-			if (pessoa.getCpf().equals(cpf)) {
-				return pessoa;
-			}
-		}
-		return null;
-	}
-
-	public static boolean hasPessoabyCpf(String cpf) {
-
-		for (Pessoa pessoa : pessoas) {
-			if (pessoa.getCpf().equals(cpf)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean hasPessoabyEmail(String email) {
-
-		for (Pessoa pessoa : pessoas) {
-			if (pessoa.getEmail().equals(email)) {
-				return true;
-			}
-		}
-		return false;
-	}
 }

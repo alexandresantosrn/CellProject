@@ -6,39 +6,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.cellprojectback.domain.Pessoa;
-import br.com.cellprojectback.repository.PessoaRepository;
-import br.com.cellprojectback.util.PessoaUtil;
+import br.com.cellprojectback.exception.ServiceException;
+import br.com.cellprojectback.service.PessoaService;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/pessoa")
 public class PessoaController {
 
-	@GetMapping("/get-pessoas")
-	public List<Pessoa> getPessoas() {
-		return PessoaRepository.getPessoas();
+	private final PessoaService pessoaService;
+
+	public PessoaController(PessoaService pessoaService) {
+		this.pessoaService = pessoaService;
 	}
 
-	@PostMapping("/adiciona-pessoa")
-	public ResponseEntity<String> adicionarPessoa(@RequestBody Pessoa pessoa) {
+	@GetMapping
+	public ResponseEntity<List<Pessoa>> listarPessoas() {
+		List<Pessoa> pessoas = pessoaService.listarPessoas();
+		return new ResponseEntity<>(pessoas, HttpStatus.OK);
+	}
 
-		if (PessoaRepository.hasPessoabyCpf(pessoa.getCpf())) {
-			return new ResponseEntity<>("Já existe um usuário com o cpf informado.", HttpStatus.UNPROCESSABLE_ENTITY);
-		}
+	@PostMapping
+	public ResponseEntity<String> cadastrarPessoa(@RequestBody Pessoa pessoa) {
 
-		else if (PessoaRepository.hasPessoabyEmail(pessoa.getEmail())) {
-			return new ResponseEntity<>("Já existe um usuário com o e-mail informado.",
-					HttpStatus.UNPROCESSABLE_ENTITY);
-		}
+		try {
+			pessoaService.salvarPessoa(pessoa);
+			return ResponseEntity.ok("Cadastro realizado com sucesso.");
 
-		else if (!PessoaUtil.isCPFValido(pessoa.getCpf())) {
-			return new ResponseEntity<>("Informe um cpf válido.", HttpStatus.UNPROCESSABLE_ENTITY);
-		}
-
-		else {
-			pessoa.setId(PessoaUtil.getNextId());
-			PessoaRepository.addPessoa(pessoa);
-
-			return ResponseEntity.ok("Cadastro realizado com sucesso!");
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
 		}
 
 	}

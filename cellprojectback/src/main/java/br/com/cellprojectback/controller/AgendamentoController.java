@@ -12,12 +12,20 @@ import br.com.cellprojectback.repository.AgendamentoRepository;
 import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.StatusAgendamentoRepository;
 import br.com.cellprojectback.service.AgendamentoService;
+import br.com.cellprojectback.service.PessoaService;
 import br.com.cellprojectback.service.StatusAgendamentoService;
+import br.com.cellprojectback.service.TipoServicoService;
 import br.com.cellprojectback.util.AgendamentoUtil;
 
 @RestController
 @CrossOrigin
 public class AgendamentoController {
+
+	private final PessoaService pessoaService;
+
+	public AgendamentoController(PessoaService pessoaService) {
+		this.pessoaService = pessoaService;
+	}
 
 	@GetMapping("/get-agendamentos")
 	public List<Agendamento> getAgendamentos() {
@@ -66,12 +74,12 @@ public class AgendamentoController {
 		else {
 			agendamento.setId(AgendamentoUtil.getNextId());
 			agendamento.setCodigo(AgendamentoUtil.gerarCodigoAgendamento());
-			Pessoa pessoa = PessoaRepository.getPessoabyCpf("05641479403");
+			Pessoa pessoa = pessoaService.findPessoabyCPF("05641479403");
 
 			if (pessoa != null) {
 				agendamento.setPessoa(pessoa);
 			}
-			
+
 			StatusAgendamento statusAgendamento = new StatusAgendamento(1, "Confirmado");
 
 			if (statusAgendamento != null) {

@@ -1,6 +1,7 @@
 package br.com.cellprojectback.util;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.Fabricante;
@@ -34,11 +35,11 @@ public class Data {
 		// Adicionando pessoa
 		Pessoa pessoa1 = new Pessoa(1, "05641479403", "Alexandre Dantas dos Santos", "allexsantosrn@gmail.com",
 				"84999494971");
-		PessoaRepository.addPessoa(pessoa1);
+		//PessoaRepository.addPessoa(pessoa1);
 
 		// Adicionando usuário
-		Usuario usuario1 = new Usuario(1, "allexsantosrn@gmail.com", "123456", pessoa1, LocalDate.now(), true);
-		UsuarioRepository.addUsuario(usuario1);
+		Usuario usuario1 = new Usuario(1, "allexsantosrn@gmail.com", "123456", pessoa1, new Date(), true);
+		//UsuarioRepository.addUsuario(usuario1);
 
 		// Adicionando marcas de smartphone
 		Fabricante fabricante1 = new Fabricante(1, "Apple");

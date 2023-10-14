@@ -13,25 +13,24 @@ public class StatusAgendamentoService {
 
 	@Autowired
 	private StatusAgendamentoRepository statusAgendamentoRepository;
-	
+
 	/**
-	 * Retorna a listagem de todos os status de agendamento disponíveis.
+	 * Retorna a listagem de todos os status de agendamento.
 	 * 
 	 * @return List<StatusAgendamento> - Todos os status de agendamento existentes.
 	 */
 	public List<StatusAgendamento> listarStatusAgendamento() {
 		return statusAgendamentoRepository.findAll();
 	}
-	
+
 	/**
 	 * Retorna a listagem dos status de agendamento com a descrição informada.
 	 * 
 	 * @param descricao
 	 * @return
 	 */
-	public List<StatusAgendamento> buscarPorDescricao(String descricao) {
-        return statusAgendamentoRepository.findByDescricao(descricao);
-    }
-	
-	
+	public List<StatusAgendamento> findStatusByDescricao(String descricao) {
+		return statusAgendamentoRepository.findByDescricao(descricao);
+	}
+
 }
