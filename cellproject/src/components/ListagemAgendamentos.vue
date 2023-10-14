@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     async getAgendamentos() {        
-        axios.get('http://localhost:8080/get-agendamentos')
+        axios.get('http://localhost:8080/agendamento')
           .then(response => {
             this.agendamentos = response.data;               
           })

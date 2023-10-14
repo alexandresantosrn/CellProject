@@ -77,7 +77,7 @@ public class Data {
 		// Adicionando agendamentos
 		Agendamento agendamento = new Agendamento(1, "AG202300001", pessoa1, LocalDate.now(), "15:00", tipoServico1,
 				statusAgendamento1);
-		AgendamentoRepository.addAgendamentos(agendamento);
+		//AgendamentoRepository.addAgendamentos(agendamento);
 
 	}
 }

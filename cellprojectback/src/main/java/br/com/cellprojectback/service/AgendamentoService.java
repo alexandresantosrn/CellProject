@@ -1,49 +1,26 @@
 package br.com.cellprojectback.service;
 
-import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.repository.AgendamentoRepository;
 
+@Service
 public class AgendamentoService {
 
-	public boolean isAgendamentoAptoCancelamento(Agendamento agendamento) {
+	@Autowired
+	private AgendamentoRepository agendamentoRepository;
 
-		if (agendamento.getStatusAgendamento().getId() == 1) {
-			return true;
-		}
-
-		return false;
-
+	/**
+	 * Retorna a listagem de todos os agendamentos.
+	 * 
+	 * @return List<Agendamento> - Todos os tipos os agendamentos existentes.
+	 */
+	public List<Agendamento> listarAgendamentos() {
+		return agendamentoRepository.findAll();
 	}
 
-	public boolean isDataAgendamentoDisponivel(Agendamento agendamento) {
-
-		LocalDate hoje = LocalDate.now();
-		if (agendamento.getDataAgendamento().isBefore(hoje) || agendamento.getDataAgendamento().isEqual(hoje)) {
-			return false;
-		}
-
-		return true;
-
-	}
-
-	public boolean isPeriodoAgendamentoHabilitado(Agendamento agendamento) {
-
-		List<Agendamento> agendamentos = AgendamentoRepository.getAgendamentos();
-
-		for (Agendamento agendamentoLocal : agendamentos) {
-
-			if (agendamentoLocal.getDataAgendamento().isEqual(agendamento.getDataAgendamento())) {
-
-				if (agendamentoLocal.getHorarioAgendamento().equals(agendamento.getHorarioAgendamento())) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-
-	}
 }

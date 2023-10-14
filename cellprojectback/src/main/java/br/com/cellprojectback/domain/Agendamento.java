@@ -3,14 +3,42 @@ package br.com.cellprojectback.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "agendamento")
 public class Agendamento {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "codigo")
 	private String codigo;
+	
+	@ManyToOne
+	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
+	
+	@Column(name = "data_agendamento")
 	private LocalDate dataAgendamento;
+	
+	@Column(name = "horario_agendamento")
 	private String horarioAgendamento;
+	
+	@ManyToOne
+	@JoinColumn(name = "tiposervico_id")
 	private TipoServico tipoServico;
+	
+	@ManyToOne
+	@JoinColumn(name = "status_id")
 	private StatusAgendamento statusAgendamento;
 
 	public Agendamento(int id, String codigo, Pessoa pessoa, LocalDate dataAgendamento, String horarioAgendamento,
