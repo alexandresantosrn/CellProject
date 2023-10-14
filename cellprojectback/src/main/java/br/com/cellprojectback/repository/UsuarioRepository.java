@@ -6,6 +6,8 @@ import br.com.cellprojectback.domain.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	Usuario getUsuarioByUsuario(String usuario);
+	Usuario findByUsuario(String usuario);
+
+	Usuario findByUsuarioAndSenha(String usuario, String senha);
 
 }

@@ -26,7 +26,7 @@ public class PessoaController {
 		return new ResponseEntity<>(pessoas, HttpStatus.OK);
 	}
 
-	@PostMapping
+	@PostMapping("cadastrar-pessoa")
 	public ResponseEntity<String> cadastrarPessoa(@RequestBody Pessoa pessoa) {
 
 		try {

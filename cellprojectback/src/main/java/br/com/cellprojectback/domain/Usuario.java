@@ -21,23 +21,27 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "usuario")
 	String usuario;
-	
+
 	@Column(name = "senha")
 	String senha;
-	
+
 	@OneToOne
 	@JoinColumn(name = "pessoa_id")
 	Pessoa pessoa;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
-	
+
 	@Column(name = "autorizado")
 	boolean autorizado;
+
+	public Usuario() {
+		super();
+	}
 
 	public Usuario(int id, String usuario, String senha, Pessoa pessoa, Date dataCadastro, boolean autorizado) {
 		super();

@@ -57,11 +57,14 @@ export default {
         }
     },
     methods: {
-        realizarLogin() {         
-            usuario = this.usuario;
-            senha = this.senha;
+        realizarLogin() { 
             
-            axios.post('http://localhost:8080/realizar-login?email='+usuario+'&senha='+senha)
+            const usuario = {
+                usuario: this.usuario,
+                senha: this.senha
+            }
+
+            axios.post('http://localhost:8080/logon/realizar-login', usuario)
                 .then(response => {                     
                     this.msg_failure = '';                               
                     this.msg = response.data;  

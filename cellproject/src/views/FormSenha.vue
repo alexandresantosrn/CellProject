@@ -34,14 +34,17 @@ export default {
             email: '',
             msg: '',
             msg_failure: '',
-            texto: 'Prezado usuário, informe abaixo o e-mail utilizado durante cadastro:'   
+            texto: 'Prezado usuário, informe abaixo o e-mail utili  zado durante cadastro:'   
         }
     },
     methods: {
         recuperarSenha() {
-            email = this.email;
+
+            const usuario = {
+                usuario: this.email
+            } 
             
-            axios.post('http://localhost:8080/enviar-email?email='+email)
+            axios.post('http://localhost:8080/logon/recuperar-senha', usuario)
                 .then(response => {                    
                     this.msg_failure = '';                                  
                     this.msg = response.data;   

@@ -27,7 +27,7 @@ public class UsuarioController {
 		return new ResponseEntity<>(usuarios, HttpStatus.OK);
 	}
 
-	@PostMapping
+	@PostMapping("cadastrar-usuario")
 	public ResponseEntity<String> cadastrarUsuario(@RequestBody Usuario usuario) {
 
 		try {

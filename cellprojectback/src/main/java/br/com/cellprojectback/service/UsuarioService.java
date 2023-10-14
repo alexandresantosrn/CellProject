@@ -63,13 +63,50 @@ public class UsuarioService {
 
 	/**
 	 * 
-	 * Retorna uma usuário através do seu e-mail.
+	 * Retorna um usuário através do seu e-mail.
 	 * 
 	 * @param usuario<String> - E-mail/usuário informado.
-	 * @return - Pessoa com o email/usuário informado.
+	 * @return Usuario - Usuário com o email/usuário informado.
 	 */
 	private Usuario findUsuarioByEmail(String usuario) {
-		return usuarioRepository.getUsuarioByUsuario(usuario);
+		return usuarioRepository.findByUsuario(usuario);
+	}
+
+	/**
+	 * 
+	 * Realiza a recuperação de senha do usuário.
+	 * 
+	 * @param email<String> - Email/usuário informado.
+	 * @return Usuario - Usuário com o email/usuário informado.
+	 */
+	public Usuario recuperarSenha(String email) {
+
+		if (email == null) {
+			throw new ServiceException("Campo obrigatório não informado.");
+		}
+
+		if (findUsuarioByEmail(email) == null) {
+			throw new ServiceException("Email não localizado na base de dados.");
+		}
+
+		return findUsuarioByEmail(email);
+	}
+
+	public Usuario realizarLogin(String usuario, String senha) {
+
+		if (usuario == null || senha == null) {
+			throw new ServiceException("Campos obrigatórios não informado.");
+		}
+
+		else if (findUsuarioByLoginSenha(usuario, senha) == null) {
+			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
+		}
+
+		return findUsuarioByLoginSenha(usuario, senha);
+	}
+
+	private Usuario findUsuarioByLoginSenha(String usuario, String senha) {
+		return usuarioRepository.findByUsuarioAndSenha(usuario, senha);
 	}
 
 }

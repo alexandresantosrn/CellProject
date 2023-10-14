@@ -69,12 +69,9 @@ export default {
         cpf: this.cpf,
         email: this.email,
         telefone: this.telefone       
-      }          
+      }         
       
-      senha: this.senha;
-      cpf: this.cpf;
-      
-      axios.post('http://localhost:8080/pessoa', pessoa)
+      axios.post('http://localhost:8080/pessoa/cadastrar-pessoa', pessoa)
         .then(response => {         
           this.msg_failure = '';                                  
           this.msg = response.data;          
@@ -94,7 +91,7 @@ export default {
         senha: this.senha           
       }
 
-      axios.post('http://localhost:8080/usuario',usuario)
+      axios.post('http://localhost:8080/usuario/cadastrar-usuario',usuario)
         .then(response => {           
             this.msg_failure = '';                                  
             this.msg = response.data;
