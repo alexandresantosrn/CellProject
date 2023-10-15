@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.Agendamento;
-import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.AgendamentoRepository;
 import br.com.cellprojectback.util.AgendamentoUtil;
@@ -29,12 +29,12 @@ public class AgendamentoService {
 	}
 
 	/**
-	 * Retorna a listagem de todos os agendamentos.
+	 * Retorna a listagem de todos os agendamentos ordenados pela data de agendamento.
 	 * 
 	 * @return List<Agendamento> - Todos os tipos os agendamentos existentes.
 	 */
 	public List<Agendamento> listarAgendamentos() {
-		return agendamentoRepository.findAll();
+		return agendamentoRepository.findAll(Sort.by(Sort.Direction.ASC,"dataAgendamento"));		
 	}
 
 	/**
