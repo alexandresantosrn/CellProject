@@ -24,12 +24,12 @@ public class StatusAgendamentoService {
 	}
 
 	/**
-	 * Retorna a listagem dos status de agendamento com a descrição informada.
+	 * Retorna status de agendamento conforme a descrição informada.
 	 * 
 	 * @param descricao
 	 * @return
 	 */
-	public List<StatusAgendamento> findStatusByDescricao(String descricao) {
+	public StatusAgendamento findStatusByDescricao(String descricao) {
 		return statusAgendamentoRepository.findByDescricao(descricao);
 	}
 

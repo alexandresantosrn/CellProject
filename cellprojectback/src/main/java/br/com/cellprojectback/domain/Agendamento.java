@@ -19,27 +19,31 @@ public class Agendamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "codigo")
 	private String codigo;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
-	
+
 	@Column(name = "data_agendamento")
 	private LocalDate dataAgendamento;
-	
+
 	@Column(name = "horario_agendamento")
 	private String horarioAgendamento;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "tiposervico_id")
 	private TipoServico tipoServico;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "status_id")
 	private StatusAgendamento statusAgendamento;
+
+	public Agendamento() {
+		super();
+	}
 
 	public Agendamento(int id, String codigo, Pessoa pessoa, LocalDate dataAgendamento, String horarioAgendamento,
 			TipoServico tipoServico, StatusAgendamento statusAgendamento) {

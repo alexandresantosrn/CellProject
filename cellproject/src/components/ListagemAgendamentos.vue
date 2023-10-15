@@ -47,24 +47,7 @@ export default {
     return {
       agendamentos: '',
       msg: '',
-      msg_failure: ''
-      // agendamentos: [
-      //   {
-      //     id: 1,
-      //     numero: 'AG2023001',
-      //     data: '2023-08-30',
-      //     horario: '09:00 AM',
-      //     status: 'Agendado'
-      //   },
-      //   {
-      //     id: 2,
-      //     numero: 'AG2023002',
-      //     data: '2023-08-31',
-      //     horario: '02:30 PM',
-      //     status: 'Confirmado'
-      //   },
-        // Adicione mais objetos de agendamento conforme necessário
-      //]
+      msg_failure: ''      
     };
   },
   methods: {
@@ -79,29 +62,22 @@ export default {
           });
       },
     cancelarAgendamento(agendamentoId) {
-      axios.post('http://localhost:8080/cancela-agendamento?id='+agendamentoId)
-        .then(response => {
-          // Verifica a resposta do servidor  
+      axios.post('http://localhost:8080/agendamento/cancelar-agendamento?id='+agendamentoId)
+        .then(response => {           
           this.msg_failure = '';                                           
           this.msg = response.data;  
-                    
+          this.limparCampos();          
         })
-        .catch(error => {                    
-            
-          if (error.response.status === 404) {
-              // Lida com o status 404 (Not Found)
-              this.msg = '';                       
-              this.msg_failure = error.response.data;            
-          } else { 
-              //Demais erros   
-              this.msg = '';                   
-              this.msg_failure = error.response.data; 
-          }
-        });
-      
-        setTimeout(() => this.msg = "", 5000);
-        setTimeout(() => this.msg_failure = "", 5000);
-    },  
+        .catch(error => {                  
+          this.msg = '';                   
+          this.msg_failure = error.response.data; 
+          this.limparCampos();
+        });    
+    },
+    limparCampos(){
+      setTimeout(() => this.msg = "", 5000);
+      setTimeout(() => this.msg_failure = "", 5000);
+    }  
   },
   mounted() {
     this.getAgendamentos();

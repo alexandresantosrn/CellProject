@@ -12,13 +12,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "statusagendamento")
 public class StatusAgendamento {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "descricao")
 	private String descricao;
+
+	public StatusAgendamento() {
+		super();
+	}
 
 	public StatusAgendamento(int id, String descricao) {
 		super();

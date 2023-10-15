@@ -9,6 +9,8 @@ import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.domain.TipoServico;
+import br.com.cellprojectback.domain.Usuario;
+import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.AgendamentoRepository;
 import br.com.cellprojectback.repository.PessoaRepository;
 import br.com.cellprojectback.repository.StatusAgendamentoRepository;
@@ -35,4 +37,30 @@ public class AgendamentoController {
 		return new ResponseEntity<>(agendamentos, HttpStatus.OK);
 	}
 
+	@PostMapping("cadastrar-agendamento")
+	public ResponseEntity<String> cadastrarAgendamento(@RequestBody Agendamento agendamento) {
+
+		try {
+			agendamentoService.salvarAgendamento(agendamento);
+			return ResponseEntity.ok("Agendamento realizado com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}
+	
+	@PostMapping("cancelar-agendamento")
+	public ResponseEntity<String> cancelarAgendamento(@RequestParam int id) {
+
+		try {			
+			agendamentoService.cancelarAgendamento(id);
+			return ResponseEntity.ok("Agendamento cancelado com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}
+	
 }

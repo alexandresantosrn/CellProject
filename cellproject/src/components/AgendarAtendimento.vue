@@ -66,24 +66,22 @@ export default {
         horarioAgendamento: this.horarioAgendamento,
         tipoServico: this.selectedTipoServico 
       }  
-        axios.post('http://localhost:8080/adiciona-agendamento', agendamento)
+        axios.post('http://localhost:8080/agendamento/cadastrar-agendamento', agendamento)
         .then(response => {          
           this.msg_failure = '';                                  
-          this.msg = response.data;                      
+          this.msg = response.data; 
+          this.limparCampos();                     
         })
         .catch(error => {                
           this.msg = '';                       
           this.msg_failure = error.response.data;                 
-        });
-       
-        //limpar msg após 5 segundos
-        setTimeout(() => this.msg = "", 5000);
-        setTimeout(() => this.msg_failure = "", 5000);
-
-        //limpar os campos
-        this.selectedTipoServico = "";
-        this.dataAgendamento = "";
-        this.horarioAgendamento = ""; 
+        });    
+    },
+    limparCampos(){
+      setTimeout(() => this.msg = "", 5000);
+      this.selectedTipoServico = "";
+      this.dataAgendamento = "";
+      this.horarioAgendamento = "";
     }
   },
   mounted() {

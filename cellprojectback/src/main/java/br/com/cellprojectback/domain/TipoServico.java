@@ -16,7 +16,7 @@ public class TipoServico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "descricao")
 	private String descricao;
 
@@ -26,15 +26,6 @@ public class TipoServico {
 
 	public TipoServico(int id) {
 		super();
-
-		if (id == 1) {
-			this.descricao = "Conserto em Garantia";
-		}
-
-		else if (id == 2) {
-			this.descricao = "Conserto Fora de Garantia";
-		}
-
 		this.id = id;
 	}
 
