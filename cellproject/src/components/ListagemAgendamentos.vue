@@ -22,13 +22,34 @@
           <td>{{ agendamento.horarioAgendamento }}</td>
           <td>{{ agendamento.statusAgendamento.descricao }}</td>
           <td>
-            <button class="btn btn-danger" @click="cancelarAgendamento(agendamento.id)">
+            <button class="btn btn-danger" @click="realizarCancelamento(agendamento.id)">
               Cancelar Agendamento
             </button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <div class="modal" tabindex="-1" role="dialog" :class="{ 'd-block': showModal }">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Confirmação de Cancelamento de Agendamento</h5>
+                  <button type="button" class="close" @click="hideModal">
+                      <span>&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  Confirma o cancelamento do agendamento?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" @click="hideModal">Cancelar</button>
+                  <button type="button" class="btn btn-danger" @click="cancelarAgendamento">Confirmar</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -47,7 +68,9 @@ export default {
     return {
       agendamentos: '',
       msg: '',
-      msg_failure: ''      
+      msg_failure: '',
+      agendamentoId: '',
+      showModal: false      
     };
   },
   methods: {
@@ -61,7 +84,8 @@ export default {
             this.msg_failure = error.response.data;
           });
       },
-    cancelarAgendamento(agendamentoId) {
+    cancelarAgendamento() {
+      const agendamentoId = this.agendamentoId;
       axios.post('http://localhost:8080/agendamento/cancelar-agendamento?id='+agendamentoId)
         .then(response => {           
           this.msg_failure = '';                                           
@@ -72,12 +96,21 @@ export default {
           this.msg = '';                   
           this.msg_failure = error.response.data; 
           this.limparCampos();
-        });    
+        }); 
+        
+        this.showModal = false;
     },
     limparCampos(){
       setTimeout(() => this.msg = "", 5000);
       setTimeout(() => this.msg_failure = "", 5000);
-    }  
+    },
+    realizarCancelamento(agendamentoId) {
+      this.agendamentoId = agendamentoId;
+      this.showModal = true;
+    },
+    hideModal() {
+      this.showModal = false;
+    }   
   },
   mounted() {
     this.getAgendamentos();
