@@ -2,10 +2,28 @@ package br.com.cellprojectback.domain;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "smartphone")
 public class Smartphone {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "modelo")
 	private String modelo;
+	
+	@OneToOne
+	@JoinColumn(name = "fabricante_id")
 	private Fabricante fabricante;
 
 	public Smartphone(int id, String modelo, Fabricante fabricante) {

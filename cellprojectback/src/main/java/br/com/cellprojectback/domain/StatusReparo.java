@@ -2,9 +2,22 @@ package br.com.cellprojectback.domain;
 
 import java.util.Objects;
 
-public class StatusReparo {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "statusreparo")
+public class StatusReparo {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "descricao")
 	private String descricao;
 
 	public StatusReparo(int id, String descricao) {

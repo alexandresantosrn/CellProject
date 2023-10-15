@@ -43,11 +43,11 @@ public class Data {
 
 		// Adicionando marcas de smartphone
 		Fabricante fabricante1 = new Fabricante(1, "Apple");
-		FabricanteRepository.addFabricante(fabricante1);
+		//FabricanteRepository.addFabricante(fabricante1);
 
 		// Adicionando modelos de smartphone
 		Smartphone smart1 = new Smartphone(1, "Iphone 12", fabricante1);
-		SmartphoneRepository.addSmartphone(smart1);
+		//SmartphoneRepository.addSmartphone(smart1);
 
 		// Adicionando status de reparo
 		StatusReparo statusReparo1 = new StatusReparo(1, "Pendente");
@@ -55,11 +55,11 @@ public class Data {
 		StatusReparo statusReparo3 = new StatusReparo(3, "Aguardando Peças");
 		StatusReparo statusReparo4 = new StatusReparo(4, "Aguardando Retirada");
 		StatusReparo statusReparo5 = new StatusReparo(5, "Concluído");
-		StatusReparoRepository.addStatusReparo(statusReparo1);
-		StatusReparoRepository.addStatusReparo(statusReparo2);
-		StatusReparoRepository.addStatusReparo(statusReparo3);
-		StatusReparoRepository.addStatusReparo(statusReparo4);
-		StatusReparoRepository.addStatusReparo(statusReparo5);
+		//StatusReparoRepository.addStatusReparo(statusReparo1);
+		//StatusReparoRepository.addStatusReparo(statusReparo2);
+		//StatusReparoRepository.addStatusReparo(statusReparo3);
+		//StatusReparoRepository.addStatusReparo(statusReparo4);
+		//StatusReparoRepository.addStatusReparo(statusReparo5);
 
 		// Adicionando ordens de serviço
 		OrdemServico os1 = new OrdemServico(1, "OS202300001", LocalDate.now(), pessoa1, smart1, tipoServico2, statusReparo5,
