@@ -20,6 +20,10 @@ public class Fabricante {
 	@Column(name = "denominacao")
 	String denominacao;
 
+	public Fabricante() {
+		super();
+	}
+
 	public Fabricante(int id, String denominacao) {
 		super();
 		this.id = id;

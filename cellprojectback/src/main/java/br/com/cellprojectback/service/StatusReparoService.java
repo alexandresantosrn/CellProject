@@ -3,10 +3,12 @@ package br.com.cellprojectback.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.StatusReparo;
 import br.com.cellprojectback.repository.StatusReparoRepository;
 
+@Service
 public class StatusReparoService {
 
 	@Autowired

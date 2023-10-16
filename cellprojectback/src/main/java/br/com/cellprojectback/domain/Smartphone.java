@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,13 +18,17 @@ public class Smartphone {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "modelo")
 	private String modelo;
-	
-	@OneToOne
+
+	@ManyToOne
 	@JoinColumn(name = "fabricante_id")
 	private Fabricante fabricante;
+
+	public Smartphone() {
+		super();
+	}
 
 	public Smartphone(int id, String modelo, Fabricante fabricante) {
 		super();

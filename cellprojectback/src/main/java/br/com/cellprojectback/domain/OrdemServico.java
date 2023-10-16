@@ -3,23 +3,56 @@ package br.com.cellprojectback.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "ordemservico")
 public class OrdemServico {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	@Column(name = "codigo")
 	private String codigo;
-	private LocalDate dataCadastro;
+	
+	@Column(name = "data_entrada")
+	private LocalDate dataEntrada;
+
+	@ManyToOne
+	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
+
+	@ManyToOne
+	@JoinColumn(name = "smartphone_id")
 	private Smartphone smartphone;
+
+	@ManyToOne
+	@JoinColumn(name = "tipoServico_id")
 	private TipoServico tipoServico;
+
+	@ManyToOne
+	@JoinColumn(name = "status_reparo")
 	private StatusReparo statusReparo;
 	private Double precoTotal;
 
-	public OrdemServico(int id, String codigo, LocalDate dataCadastro, Pessoa pessoa, Smartphone smartphone,
+	public OrdemServico() {
+		super();
+	}
+
+	public OrdemServico(int id, String codigo, LocalDate dataEntrada, Pessoa pessoa, Smartphone smartphone,
 			TipoServico tipoServico, StatusReparo statusReparo, Double precoTotal) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
-		this.dataCadastro = dataCadastro;
+		this.dataEntrada = dataEntrada;
 		this.pessoa = pessoa;
 		this.smartphone = smartphone;
 		this.tipoServico = tipoServico;
@@ -43,12 +76,12 @@ public class OrdemServico {
 		this.codigo = codigo;
 	}
 
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
+	public LocalDate getdataEntrada() {
+		return dataEntrada;
 	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setdataEntrada(LocalDate dataEntrada) {
+		this.dataEntrada = dataEntrada;
 	}
 
 	public Pessoa getPessoa() {
@@ -93,7 +126,7 @@ public class OrdemServico {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, dataCadastro, id, pessoa, precoTotal, smartphone, statusReparo, tipoServico);
+		return Objects.hash(codigo, dataEntrada, id, pessoa, precoTotal, smartphone, statusReparo, tipoServico);
 	}
 
 	@Override
@@ -105,7 +138,7 @@ public class OrdemServico {
 		if (getClass() != obj.getClass())
 			return false;
 		OrdemServico other = (OrdemServico) obj;
-		return Objects.equals(codigo, other.codigo) && Objects.equals(dataCadastro, other.dataCadastro)
+		return Objects.equals(codigo, other.codigo) && Objects.equals(dataEntrada, other.dataEntrada)
 				&& id == other.id && Objects.equals(pessoa, other.pessoa)
 				&& Objects.equals(precoTotal, other.precoTotal) && Objects.equals(smartphone, other.smartphone)
 				&& Objects.equals(statusReparo, other.statusReparo) && Objects.equals(tipoServico, other.tipoServico);

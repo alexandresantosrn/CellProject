@@ -1,10 +1,5 @@
 package br.com.cellprojectback.util;
 
-import java.util.List;
-
-import br.com.cellprojectback.domain.Pessoa;
-import br.com.cellprojectback.repository.PessoaRepository;
-
 public class PessoaUtil {
 
 	public static boolean isCPFValido(String cpf) {

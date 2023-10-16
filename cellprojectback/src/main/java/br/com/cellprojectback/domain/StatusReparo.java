@@ -12,13 +12,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "statusreparo")
 public class StatusReparo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "descricao")
 	private String descricao;
+
+	public StatusReparo() {
+		super();
+	}
 
 	public StatusReparo(int id, String descricao) {
 		super();
