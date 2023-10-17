@@ -47,22 +47,4 @@ public class PessoaUtil {
 
 		return true;
 	}
-
-//	public static int getNextId() {
-//
-//		//List<Pessoa> pessoas = PessoaRepository.getPessoas();
-//
-//		int var = 0;
-//		int temp = 0;
-//
-//		for (Pessoa pessoa : pessoas) {
-//			temp = pessoa.getId();
-//
-//			if (temp > var) {
-//				var = temp;
-//			}
-//		}
-//
-//		return var + 1;
-//	}
 }

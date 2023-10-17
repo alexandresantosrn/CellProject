@@ -29,12 +29,13 @@ public class AgendamentoService {
 	}
 
 	/**
-	 * Retorna a listagem de todos os agendamentos ordenados pela data de agendamento.
+	 * Retorna a listagem de todos os agendamentos ordenados pela data de
+	 * agendamento.
 	 * 
 	 * @return List<Agendamento> - Todos os tipos os agendamentos existentes.
 	 */
 	public List<Agendamento> listarAgendamentos() {
-		return agendamentoRepository.findAll(Sort.by(Sort.Direction.ASC,"dataAgendamento"));		
+		return agendamentoRepository.findAll(Sort.by(Sort.Direction.ASC, "dataAgendamento"));
 	}
 
 	/**
@@ -84,11 +85,10 @@ public class AgendamentoService {
 
 		for (Agendamento agendamento : agendamentos) {
 
-			if (agendamento.getDataAgendamento().isEqual(dataAgendamento)) {
+			if ((agendamento.getDataAgendamento().isEqual(dataAgendamento))
+					&& (agendamento.getHorarioAgendamento().equals(horarioAgendamento))) {
+				return false;
 
-				if (agendamento.getHorarioAgendamento().equals(horarioAgendamento)) {
-					return false;
-				}
 			}
 
 		}
