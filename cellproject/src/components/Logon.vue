@@ -70,6 +70,7 @@ export default {
                     this.msg = response.data;  
                     this.authenticated = true;  
                     this.limparCampos();
+                    this.$router.push('/LoginAutenticado');
                     this.$emit('realizarLogin', this.authenticated);          
                 })
                 .catch(error => {                              
