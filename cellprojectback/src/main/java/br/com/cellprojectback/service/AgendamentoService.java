@@ -86,11 +86,11 @@ public class AgendamentoService {
 		for (Agendamento agendamento : agendamentos) {
 
 			if ((agendamento.getDataAgendamento().isEqual(dataAgendamento))
-					&& (agendamento.getHorarioAgendamento().equals(horarioAgendamento))) {
+					&& (agendamento.getHorarioAgendamento().equals(horarioAgendamento))
+					&& !agendamento.getStatusAgendamento().getDescricao().equals("Cancelado")) {
 				return false;
 
 			}
-
 		}
 
 		return true;
