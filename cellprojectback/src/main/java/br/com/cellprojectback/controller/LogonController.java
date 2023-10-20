@@ -25,7 +25,7 @@ public class LogonController {
 	public ResponseEntity<String> recuperarSenha(@RequestBody Usuario usuario) {
 
 		try {
-			usuarioService.recuperarSenha(usuario.getUsuario());
+			usuarioService.recuperarSenha(usuario.getLogin());
 			return ResponseEntity.ok("E-mail de recuperação de senha enviado com sucesso.");
 
 		} catch (Exception e) {
@@ -35,9 +35,9 @@ public class LogonController {
 
 	@PostMapping("/realizar-login")
 	public ResponseEntity<String> realizarLogin(@RequestBody Usuario usuario) {
-
+		usuario.getLogin();
 		try {
-			usuarioService.realizarLogin(usuario.getUsuario(), usuario.getSenha());
+			usuarioService.realizarLogin(usuario.getLogin(), usuario.getSenha());
 			return ResponseEntity.ok("Usuário autenticado com sucesso.");
 		}
 

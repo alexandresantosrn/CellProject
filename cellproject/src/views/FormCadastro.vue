@@ -87,7 +87,7 @@ export default {
     cadastrarUsuario() {      
 
       const usuario = {
-        usuario: this.email,
+        login: this.email,
         senha: this.senha           
       }
 
@@ -138,6 +138,7 @@ export default {
   } 
 
   button {
-      margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
   } 
 </style>

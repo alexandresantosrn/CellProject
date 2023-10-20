@@ -128,11 +128,20 @@ public class AgendamentoService {
 
 		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
 
-		if (!agendamento.getStatusAgendamento().getDescricao().equals("Confirmado")) {
-			throw new ServiceException("O agendamento selecionado não pode mais ser cancelado.");
+		if (agendamento.getStatusAgendamento().getDescricao().equals("Finalizado")) {
+			throw new ServiceException(
+					"O agendamento selecionado não pode mais ser cancelado, pois este já se encontra finalizado.");
 		}
 
-		agendamento.setStatusAgendamento(statusAgendamentoService.findStatusByDescricao("Cancelado"));
+		else if (agendamento.getStatusAgendamento().getDescricao().equals("Cancelado")) {
+			throw new ServiceException("O agendamento selecionado já se encontra cancelado.");
+		}
+
+		else if (agendamento.getDataAgendamento().equals(LocalDate.now())
+				|| (agendamento.getDataAgendamento().isBefore(LocalDate.now()))) {
+
+			throw new ServiceException("Não é mais possível realizar cancelamentos para a data informada.");
+		}
 
 		return agendamentoRepository.save(agendamento);
 	}

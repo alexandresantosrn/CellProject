@@ -37,7 +37,7 @@ public class PessoaService {
 				|| pessoa.getTelefone() == null) {
 			throw new ServiceException("Campos obrigatórios não informados.");
 		}
-		
+
 		else if (!PessoaUtil.isCPFValido(pessoa.getCpf())) {
 			throw new ServiceException("Informe um cpf válido.");
 		}

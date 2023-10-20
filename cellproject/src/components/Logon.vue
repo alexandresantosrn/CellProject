@@ -60,7 +60,7 @@ export default {
         realizarLogin() { 
             
             const usuario = {
-                usuario: this.usuario,
+                login: this.usuario,
                 senha: this.senha
             }
 

@@ -22,8 +22,8 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "usuario")
-	String usuario;
+	@Column(name = "login")
+	String login;
 
 	@Column(name = "senha")
 	String senha;
@@ -43,10 +43,10 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(int id, String usuario, String senha, Pessoa pessoa, Date dataCadastro, boolean autorizado) {
+	public Usuario(int id, String login, String senha, Pessoa pessoa, Date dataCadastro, boolean autorizado) {
 		super();
 		this.id = id;
-		this.usuario = usuario;
+		this.login = login;
 		this.senha = senha;
 		this.pessoa = pessoa;
 		this.dataCadastro = dataCadastro;
@@ -61,12 +61,12 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getSenha() {
@@ -103,7 +103,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(autorizado, dataCadastro, id, pessoa, senha, usuario);
+		return Objects.hash(autorizado, dataCadastro, id, pessoa, senha, login);
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class Usuario {
 		Usuario other = (Usuario) obj;
 		return autorizado == other.autorizado && Objects.equals(dataCadastro, other.dataCadastro) && id == other.id
 				&& Objects.equals(pessoa, other.pessoa) && Objects.equals(senha, other.senha)
-				&& Objects.equals(usuario, other.usuario);
+				&& Objects.equals(login, other.login);
 	}
 
 }

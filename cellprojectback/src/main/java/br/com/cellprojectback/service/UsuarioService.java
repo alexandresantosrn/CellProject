@@ -40,15 +40,15 @@ public class UsuarioService {
 	 */
 	public Usuario salvarUsuario(Usuario usuario) {
 
-		if (usuario.getUsuario() == null || usuario.getSenha() == null) {
+		if (usuario.getLogin() == null || usuario.getSenha() == null) {
 			throw new ServiceException("Campos obrigatórios não informados.");
 		}
 
-		else if (findUsuarioByEmail(usuario.getUsuario()) != null) {
+		else if (findUsuarioByEmail(usuario.getLogin()) != null) {
 			throw new ServiceException("Já existe um cadastro de usuário com o email informado.");
 		}
 
-		Pessoa pessoa = pessoaService.findPessoaByEmail(usuario.getUsuario());
+		Pessoa pessoa = pessoaService.findPessoaByEmail(usuario.getLogin());
 
 		if (pessoa == null) {
 			throw new ServiceException("Erro ao obter dados da pessoa.");
@@ -65,19 +65,19 @@ public class UsuarioService {
 	 * 
 	 * Retorna um usuário através do seu e-mail.
 	 * 
-	 * @param usuario<String> - E-mail/usuário informado.
+	 * @param login<String> - E-mail/login informado.
 	 * @return Usuario - Usuário com o email/usuário informado.
 	 */
-	private Usuario findUsuarioByEmail(String usuario) {
-		return usuarioRepository.findByUsuario(usuario);
+	private Usuario findUsuarioByEmail(String login) {
+		return usuarioRepository.findByLogin(login);
 	}
 
 	/**
 	 * 
 	 * Realiza a recuperação de senha do usuário.
 	 * 
-	 * @param email<String> - Email/usuário informado.
-	 * @return Usuario - Usuário com o email/usuário informado.
+	 * @param email<String> - Email/login informado.
+	 * @return Usuario - Usuário com o email/login informado.
 	 */
 	public Usuario recuperarSenha(String email) {
 
@@ -92,21 +92,35 @@ public class UsuarioService {
 		return findUsuarioByEmail(email);
 	}
 
-	public Usuario realizarLogin(String usuario, String senha) {
+	/**
+	 * Realizar o registro do login do usuário no sistema.
+	 * 
+	 * @param login<String> - E-mail/login informado.
+	 * @param senha<String - Senha do usuário.
+	 * @return Usuario - Usuário autenticado no sistema.
+	 */
+	public Usuario realizarLogin(String login, String senha) {
 
-		if (usuario == null || senha == null) {
+		if (login == null || senha == null) {
 			throw new ServiceException("Campos obrigatórios não informado.");
 		}
 
-		else if (findUsuarioByLoginSenha(usuario, senha) == null) {
+		else if (findUsuarioByLoginSenha(login, senha) == null) {
 			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
 		}
 
-		return findUsuarioByLoginSenha(usuario, senha);
+		return findUsuarioByLoginSenha(login, senha);
 	}
 
-	private Usuario findUsuarioByLoginSenha(String usuario, String senha) {
-		return usuarioRepository.findByUsuarioAndSenha(usuario, senha);
+	/**
+	 * Localiza um usuário através do seu login e senha.
+	 * 
+	 * @param login<String> - E-mail/login informado.
+	 * @param senha<String - Senha do usuário.
+	 * @return
+	 */
+	private Usuario findUsuarioByLoginSenha(String login, String senha) {
+		return usuarioRepository.findByLoginAndSenha(login, senha);
 	}
 
 }
