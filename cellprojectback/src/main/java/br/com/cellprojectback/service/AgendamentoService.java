@@ -125,12 +125,13 @@ public class AgendamentoService {
 	 * @return Agendamento - Agendamento atualizado para o status: Cancelado.
 	 */
 	public Agendamento cancelarAgendamento(int id) {
-
+		
 		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
+		System.out.println(agendamento.getStatusAgendamento().getDescricao());
 
 		if (agendamento.getStatusAgendamento().getDescricao().equals("Finalizado")) {
 			throw new ServiceException(
-					"O agendamento selecionado não pode mais ser cancelado, pois este já se encontra finalizado.");
+					"O agendamento selecionado não pode mais ser cancelado, pois já se encontra finalizado.");
 		}
 
 		else if (agendamento.getStatusAgendamento().getDescricao().equals("Cancelado")) {
@@ -140,7 +141,7 @@ public class AgendamentoService {
 		else if (agendamento.getDataAgendamento().equals(LocalDate.now())
 				|| (agendamento.getDataAgendamento().isBefore(LocalDate.now()))) {
 
-			throw new ServiceException("Não é mais possível realizar cancelamentos para a data informada.");
+			throw new ServiceException("Não é mais possível realizar cancelamentos para este agendamento.");
 		}
 
 		return agendamentoRepository.save(agendamento);

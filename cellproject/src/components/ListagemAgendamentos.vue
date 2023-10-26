@@ -34,7 +34,7 @@
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title">Confirmação de Cancelamento de Agendamento</h5>
+                  <h5 class="modal-title">Confirmação de Cancelamento do Agendamento</h5>
                   <button type="button" class="close" @click="hideModal">
                       <span>&times;</span>
                   </button>
