@@ -1,6 +1,8 @@
 package br.com.cellprojectback.util;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AgendamentoUtil {
 
@@ -18,7 +20,7 @@ public class AgendamentoUtil {
 	}
 
 	/**
-	 * Método auxiliar que complementa zeros à esquerda para a String informada.
+	 * Método auxiliar que complementa zeros à esquerda para a String de agendamento.
 	 * 
 	 * @param codigo<String> - Código parcial.
 	 * @return codigo<String> - Código final.
@@ -31,5 +33,35 @@ public class AgendamentoUtil {
 		}
 
 		return codigo;
+	}
+
+	/**
+	 * Método gerador dos horários de trabalho habilitados para um agendamento
+	 * diário.
+	 * 
+	 * @return ArrayList<String> - Array de horários.
+	 */
+	private static ArrayList<String> getHorariosHabilitados() {
+
+		ArrayList<String> horarios = new ArrayList<>();
+
+		horarios.add("08:00");
+		horarios.add("08:30");
+		horarios.add("09:00");
+		horarios.add("09:30");
+		horarios.add("10:00");
+		horarios.add("10:30");
+		horarios.add("11:30");
+		horarios.add("12:00");
+		horarios.add("12:30");
+		horarios.add("13:00");
+		horarios.add("14:00");
+		horarios.add("15:00");
+		horarios.add("15:30");
+		horarios.add("16:30");
+		horarios.add("17:00");
+		horarios.add("17:30");
+
+		return horarios;
 	}
 }

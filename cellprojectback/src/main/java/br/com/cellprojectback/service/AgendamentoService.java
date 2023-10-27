@@ -1,6 +1,7 @@
 package br.com.cellprojectback.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,12 +53,14 @@ public class AgendamentoService {
 			throw new ServiceException("Campos obrigatórios não informados.");
 		}
 
+		// Não permite marcar agendamentos para a data presente ou para datas passadas.
 		else if (agendamento.getDataAgendamento().isBefore(LocalDate.now())
 				|| agendamento.getDataAgendamento().isEqual(LocalDate.now())) {
 
 			throw new ServiceException("Não é possível registrar agendamentos para a data informada.");
 		}
 
+		// Verifica se a data/horário marcado encontram-se disponíveis.
 		else if (!isPeriodoAgendamentoDisponivel(agendamento.getDataAgendamento(),
 				agendamento.getHorarioAgendamento())) {
 
@@ -83,13 +86,15 @@ public class AgendamentoService {
 
 		List<Agendamento> agendamentos = listarAgendamentos();
 
+		// Caso haja agendamentos para a data e horário informados, retorna false,
+		// exceto se o agendamento já estiver cancelado.
 		for (Agendamento agendamento : agendamentos) {
 
 			if ((agendamento.getDataAgendamento().isEqual(dataAgendamento))
 					&& (agendamento.getHorarioAgendamento().equals(horarioAgendamento))
-					&& !agendamento.getStatusAgendamento().getDescricao().equals("Cancelado")) {
-				return false;
+					&& !isAgendamentoCancelado(agendamento)) {
 
+				return false;
 			}
 		}
 
@@ -101,7 +106,6 @@ public class AgendamentoService {
 	 * 
 	 * @return int - Id máximo de agendamento.
 	 */
-
 	private int getIdMaximoAgendamento() {
 
 		int maxId = 0;
@@ -128,15 +132,19 @@ public class AgendamentoService {
 
 		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
 
+		// Não permite cancelar agendamentos já finalizados.
 		if (isAgendamentoFinalizado(agendamento)) {
 			throw new ServiceException(
 					"O agendamento selecionado não pode mais ser cancelado, pois já se encontra finalizado.");
 		}
 
+		// Não permite cancelar agendamentos já cancelados.
 		else if (isAgendamentoCancelado(agendamento)) {
 			throw new ServiceException("O agendamento selecionado já se encontra cancelado.");
 		}
 
+		// Não permite cancelar agendamentos agendados para a data presente ou para
+		// datas passadas.
 		else if (agendamento.getDataAgendamento().equals(LocalDate.now())
 				|| (agendamento.getDataAgendamento().isBefore(LocalDate.now()))) {
 
@@ -188,4 +196,7 @@ public class AgendamentoService {
 		return false;
 	}
 
+	public ArrayList<String> consultarHorariosDisponiveis(LocalDate dataAgendamento) {
+
+	}
 }
