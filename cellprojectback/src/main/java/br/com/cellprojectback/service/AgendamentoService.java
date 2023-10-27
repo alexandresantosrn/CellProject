@@ -125,16 +125,15 @@ public class AgendamentoService {
 	 * @return Agendamento - Agendamento atualizado para o status: Cancelado.
 	 */
 	public Agendamento cancelarAgendamento(int id) {
-		
-		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
-		System.out.println(agendamento.getStatusAgendamento().getDescricao());
 
-		if (agendamento.getStatusAgendamento().getDescricao().equals("Finalizado")) {
+		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
+
+		if (isAgendamentoFinalizado(agendamento)) {
 			throw new ServiceException(
 					"O agendamento selecionado não pode mais ser cancelado, pois já se encontra finalizado.");
 		}
 
-		else if (agendamento.getStatusAgendamento().getDescricao().equals("Cancelado")) {
+		else if (isAgendamentoCancelado(agendamento)) {
 			throw new ServiceException("O agendamento selecionado já se encontra cancelado.");
 		}
 
@@ -155,6 +154,38 @@ public class AgendamentoService {
 	 */
 	public Optional<Agendamento> buscarAgendamentoporId(int id) {
 		return agendamentoRepository.findById(id);
+	}
+
+	/**
+	 * Retorna true caso o agendamento esteja com status cancelado.
+	 * 
+	 * @param agendamento<Agendamento> - Agendamento em questão.
+	 * @return boolean - Retorna true caso o agendamento esteja com status
+	 *         cancelado.
+	 */
+	public boolean isAgendamentoCancelado(Agendamento agendamento) {
+
+		if (agendamento.getStatusAgendamento().getDescricao().equals("Cancelado")) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Retorna true caso o agendamento esteja com status finalizado.
+	 * 
+	 * @param agendamento<Agendamento> - Agendamento em questão.
+	 * @return boolean - Retorna true caso o agendamento esteja com status
+	 *         finalizado.
+	 */
+	public boolean isAgendamentoFinalizado(Agendamento agendamento) {
+
+		if (agendamento.getStatusAgendamento().getDescricao().equals("Finalizado")) {
+			return true;
+		}
+
+		return false;
 	}
 
 }
