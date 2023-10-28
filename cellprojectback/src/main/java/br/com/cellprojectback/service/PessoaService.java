@@ -1,5 +1,6 @@
 package br.com.cellprojectback.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,9 @@ public class PessoaService {
 		else if (findPessoaByEmail(pessoa.getEmail()) != null) {
 			throw new ServiceException("Já existe um cadastro com o email informado.");
 		}
-
+		
+		pessoa.setDataCadastro(new Date());
+		
 		return pessoaRepository.save(pessoa);
 	}
 

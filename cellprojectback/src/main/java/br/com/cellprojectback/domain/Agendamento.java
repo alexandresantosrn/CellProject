@@ -1,6 +1,7 @@
 package br.com.cellprojectback.domain;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -11,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "agendamento")
@@ -41,12 +44,16 @@ public class Agendamento {
 	@JoinColumn(name = "status_id")
 	private StatusAgendamento statusAgendamento;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_cadastro")
+	private Date dataCadastro;
+
 	public Agendamento() {
 		super();
 	}
 
 	public Agendamento(int id, String codigo, Pessoa pessoa, LocalDate dataAgendamento, String horarioAgendamento,
-			TipoServico tipoServico, StatusAgendamento statusAgendamento) {
+			TipoServico tipoServico, StatusAgendamento statusAgendamento, Date dataCadastro) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -55,6 +62,7 @@ public class Agendamento {
 		this.horarioAgendamento = horarioAgendamento;
 		this.tipoServico = tipoServico;
 		this.statusAgendamento = statusAgendamento;
+		this.dataCadastro = dataCadastro;
 	}
 
 	public int getId() {
@@ -113,9 +121,18 @@ public class Agendamento {
 		this.statusAgendamento = statusAgendamento;
 	}
 
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, dataAgendamento, horarioAgendamento, id, pessoa, statusAgendamento, tipoServico);
+		return Objects.hash(codigo, dataAgendamento, dataCadastro, horarioAgendamento, id, pessoa, statusAgendamento,
+				tipoServico);
 	}
 
 	@Override
@@ -128,6 +145,7 @@ public class Agendamento {
 			return false;
 		Agendamento other = (Agendamento) obj;
 		return Objects.equals(codigo, other.codigo) && Objects.equals(dataAgendamento, other.dataAgendamento)
+				&& Objects.equals(dataCadastro, other.dataCadastro)
 				&& Objects.equals(horarioAgendamento, other.horarioAgendamento) && id == other.id
 				&& Objects.equals(pessoa, other.pessoa) && Objects.equals(statusAgendamento, other.statusAgendamento)
 				&& Objects.equals(tipoServico, other.tipoServico);

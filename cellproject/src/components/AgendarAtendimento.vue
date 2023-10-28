@@ -15,12 +15,14 @@
 
         <div class="form-group">
             <label for="dataAgendamento">Data de Agendamento:</label>
-            <input type="date" class="form-control" id="dataAgendamento" v-model="dataAgendamento" required>
+            <input type="date" class="form-control" id="dataAgendamento" v-model="dataAgendamento" required  @change="carregarHorarios">
         </div>
-
+        
         <div class="form-group">
             <label for="horarioAgendamento">Horário de Agendamento:</label>
-            <input type="time" class="form-control" id="horarioAgendamento" v-model="horarioAgendamento" required>
+            <select class="form-control" id="horarioAgendamento" v-model="horarioAgendamento" required>
+              <option v-for="horario in comboHorarioAgendamento" :key="horario" :value="horario">{{ horario }}</option>           
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary" >Agendar</button>
@@ -45,6 +47,7 @@ export default {
       comboTipoServico: [],
       dataAgendamento: '',
       horarioAgendamento: '',
+      comboHorarioAgendamento: [],
       msg: '',
       msg_failure: ''
     };
@@ -60,7 +63,6 @@ export default {
         });
     },  
     agendarAtendimento() {
-
       const agendamento = {
         dataAgendamento: this.dataAgendamento,
         horarioAgendamento: this.horarioAgendamento,
@@ -76,6 +78,16 @@ export default {
           this.msg = '';                       
           this.msg_failure = error.response.data;                 
         });    
+    },
+    carregarHorarios() {
+      const dataAgendamento = this.dataAgendamento;     
+      axios.get('http://localhost:8080/agendamento/carregar-horarios?dataAgendamento='+dataAgendamento)
+        .then(response => {                                 
+          this.comboHorarioAgendamento = response.data;         
+        })
+        .catch(error => {                  
+          console.error('Erro ao buscar dados:', error);
+        }); 
     },
     limparCampos(){
       setTimeout(() => this.msg = "", 5000);
@@ -97,16 +109,20 @@ export default {
   }
 
   label {              
-      margin-bottom: 5px;
-      margin-top: 5px;
-      color: #222;        
-      border-left: 4px solid ;
-      width: 500px;
-      text-align: left;
-      padding: 8px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: #222;        
+    border-left: 4px solid ;
+    width: 500px;
+    text-align: left;
+    padding: 8px;
   }
 
   input {
-      margin-bottom: 10px;
+    margin-bottom: 10px;
   }
+
+  button {
+    margin: 10px
+  } 
 </style>

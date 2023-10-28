@@ -52,4 +52,10 @@ public class AgendamentoController {
 
 	}
 	
+	@GetMapping("carregar-horarios")
+	public ResponseEntity<List<String>> carregarHorarios(@RequestParam String dataAgendamento) {
+		List<String> horarios = agendamentoService.carregarHorarios(dataAgendamento);
+		return new ResponseEntity<>(horarios, HttpStatus.OK);
+	}
+	
 }

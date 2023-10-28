@@ -2,7 +2,7 @@ package br.com.cellprojectback.util;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class AgendamentoUtil {
 
@@ -20,7 +20,8 @@ public class AgendamentoUtil {
 	}
 
 	/**
-	 * Método auxiliar que complementa zeros à esquerda para a String de agendamento.
+	 * Método auxiliar que complementa zeros à esquerda para a String de
+	 * agendamento.
 	 * 
 	 * @param codigo<String> - Código parcial.
 	 * @return codigo<String> - Código final.
@@ -41,9 +42,9 @@ public class AgendamentoUtil {
 	 * 
 	 * @return ArrayList<String> - Array de horários.
 	 */
-	private static ArrayList<String> getHorariosHabilitados() {
+	public static List<String> getHorariosDisponiveis() {
 
-		ArrayList<String> horarios = new ArrayList<>();
+		List<String> horarios = new ArrayList<>();
 
 		horarios.add("08:00");
 		horarios.add("08:30");
