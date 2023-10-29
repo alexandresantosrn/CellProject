@@ -7,9 +7,9 @@
         <div id="links" v-show="allowLinks">
             <router-link to="/">Home</router-link> |
             <router-link to="/usuario">Área do Usuário</router-link> 
-            <router-link to="/atendimentos">Atendimentos</router-link> 
-            <router-link to="/sair">Sair</router-link>
+            <router-link to="/atendimentos">Atendimentos</router-link>            
         </div>
+        <router-link to="/sair">Sair</router-link>
     </div>    
 </template>
 

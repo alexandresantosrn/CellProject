@@ -104,8 +104,8 @@ export default {
 
 <style scoped>
   #agendamento {
-      width: 500px;       
-      margin: auto;        
+    width: 500px;       
+    margin: auto;        
   }
 
   label {              
