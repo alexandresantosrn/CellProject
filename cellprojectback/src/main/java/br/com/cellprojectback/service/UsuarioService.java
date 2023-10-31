@@ -10,6 +10,7 @@ import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.UsuarioRepository;
+import br.com.cellprojectback.util.BcryptUtil;
 
 @Service
 public class UsuarioService {
@@ -53,11 +54,12 @@ public class UsuarioService {
 		if (pessoa == null) {
 			throw new ServiceException("Erro ao obter dados da pessoa.");
 		}
-
+		
 		usuario.setPessoa(pessoa);
 		usuario.setAutorizado(true);
 		usuario.setDataCadastro(new Date());
-
+		usuario.setSenha(BcryptUtil.cryptPassword(usuario.getSenha()));
+		
 		return usuarioRepository.save(usuario);
 	}
 
@@ -104,10 +106,18 @@ public class UsuarioService {
 		if (login == null || senha == null) {
 			throw new ServiceException("Campos obrigatórios não informado.");
 		}
-
-		else if (findUsuarioByLoginSenha(login, senha) == null) {
+		
+		Usuario usuario = findUsuarioByEmail(login);
+		
+		boolean senhaCorreta = BcryptUtil.isMatchPassword(senha, usuario.getSenha());
+		
+		if (!senhaCorreta) {
 			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
 		}
+
+//		else if (findUsuarioByLoginSenha(login, senha) == null) {
+//			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
+//		}
 
 		return findUsuarioByLoginSenha(login, senha);
 	}

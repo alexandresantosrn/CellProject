@@ -2,7 +2,7 @@
 </template>
 
 <script>
-name: 'Sair'
+name: 'Logout'
 export default {
     methods: {
         logout() {
