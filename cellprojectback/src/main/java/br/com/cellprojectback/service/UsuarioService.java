@@ -11,6 +11,7 @@ import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.UsuarioRepository;
 import br.com.cellprojectback.util.BcryptUtil;
+import br.com.cellprojectback.util.JwtUtil;
 
 @Service
 public class UsuarioService {
@@ -118,6 +119,12 @@ public class UsuarioService {
 //		else if (findUsuarioByLoginSenha(login, senha) == null) {
 //			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
 //		}
+		
+		String teste = JwtUtil.generateToken(login);
+		String teste2 = "asdadad511a5s1dad";
+		System.out.println(teste2);
+		
+		JwtUtil.isValido(teste);
 
 		return findUsuarioByLoginSenha(login, senha);
 	}
