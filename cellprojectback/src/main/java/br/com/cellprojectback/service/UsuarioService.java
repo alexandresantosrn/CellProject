@@ -10,8 +10,8 @@ import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.UsuarioRepository;
-import br.com.cellprojectback.util.BcryptUtil;
-import br.com.cellprojectback.util.JwtUtil;
+import security.BcryptUtil;
+import security.JwtUtil;
 
 @Service
 public class UsuarioService {

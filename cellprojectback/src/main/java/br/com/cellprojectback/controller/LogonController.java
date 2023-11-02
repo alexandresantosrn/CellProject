@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.service.UsuarioService;
-import br.com.cellprojectback.util.JwtUtil;
+import security.JwtUtil;
 
 @CrossOrigin
 @RestController

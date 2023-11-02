@@ -1,4 +1,4 @@
-package br.com.cellprojectback.util;
+package security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
