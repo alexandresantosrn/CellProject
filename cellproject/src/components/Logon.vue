@@ -68,9 +68,14 @@ export default {
                 .then(response => {                     
                     this.msg_failure = '';                               
                     this.msg = response.data;  
+                    
                     this.authenticated = true;  
                     this.limparCampos();
-                    this.$router.push('/LoginAutenticado');
+
+                    const token = response.data;
+                    sessionStorage.setItem('token', token);
+
+                    this.$router.push('/LoginAutenticado');            
                     this.$emit('realizarLogin', this.authenticated);          
                 })
                 .catch(error => {                              

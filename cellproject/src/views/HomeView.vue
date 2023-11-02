@@ -22,6 +22,15 @@ export default {
     }
   }, 
   methods: {
+    getData() {
+    const token = sessionStorage.getItem('token');
+
+    if (token != null) {        
+      this.showLinks();
+      this.$router.push('/loginautenticado');
+    } 
+         
+    },
     authenticated(value) {      
       this.logoff = !value;
       this.showLinks();
@@ -30,6 +39,9 @@ export default {
       this.linksOn = true;
       this.$emit('showLinks', this.linksOn);
     }
+  },
+  mounted() {
+    this.getData();
   }  
 }
 </script>

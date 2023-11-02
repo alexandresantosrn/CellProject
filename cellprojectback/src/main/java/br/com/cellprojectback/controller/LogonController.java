@@ -1,5 +1,6 @@
 package br.com.cellprojectback.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.service.UsuarioService;
+import br.com.cellprojectback.util.JwtUtil;
 
 @CrossOrigin
 @RestController
@@ -35,10 +37,10 @@ public class LogonController {
 
 	@PostMapping("/realizar-login")
 	public ResponseEntity<String> realizarLogin(@RequestBody Usuario usuario) {
-		usuario.getLogin();
+
 		try {
 			usuarioService.realizarLogin(usuario.getLogin(), usuario.getSenha());
-			return ResponseEntity.ok("Usuário autenticado com sucesso.");
+			return ResponseEntity.ok(JwtUtil.generateToken(usuario.getLogin()));
 		}
 
 		catch (Exception e) {

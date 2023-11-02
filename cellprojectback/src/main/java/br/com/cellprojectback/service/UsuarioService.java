@@ -55,12 +55,12 @@ public class UsuarioService {
 		if (pessoa == null) {
 			throw new ServiceException("Erro ao obter dados da pessoa.");
 		}
-		
+
 		usuario.setPessoa(pessoa);
 		usuario.setAutorizado(true);
 		usuario.setDataCadastro(new Date());
 		usuario.setSenha(BcryptUtil.cryptPassword(usuario.getSenha()));
-		
+
 		return usuarioRepository.save(usuario);
 	}
 
@@ -99,7 +99,7 @@ public class UsuarioService {
 	 * Realizar o registro do login do usuário no sistema.
 	 * 
 	 * @param login<String> - E-mail/login informado.
-	 * @param senha<String - Senha do usuário.
+	 * @param senha<String  - Senha do usuário.
 	 * @return Usuario - Usuário autenticado no sistema.
 	 */
 	public Usuario realizarLogin(String login, String senha) {
@@ -107,11 +107,11 @@ public class UsuarioService {
 		if (login == null || senha == null) {
 			throw new ServiceException("Campos obrigatórios não informado.");
 		}
-		
+
 		Usuario usuario = findUsuarioByEmail(login);
-		
+
 		boolean senhaCorreta = BcryptUtil.isMatchPassword(senha, usuario.getSenha());
-		
+
 		if (!senhaCorreta) {
 			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
 		}
@@ -119,12 +119,6 @@ public class UsuarioService {
 //		else if (findUsuarioByLoginSenha(login, senha) == null) {
 //			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
 //		}
-		
-		String teste = JwtUtil.generateToken(login);
-		String teste2 = "asdadad511a5s1dad";
-		System.out.println(teste2);
-		
-		JwtUtil.isValido(teste);
 
 		return findUsuarioByLoginSenha(login, senha);
 	}
@@ -133,7 +127,7 @@ public class UsuarioService {
 	 * Localiza um usuário através do seu login e senha.
 	 * 
 	 * @param login<String> - E-mail/login informado.
-	 * @param senha<String - Senha do usuário.
+	 * @param senha<String  - Senha do usuário.
 	 * @return
 	 */
 	private Usuario findUsuarioByLoginSenha(String login, String senha) {
