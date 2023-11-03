@@ -11,7 +11,6 @@ import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.UsuarioRepository;
 import security.BcryptUtil;
-import security.JwtUtil;
 
 @Service
 public class UsuarioService {
