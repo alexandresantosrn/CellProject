@@ -74,19 +74,35 @@ export default {
     };
   },
   methods: {
-    async getAgendamentos() {        
-        axios.get('http://localhost:8080/agendamento')
-          .then(response => {
-            this.agendamentos = response.data;               
-          })
-          .catch(error => {
-            this.msg = '';
-            this.msg_failure = error.response.data;
-          });
-      },
+    getAgendamentos() { 
+      const token = sessionStorage.getItem('token');
+      
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      axios.get('http://localhost:8080/agendamento', config)
+        .then(response => {
+          this.agendamentos = response.data;               
+        })
+        .catch(error => {
+          console.error('Erro ao buscar dados:', error);
+        });
+    },
     cancelarAgendamento() {
       const agendamentoId = this.agendamentoId;
-      axios.post('http://localhost:8080/agendamento/cancelar-agendamento?id='+agendamentoId)
+
+      const token = sessionStorage.getItem('token');
+        
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      axios.post('http://localhost:8080/agendamento/cancelar-agendamento?id='+agendamentoId, null, config)
         .then(response => {           
           this.msg_failure = '';                                           
           this.msg = response.data;  
@@ -115,9 +131,9 @@ export default {
   mounted() {
     this.getAgendamentos();
   },
-  updated() {
-    this.getAgendamentos();
-  }
+  // updated() {
+  //   this.getAgendamentos();
+  // }
 };
 </script>
 

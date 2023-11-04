@@ -63,12 +63,21 @@ export default {
         });
     },  
     agendarAtendimento() {
+      const token = sessionStorage.getItem('token');
+        
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }; 
+      console.log(token);
+      
       const agendamento = {
         dataAgendamento: this.dataAgendamento,
         horarioAgendamento: this.horarioAgendamento,
         tipoServico: this.selectedTipoServico 
       }  
-        axios.post('http://localhost:8080/agendamento/cadastrar-agendamento', agendamento)
+        axios.post('http://localhost:8080/agendamento/cadastrar-agendamento', agendamento, config)
         .then(response => {          
           this.msg_failure = '';                                  
           this.msg = response.data; 

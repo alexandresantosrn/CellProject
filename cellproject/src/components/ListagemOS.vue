@@ -39,8 +39,16 @@
       };
     },
     methods: {
-      async getOrdensServico() {        
-        axios.get('http://localhost:8080/ordemservico')
+      getOrdensServico() {       
+        const token = sessionStorage.getItem('token');
+        
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }; 
+        
+        axios.get('http://localhost:8080/ordemservico', config)
           .then(response => {
             this.ordens = response.data;               
           })
