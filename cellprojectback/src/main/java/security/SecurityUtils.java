@@ -23,7 +23,7 @@ public class SecurityUtils {
        
         //token2 = token2.replace("Bearer ", "");
         
-        //System.out.println(token2);
+        System.out.println(token2);
         return parseTokenSubject(token);
     }
     
