@@ -24,16 +24,32 @@ public class JwtUtil {
 				.id(UUID.randomUUID().toString()).signWith(key).compact();
 	}
 
-	public static void isValid(String word) {
+	public static boolean isValid(String token) {
+
+		boolean valid = false;
 
 		try {
-			Jwts.parser().verifyWith(key).build().parseSignedClaims(word);
+			Jwts.parser().verifyWith(key).build().parseSignedClaims(token);
 			logger.info("Token é valido!");
+			valid = true;
 
 		} catch (JwtException e) {
 			logger.info("Token não é válido");
 		}
 
+		return valid;
+	}
+
+	public static boolean isExpired(String token) {
+
+		Date date = Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload().getExpiration();
+
+		return date.before(new Date());
+	}
+
+	public static String getUsernameByToken(String token) {
+
+		return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload().getSubject();
 	}
 
 }

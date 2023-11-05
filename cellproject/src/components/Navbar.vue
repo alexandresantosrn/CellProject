@@ -4,12 +4,13 @@
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
 
-        <div id="links" v-show="allowLinks">
+        <div id="links" v-show="token">
             <router-link to="/">Home</router-link> |
             <router-link to="/usuario">Área do Usuário</router-link> 
-            <router-link to="/atendimentos">Atendimentos</router-link>            
+            <router-link to="/atendimentos">Atendimentos</router-link>
+            <router-link to="/sair">Sair</router-link>            
         </div>
-        <router-link to="/sair">Sair</router-link>
+       
     </div>    
 </template>
 
@@ -19,8 +20,21 @@ export default {
     props: {
         logo: String,
         alt: String,
-        allowLinks: Boolean  
     }, 
+    data() {
+        return {
+            token: null
+        }
+    },
+    methods: {
+        getToken() {            
+            this.token = sessionStorage.getItem('token');            
+            console.log(this.token);
+        }
+    },
+    mounted(){
+        this.getToken();
+    }
 }
 </script>
 

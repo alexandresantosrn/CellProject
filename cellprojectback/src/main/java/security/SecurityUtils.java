@@ -14,7 +14,7 @@ public class SecurityUtils {
 	private static final Logger logger = Logger.getLogger(SecurityUtils.class.getName());
 
 	@SuppressWarnings("unused")
-	static Authentication getAuthentication(HttpServletRequest request) {
+	public static Authentication getAuthentication(HttpServletRequest request) {
 		var token = request.getHeader(HEADER_STRING);
 		var secret = "segredo";
 
@@ -24,16 +24,37 @@ public class SecurityUtils {
 			token = token.replace("Bearer ", "");
 		} else if (token == null) {
 			token = secret;
-		}		
-		
+		}
+
 		logger.info(token);
 		return parseTokenSubject(token);
 	}
 
 	private static UsernamePasswordAuthenticationToken parseTokenSubject(String token) {
 
-		var subject = "allexsantosrn@gmail.com";
+		var subject = "secret";
 
+		if (!token.equals("segredo")) {
+			
+			// Verificando a validade do token.
+			if (!JwtUtil.isValid(token)) {
+				return null;
+			}
+
+			// Verificando se o token encontra-se expirado.
+			else if (JwtUtil.isExpired(token)) {
+				return null;
+			}
+
+			// Verificando se o username não é nulo.
+			else if (JwtUtil.getUsernameByToken(token) == null) {
+				return null;
+			}
+
+			subject = JwtUtil.getUsernameByToken(token);
+		}
+
+		logger.info(subject);
 		return new UsernamePasswordAuthenticationToken(subject, null, List.of());
 	}
 }

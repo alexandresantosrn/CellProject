@@ -109,15 +109,15 @@ public class UsuarioService {
 
 		Usuario usuario = findUsuarioByEmail(login);
 
+		if (usuario == null) {
+			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
+		}
+
 		boolean senhaCorreta = BcryptUtil.isMatchPassword(senha, usuario.getSenha());
 
 		if (!senhaCorreta) {
 			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
 		}
-
-//		else if (findUsuarioByLoginSenha(login, senha) == null) {
-//			throw new ServiceException("Email ou senha incorretos. Tente outra vez!");
-//		}
 
 		return findUsuarioByLoginSenha(login, senha);
 	}

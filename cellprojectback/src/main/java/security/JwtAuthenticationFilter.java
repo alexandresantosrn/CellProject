@@ -15,7 +15,7 @@ public class JwtAuthenticationFilter extends GenericFilter {
 	public void doFilter(jakarta.servlet.ServletRequest request, jakarta.servlet.ServletResponse response,
 			jakarta.servlet.FilterChain chain) throws IOException, jakarta.servlet.ServletException {
 
-		var auth = SecurityUtils.getAuthentication((HttpServletRequest) request);
+		var auth = SecurityUtils.getAuthentication((HttpServletRequest) request);		
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		chain.doFilter(request, response);
 	}
