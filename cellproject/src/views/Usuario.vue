@@ -1,23 +1,23 @@
 <template>
     <div class="usuario">
-      <h2>Área do Cliente/Usuário</h2>
-        <div id = "instrucoes">
-            <Instrucoes :texto="texto" />
-        </div>   
+        <h2>Área do Cliente/Usuário</h2>
+            <div id = "instrucoes">
+                <Instrucoes :texto="texto" />
+            </div>   
 
-        <UserBanner v-on:adicionarAgendamento="showFormAgendamentos" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
-        
-        <div v-show="exibirFormAgendamento">
-            <AgendarAtendimento />
-        </div>   
-        
-        <div v-show="exibirListagemAgendamento">
-            <ListagemAgendamentos />
-        </div> 
+            <UserBanner v-on:adicionarAgendamento="showFormAgendamentos" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
+            
+            <div v-show="exibirFormAgendamento">
+                <AgendarAtendimento />
+            </div>   
+            
+            <div v-show="exibirListagemAgendamento">
+                <ListagemAgendamentos />
+            </div> 
 
-        <div v-show="exibirListagemOS">
-            <ListagemOS />
-        </div>
+            <div v-show="exibirListagemOS">
+                <ListagemOS />
+            </div>
     </div>    
 </template>
 
@@ -36,7 +36,7 @@ export default {
             exibirFormAgendamento: false,
             exibirListagemAgendamento: false,
             exibirListagemOS: false,
-            texto: 'Prezado usuário, selecione abaixo uma das opções desejadas:'
+            texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:'
         }
     },            
     components: {

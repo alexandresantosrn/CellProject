@@ -6,6 +6,7 @@ name: 'Logout'
 export default {
     methods: {
         logout() {
+            sessionStorage.removeItem('token');
             this.$router.push('/');
         }
     },
