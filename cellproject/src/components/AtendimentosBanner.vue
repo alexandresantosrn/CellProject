@@ -1,7 +1,7 @@
 <template>
     <div id="banner">
         <div class="sessions">            
-            <router-link to="/usuario">
+            <router-link to="/atendimentos">
                 <div id="add-agendamento" @click="adicionarAgendamento(), mudarCorAgendamento()" :style="{ backgroundColor: corAgendamento}">                    
                     <img :src="add_agendamento_src" :alt="add_agendamento_alt" class="img-user">                
                     <p>CADASTRAR</p>
@@ -9,7 +9,7 @@
                 </div>
             </router-link>
 
-            <router-link to="/usuario">
+            <router-link to="/atendimentos">
                 <div id="list-agendamentos" @click="listarAgendamentos(), mudarCorAgendamentos()" :style="{ backgroundColor: corListagemAgendamento}">
                     <img :src="list_agendamentos_src" :alt="list_agendamentos_alt" class="img-user"> 
                     <p>ATENDER / LISTAR</p> 
@@ -17,7 +17,7 @@
                 </div>
             </router-link>
 
-            <router-link to="/usuario">
+            <router-link to="/atendimentos">
                 <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
                     <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
                     <p>LISTAR</p>

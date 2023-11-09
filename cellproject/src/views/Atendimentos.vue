@@ -12,7 +12,7 @@
       </div>   
       
       <div v-show="exibirListagemAgendamento">
-          <ListagemAgendamentos />
+          <AtenderAgendamentos />
       </div> 
 
       <div v-show="exibirListagemOS">
@@ -25,9 +25,9 @@
 
 import AtendimentosBanner from '../components/AtendimentosBanner.vue';
 import AgendarAtendimento from '@/components/AgendarAtendimento.vue';
-import ListagemAgendamentos from '@/components/ListagemAgendamentos.vue';
 import ListagemOS from '@/components/ListagemOS.vue';
 import Instrucoes from '@/components/Instrucoes.vue';
+import AtenderAgendamentos from '../components/AtenderAgendamentos.vue';
 
 export default {
   name: 'Atendimentos',
@@ -41,9 +41,9 @@ export default {
   },            
   components: {
       AtendimentosBanner,
-      AgendarAtendimento,
-      ListagemAgendamentos,
+      AgendarAtendimento,      
       ListagemOS,
+      AtenderAgendamentos,
       Instrucoes
   },
   methods: {

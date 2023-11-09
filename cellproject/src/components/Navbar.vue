@@ -4,7 +4,7 @@
             <img :src="logo" :alt="alt" id="logo">
         </router-link>
 
-        <div id="links" v-show="token">
+        <div id="links" v-if="token">
             <router-link to="/">Home</router-link> |
             <router-link to="/usuario">Área do Usuário</router-link> 
             <router-link to="/atendimentos">Atendimentos</router-link>
