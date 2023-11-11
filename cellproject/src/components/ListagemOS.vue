@@ -2,6 +2,8 @@
   <div>
     <h2>Listagem de Ordens de Serviço</h2>
     
+    <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
+
     <table class="table">
       <thead>
         <tr>
@@ -29,14 +31,19 @@
   </div>
 </template>
   
-  <script>
-  import axios from 'axios';
+<script>
+import MessageFailure from './MessageFailure.vue';
+import axios from 'axios'; 
 
   export default {
     data() {
       return {
-        ordens: ''    
+        ordens: '',
+        msg_failure: ''    
       };
+    },
+    components: {
+      MessageFailure
     },
     methods: {
       getOrdensServico() {       
@@ -53,6 +60,8 @@
             this.ordens = response.data;               
           })
           .catch(error => {
+            this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
+            console.log(this.msg_failure);
             console.error('Erro ao buscar dados:', error);
           });
       }

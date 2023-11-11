@@ -9,9 +9,9 @@
       <thead>
         <tr>
           <th>N&#186 Agendamento</th>
-          <th>Data do Agendamento</th>
-          <th>Horário do Agendamento</th>
-          <th>Status do Agendamento</th>
+          <th>Data </th>
+          <th>Horário</th>
+          <th>Status</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -88,6 +88,7 @@ export default {
           this.agendamentos = response.data;               
         })
         .catch(error => {
+          this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
           console.error('Erro ao buscar dados:', error);
         });
     },
@@ -128,7 +129,7 @@ export default {
       this.showModal = false;
     },
     formatarData(data) {
-      //Convertendo data para formato brasi
+      //Convertendo data para formato brasileiro.
       const [ano, mes, dia] = data.split('-');
       return `${dia}/${mes}/${ano}`;
     }  
@@ -144,7 +145,7 @@ export default {
 
 <style scoped>
   .table {
-    width: 1000px;       
+    width: 800px;       
     margin: auto;  
   }
 </style>

@@ -59,6 +59,7 @@ export default {
           this.comboTipoServico = response.data;
         })
         .catch(error => {
+          this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
           console.error('Erro ao buscar dados:', error);
         });
     },  
