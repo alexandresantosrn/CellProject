@@ -53,7 +53,8 @@ export default {
          msg: '',
          msg_failure: '',
          usuario: '',
-         senha: ''
+         senha: '',
+         value: ''
         }
     },
     methods: {
@@ -77,6 +78,8 @@ export default {
 
                     this.cleanLogoff();
 
+                    this.reloadPage();
+
                     this.$router.push('/LoginAutenticado');            
                     this.$emit('realizarLogin', this.authenticated);          
                 })
@@ -95,7 +98,17 @@ export default {
         cleanLogoff() {
             //Remove a variável auxiliar de logoff do localStorage.
             localStorage.removeItem('logoff');            
-        }  
+        },
+        reloadPage() {          
+            this.value = localStorage.getItem('logon'); 
+
+            //Recarrega a página para ocultar os menus de acesso.
+            if (this.value != 1) {
+                window.location.reload();   
+                const temp = 1;
+                localStorage.setItem('logon', temp);
+            }       
+        }   
     }
 }
 </script>
