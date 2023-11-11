@@ -75,6 +75,8 @@ export default {
                     const token = response.data;
                     sessionStorage.setItem('token', token);
 
+                    this.cleanLogoff();
+
                     this.$router.push('/LoginAutenticado');            
                     this.$emit('realizarLogin', this.authenticated);          
                 })
@@ -89,6 +91,10 @@ export default {
             setTimeout(() => this.msg_failure = "", 10000); 
             this.usuario = "";
             this.senha = "";
+        },
+        cleanLogoff() {
+            //Remove a variável auxiliar de logoff do localStorage.
+            localStorage.removeItem('logoff');            
         }  
     }
 }
