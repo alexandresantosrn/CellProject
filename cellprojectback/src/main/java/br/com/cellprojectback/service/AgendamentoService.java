@@ -41,6 +41,26 @@ public class AgendamentoService {
 	}
 
 	/**
+	 * Retorna a listagem dos agendamentos ordenados pela data de agendamento.
+	 * 
+	 * @return List<Agendamento> - Os agendamentos existentes (Exceto os
+	 *         cancelados).
+	 */
+	public List<Agendamento> listarAgendamentosAtivos() {
+		List<Agendamento> agendamentos = agendamentoRepository.findAll(Sort.by(Sort.Direction.ASC, "dataAgendamento"));
+		List<Agendamento> listaAgendamentos = new ArrayList<>();
+
+		for (Agendamento agendamento : agendamentos) {
+
+			if (!isAgendamentoCancelado(agendamento)) {
+				listaAgendamentos.add(agendamento);
+			}
+		}
+
+		return listaAgendamentos;
+	}
+
+	/**
 	 * Salva um novo agendamento na base de dados.
 	 * 
 	 * @param agendamento<Agendamento> - Novo agendamento informado.

@@ -22,7 +22,7 @@ public class AgendamentoController {
 
 	@GetMapping
 	public ResponseEntity<List<Agendamento>> listarAgendamentos() {
-		List<Agendamento> agendamentos = agendamentoService.listarAgendamentos();
+		List<Agendamento> agendamentos = agendamentoService.listarAgendamentosAtivos();
 		return new ResponseEntity<>(agendamentos, HttpStatus.OK);
 	}
 

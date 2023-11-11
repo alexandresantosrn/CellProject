@@ -18,7 +18,7 @@
       <tbody>
         <tr v-for="agendamento in agendamentos" :key="agendamento.id">
           <td>{{ agendamento.codigo }}</td>
-          <td>{{ agendamento.dataAgendamento }}</td>
+          <td>{{ formatarData(agendamento.dataAgendamento) }}</td>
           <td>{{ agendamento.horarioAgendamento }}</td>
           <td>{{ agendamento.statusAgendamento.descricao }}</td>
           <td>
@@ -126,14 +126,19 @@ export default {
     },
     hideModal() {
       this.showModal = false;
-    }   
+    },
+    formatarData(data) {
+      //Convertendo data para formato brasi
+      const [ano, mes, dia] = data.split('-');
+      return `${dia}/${mes}/${ano}`;
+    }  
   },
   mounted() {
     this.getAgendamentos();
   },
-  // updated() {
-  //   this.getAgendamentos();
-  // }
+  updated() {
+    this.getAgendamentos();
+  }
 };
 </script>
 

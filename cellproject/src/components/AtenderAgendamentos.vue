@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="agendamentos">
     <form @submit.prevent="consultarAgendamentos">
       <div class="form-group">
         <label for="dataAgendamento">Data de Agendamento:</label>
@@ -22,7 +22,9 @@
 export default {
   data() {
     return {
-      dataAgendamento: new Date().toISOString().substr(0, 10), // Define a data atual
+      resultados: [],
+      
+      dataAgendamento: new Date().toISOString().split('T')[0], // Define a data atual
       statusAgendamento: "Confirmado" // Define o status como Confirmado
     };
   },
@@ -34,3 +36,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  #agendamentos {
+    width: 300px;       
+    margin: auto;  
+  }
+</style>
