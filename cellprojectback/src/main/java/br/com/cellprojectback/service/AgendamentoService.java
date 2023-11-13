@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.Agendamento;
+import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.AgendamentoRepository;
 import br.com.cellprojectback.util.AgendamentoUtil;
@@ -53,6 +54,28 @@ public class AgendamentoService {
 		for (Agendamento agendamento : agendamentos) {
 
 			if (!isAgendamentoCancelado(agendamento)) {
+				listaAgendamentos.add(agendamento);
+			}
+		}
+
+		return listaAgendamentos;
+	}
+
+	public List<Agendamento> listarAgendamentosAtivosByDataStatus(String dataAgendamento, int idStatusAgendamento) {
+
+		// Convertendo a data informada em LocalDate.
+		LocalDate data = LocalDate.parse(dataAgendamento);
+		
+		// Retornando o status do agendamento através do seu id.
+		StatusAgendamento statusAgendamento = statusAgendamentoService.buscarStatusAgendamentoporId(idStatusAgendamento)
+				.orElseThrow();
+
+		List<Agendamento> agendamentos = findAgendamentosbyDate(data);
+		List<Agendamento> listaAgendamentos = new ArrayList<>();
+
+		for (Agendamento agendamento : agendamentos) {
+
+			if (agendamento.getStatusAgendamento().getDescricao().equals(statusAgendamento.getDescricao())) {
 				listaAgendamentos.add(agendamento);
 			}
 		}

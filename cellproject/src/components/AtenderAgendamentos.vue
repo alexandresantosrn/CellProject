@@ -2,19 +2,20 @@
   <div id="agendamentos">
     <h2>Listar/Atender Agendamentos</h2>
 
+    <Message :msg="msg" v-show="msg" />
+    <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
+
     <form @submit.prevent="consultarAgendamentos">
       <div class="form-group">
         <label for="dataAgendamento">Data de Agendamento:</label>
         <input type="date" id="dataAgendamento" v-model="dataAgendamento" class="form-control" />
       </div>
       <div class="form-group">
-        <label for="statusAgendamento">Status de Agendamento:</label>
-        <select id="statusAgendamento" v-model="statusAgendamento" class="form-control">
-          <option value="Confirmado">Confirmado</option>
-          <option value="Pendente">Pendente</option>
-          <option value="Cancelado">Cancelado</option>
-        </select>
-      </div>
+            <label for="statusagendamento">Status de Agendamento:</label>
+            <select class="form-control" id="statusagendamento" v-model="selectedStatusAgendamento" required>
+              <option v-for="status in comboStatusAgendamento" :key="status.id" :value="status.id">{{ status.descricao }}</option>           
+            </select>
+        </div>
       <button type="submit" class="btn btn-primary">Consultar</button>
     </form>
 
@@ -24,18 +25,24 @@
           <tr>
             <th scope="col">Nº Agendamento</th>
             <th scope="col">Nome do Cliente</th>
-            <th scope="col">Data do Agendamento</th>
-            <th scope="col">Horário do Agendamento</th>
-            <th scope="col">Status do Agendamento</th>
+            <th scope="col">Data</th>
+            <th scope="col">Horário</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(agendamento, index) in resultados" :key="index">
-            <td>{{ agendamento.numero }}</td>
-            <td>{{ agendamento.nomeCliente }}</td>
+            <td>{{ agendamento.codigo }}</td>
+            <td>{{ agendamento.pessoa.nome }}</td>
             <td>{{ formatarData(agendamento.dataAgendamento) }}</td>
             <td>{{ agendamento.horarioAgendamento }}</td>
-            <td>{{ agendamento.statusAgendamento }}</td>
+            <td>{{ agendamento.statusAgendamento.descricao }}</td>
+            <td>
+              <button class="btn btn-primary" @click="realizarCancelamento(agendamento.id)">
+                Iniciar Atendimento
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -45,27 +52,81 @@
 </template>
 
 <script>
+
+import Message from './Message.vue';
+import MessageFailure from './MessageFailure.vue';
+import axios from 'axios';  
+
 export default {
+  name: 'AtenderAgendamentos',
+  components: {
+    Message,
+    MessageFailure
+  },
   data() {
     return {
       resultados: [],
-
+      comboStatusAgendamento: [],
+      selectedStatusAgendamento: '',
       dataAgendamento: new Date().toISOString().split('T')[0], // Define a data atual
-      statusAgendamento: "Confirmado" // Define o status como Confirmado
+      statusAgendamento: '',
+      msg: '',
+      msg_failure: ''
     };
   },
   methods: {
+    async getStatusAgendamento() {
+      axios.get('http://localhost:8080/statusagendamento')
+        .then(response => {
+          this.comboStatusAgendamento = response.data;
+        })
+        .catch(error => {
+          this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
+          console.error('Erro ao buscar dados:', error);
+        });
+    }, 
     consultarAgendamentos() {
-      this.resultados = [
-        { numero: 1, nomeCliente: 'João', dataAgendamento: '2023-11-10', horarioAgendamento: '14:00', statusAgendamento: 'Confirmado' },
-        { numero: 2, nomeCliente: 'Maria', dataAgendamento: '2023-11-12', horarioAgendamento: '15:30', statusAgendamento: 'Confirmado' },
-      ];
+
+      const token = sessionStorage.getItem('token');
+      
+      const dataAgendamento = this.dataAgendamento;        
+      const statusAgendamento = this.selectedStatusAgendamento;        
+      
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      axios.get('http://localhost:8080/agendamento/list-by-data?dataAgendamento='+dataAgendamento+'&id='+statusAgendamento, config)
+        .then(response => {
+            this.msg_failure = "";
+            
+            this.resultados = response.data; 
+
+            if(this.resultados.length < 1) {
+              this.msg_failure = 'Não foram localizados agendamentos com os parâmetros informados.'
+            }
+
+            this.limparCampos();
+        })
+        .catch(error => {
+          //this.msg_failure = response.data;          
+          console.error('Erro ao buscar dados:', error);
+        });
+
     },
     formatarData(data) {
       //Convertendo data para formato brasileiro.
       const [ano, mes, dia] = data.split('-');
       return `${dia}/${mes}/${ano}`;
+    },
+    limparCampos() {
+      setTimeout(() => this.msg_failure = "", 5000);
     }  
+  },
+  mounted() {
+    this.getStatusAgendamento();
   }
 };
 </script>
@@ -77,8 +138,13 @@ export default {
   }
 
   .table {
-    width: 1000px;
+    width: 1200px;
     margin: auto;      
+  }
+
+  td {
+    text-align: center;
+    vertical-align: middle;
   }
 
   label {              

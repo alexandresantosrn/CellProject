@@ -74,11 +74,10 @@ export default {
                     this.limparCampos();
 
                     const token = response.data;
-                    sessionStorage.setItem('token', token);
-
-                    this.cleanLogoff();
+                    sessionStorage.setItem('token', token);                    
 
                     this.reloadPage();
+                    this.cleanData();
 
                     this.$router.push('/LoginAutenticado');            
                     this.$emit('realizarLogin', this.authenticated);          
@@ -95,9 +94,13 @@ export default {
             this.usuario = "";
             this.senha = "";
         },
-        cleanLogoff() {
+        cleanData() {
             //Remove a variável auxiliar de logoff do localStorage.
-            localStorage.removeItem('logoff');            
+            localStorage.removeItem('logoff');   
+
+            //Remove a variável auxiliar de logon do localStorage.
+            localStorage.removeItem('logon');
+
         },
         reloadPage() {          
             this.value = localStorage.getItem('logon'); 

@@ -29,7 +29,6 @@ export default {
     methods: {
         getToken() {            
             this.token = sessionStorage.getItem('token');            
-            console.log(this.token);
         }
     },
     mounted(){

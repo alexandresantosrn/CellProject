@@ -71,7 +71,6 @@ export default {
           Authorization: `Bearer ${token}`
         }
       }; 
-      console.log(token);
       
       const agendamento = {
         dataAgendamento: this.dataAgendamento,

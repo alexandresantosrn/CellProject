@@ -148,4 +148,9 @@ export default {
     width: 800px;       
     margin: auto;  
   }
+
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
 </style>

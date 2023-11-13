@@ -23,6 +23,10 @@ public class StatusAgendamento {
 	public StatusAgendamento() {
 		super();
 	}
+	
+	public StatusAgendamento(int id) {
+		this.id = id;
+	}
 
 	public StatusAgendamento(int id, String descricao) {
 		super();

@@ -26,6 +26,14 @@ public class AgendamentoController {
 		return new ResponseEntity<>(agendamentos, HttpStatus.OK);
 	}
 
+	@GetMapping("list-by-data")
+	public ResponseEntity<List<Agendamento>> listarAgendamentosByDataStatus(@RequestParam String dataAgendamento,
+			int id) {
+
+		List<Agendamento> agendamentos = agendamentoService.listarAgendamentosAtivosByDataStatus(dataAgendamento, id);
+		return new ResponseEntity<>(agendamentos, HttpStatus.OK);
+	}
+
 	@PostMapping("cadastrar-agendamento")
 	public ResponseEntity<String> cadastrarAgendamento(@RequestBody Agendamento agendamento) {
 
@@ -38,11 +46,11 @@ public class AgendamentoController {
 		}
 
 	}
-	
+
 	@PostMapping("cancelar-agendamento")
 	public ResponseEntity<String> cancelarAgendamento(@RequestParam int id) {
 
-		try {			
+		try {
 			agendamentoService.cancelarAgendamento(id);
 			return ResponseEntity.ok("Agendamento cancelado com sucesso.");
 
@@ -51,11 +59,24 @@ public class AgendamentoController {
 		}
 
 	}
-	
+
 	@GetMapping("carregar-horarios")
 	public ResponseEntity<List<String>> carregarHorarios(@RequestParam String dataAgendamento) {
 		List<String> horarios = agendamentoService.carregarHorarios(dataAgendamento);
 		return new ResponseEntity<>(horarios, HttpStatus.OK);
 	}
-	
+
+	@PostMapping("iniciar-agendamento")
+	public ResponseEntity<String> iniciarAgendamento(@RequestParam int id) {
+
+		try {
+			agendamentoService.cancelarAgendamento(id);
+			return ResponseEntity.ok("Agendamento cancelado com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}
+
 }
