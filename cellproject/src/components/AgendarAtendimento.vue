@@ -54,13 +54,22 @@ export default {
   },
   methods: {
     async getTipoServico() {
-      axios.get('http://localhost:8080/tiposervico')
+
+      const token = sessionStorage.getItem('token');
+        
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      axios.get('http://localhost:8080/tiposervico', config)
         .then(response => {
           this.comboTipoServico = response.data;
         })
         .catch(error => {
-          this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
-          console.error('Erro ao buscar dados:', error);
+          //this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
+          //  console.error('Erro ao buscar dados:', error);
         });
     },  
     agendarAtendimento() {
