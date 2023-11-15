@@ -25,6 +25,12 @@ public class SecurityUtils {
 		} else if (token == null) {
 			token = secret;
 		}
+		
+//		if (token == null) {
+//			return null;
+//		}
+//		
+//		token = token.replace("Bearer ", "");
 
 		logger.info(token);
 		return parseTokenSubject(token);

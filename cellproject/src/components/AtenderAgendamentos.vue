@@ -76,14 +76,22 @@ export default {
   },
   methods: {
     async getStatusAgendamento() {
-      axios.get('http://localhost:8080/statusagendamento')
+      const token = sessionStorage.getItem('token');
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+      
+      axios.get('http://localhost:8080/statusagendamento', config)
         .then(response => {
           this.comboStatusAgendamento = response.data;
         })
-        // .catch(error => {
-        //   this.msg_failure = response.data;
-        //   console.error('Erro ao buscar dados:', error);
-        // });
+        .catch(error => {
+          this.msg_failure = response.data;
+          console.error('Erro ao buscar dados:', error);
+        });
     }, 
     consultarAgendamentos() {
       const token = sessionStorage.getItem('token');
@@ -109,10 +117,10 @@ export default {
 
           this.limparCampos();
         })
-        // .catch(error => {
-        //   this.msg_failure = error.response.data;           
-        //   console.error('Erro ao buscar dados:', error);
-        // });
+        .catch(error => {
+          this.msg_failure = error.response.data;           
+          console.error('Erro ao buscar dados:', error);
+        });
 
     },
     iniciarAgendamento(agendamentoId) {
