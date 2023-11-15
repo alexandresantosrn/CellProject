@@ -1,5 +1,5 @@
 <template>
-  <div class="atendimentos">
+  <div class="atendimentos" v-if="token">
     <h2>Módulo de Atendimentos</h2>
       <div id = "instrucoes">
           <Instrucoes :texto="texto" />
@@ -36,7 +36,8 @@ export default {
           exibirFormAgendamento: false,
           exibirListagemAgendamento: false,
           exibirListagemOS: false,
-          texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:'
+          texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:',
+          token: ''
       }
   },            
   components: {
@@ -47,21 +48,31 @@ export default {
       Instrucoes
   },
   methods: {
-      showFormAgendamentos(value) {            
-          this.exibirFormAgendamento = value;
-          this.exibirListagemAgendamento = false;
-          this.exibirListagemOS = false;
-      },
-      showListarAgendamentos(value) {
-          this.exibirFormAgendamento = false;
-          this.exibirListagemAgendamento = value;     
-          this.exibirListagemOS = false;
-      },
-      showListarOs(value) {
-          this.exibirFormAgendamento = false;
-          this.exibirListagemAgendamento = false;
-          this.exibirListagemOS = value;
-      }
+    showFormAgendamentos(value) {            
+        this.exibirFormAgendamento = value;
+        this.exibirListagemAgendamento = false;
+        this.exibirListagemOS = false;
+    },
+    showListarAgendamentos(value) {
+        this.exibirFormAgendamento = false;
+        this.exibirListagemAgendamento = value;     
+        this.exibirListagemOS = false;
+    },
+    showListarOs(value) {
+        this.exibirFormAgendamento = false;
+        this.exibirListagemAgendamento = false;
+        this.exibirListagemOS = value;
+    },
+    getToken() {            
+        this.token = sessionStorage.getItem('token');       
+        console.log(this.token);
+        if (this.token === null) {
+            this.$router.push('/');
+        }
+    }
+  },
+  mounted() {
+    this.getToken();
   }
 }
 </script>

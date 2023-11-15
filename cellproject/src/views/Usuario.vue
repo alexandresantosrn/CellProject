@@ -1,5 +1,5 @@
 <template>
-    <div class="usuario">
+    <div class="usuario" v-if="token">
         <h2>Área do Cliente/Usuário</h2>
             <div id = "instrucoes">
                 <Instrucoes :texto="texto" />
@@ -18,7 +18,7 @@
             <div v-show="exibirListagemOS">
                 <ListagemOS />
             </div>
-    </div>    
+    </div> 
 </template>
 
 <script>
@@ -36,7 +36,8 @@ export default {
             exibirFormAgendamento: false,
             exibirListagemAgendamento: false,
             exibirListagemOS: false,
-            texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:'
+            texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:',
+            token: ''
         }
     },            
     components: {
@@ -61,7 +62,17 @@ export default {
             this.exibirFormAgendamento = false;
             this.exibirListagemAgendamento = false;
             this.exibirListagemOS = value;
+        },
+        getToken() {            
+            this.token = sessionStorage.getItem('token');       
+            
+            if (this.token === null) {
+                this.$router.push('/');
+            }
         }
+    },
+    mounted() {
+        this.getToken();
     }
 }
 </script>

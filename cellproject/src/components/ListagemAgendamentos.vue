@@ -88,7 +88,7 @@ export default {
           this.agendamentos = response.data;               
         })
         .catch(error => {
-          this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
+          this.msg_failure = error.response.data; 
           console.error('Erro ao buscar dados:', error);
         });
     },
