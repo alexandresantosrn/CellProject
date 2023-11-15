@@ -65,7 +65,7 @@ public class AgendamentoService {
 
 		// Convertendo a data informada em LocalDate.
 		LocalDate data = LocalDate.parse(dataAgendamento);
-		
+
 		// Retornando o status do agendamento através do seu id.
 		StatusAgendamento statusAgendamento = statusAgendamentoService.buscarStatusAgendamentoporId(idStatusAgendamento)
 				.orElseThrow();
@@ -180,10 +180,10 @@ public class AgendamentoService {
 
 		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
 
-		// Não permite cancelar agendamentos já finalizados.
-		if (isAgendamentoFinalizado(agendamento)) {
+		// Não permite cancelar agendamentos já atendidos.
+		if (isAgendamentoAtendido(agendamento)) {
 			throw new ServiceException(
-					"O agendamento selecionado não pode mais ser cancelado, pois este já se encontra finalizado.");
+					"O agendamento selecionado não pode mais ser cancelado, pois este já se encontra atendido.");
 		}
 
 		// Não permite cancelar agendamentos já cancelados.
@@ -234,15 +234,15 @@ public class AgendamentoService {
 	}
 
 	/**
-	 * Retorna true caso o agendamento esteja com status finalizado.
+	 * Retorna true caso o agendamento esteja com status atendido.
 	 * 
 	 * @param agendamento<Agendamento> - Agendamento em questão.
 	 * @return boolean - Retorna true caso o agendamento esteja com status
 	 *         finalizado.
 	 */
-	private boolean isAgendamentoFinalizado(Agendamento agendamento) {
+	private boolean isAgendamentoAtendido(Agendamento agendamento) {
 
-		if (agendamento.getStatusAgendamento().getDescricao().equals("Finalizado")) {
+		if (agendamento.getStatusAgendamento().getDescricao().equals("Atendido")) {
 			return true;
 		}
 
@@ -289,5 +289,34 @@ public class AgendamentoService {
 	 */
 	private List<Agendamento> findAgendamentosbyDate(LocalDate dataAgendamento) {
 		return agendamentoRepository.findByDataAgendamento(dataAgendamento);
+	}
+
+	public Agendamento iniciarAgendamento(int id) {
+
+		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
+
+		// Não permite iniciar agendamentos já atendidos.
+		if (isAgendamentoAtendido(agendamento)) {
+			throw new ServiceException(
+					"O agendamento selecionado não pode ser iniciado, pois este já encontra-se atendido.");
+		}
+
+		// Não permite iniciar agendamentos já cancelados.
+		else if (isAgendamentoCancelado(agendamento)) {
+			throw new ServiceException(
+					"O agendamento selecionado não pode ser iniciado, pois este já encontra-se cancelado.");
+		}
+
+		// Não permite atender agendamentos realizados para datas diferentes da data
+		// atual.
+		else if (!agendamento.getDataAgendamento().equals(LocalDate.now())) {
+			throw new ServiceException(
+					"Não é possível iniciar atendimentos marcados para datas futuras e/ou passadas.");
+		}
+
+		// Seta o agendamento para o status cancelado.
+		agendamento.setStatusAgendamento(statusAgendamentoService.findStatusByDescricao("Atendido"));
+
+		return agendamentoRepository.save(agendamento);
 	}
 }

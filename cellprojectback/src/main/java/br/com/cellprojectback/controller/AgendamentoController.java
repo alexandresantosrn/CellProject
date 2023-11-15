@@ -70,8 +70,8 @@ public class AgendamentoController {
 	public ResponseEntity<String> iniciarAgendamento(@RequestParam int id) {
 
 		try {
-			agendamentoService.cancelarAgendamento(id);
-			return ResponseEntity.ok("Agendamento cancelado com sucesso.");
+			agendamentoService.iniciarAgendamento(id);
+			return ResponseEntity.ok("Agendamento iniciado com sucesso.");
 
 		} catch (ServiceException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());

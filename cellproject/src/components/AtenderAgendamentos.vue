@@ -39,7 +39,7 @@
             <td>{{ agendamento.horarioAgendamento }}</td>
             <td>{{ agendamento.statusAgendamento.descricao }}</td>
             <td>
-              <button class="btn btn-primary" @click="realizarCancelamento(agendamento.id)">
+              <button class="btn btn-primary" @click="iniciarAgendamento(agendamento.id)">
                 Iniciar Atendimento
               </button>
             </td>
@@ -68,8 +68,8 @@ export default {
       resultados: [],
       comboStatusAgendamento: [],
       selectedStatusAgendamento: '',
+      agendamentoId: '',
       dataAgendamento: new Date().toISOString().split('T')[0], // Define a data atual
-      statusAgendamento: '',
       msg: '',
       msg_failure: ''
     };
@@ -81,12 +81,11 @@ export default {
           this.comboStatusAgendamento = response.data;
         })
         .catch(error => {
-          this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
+          this.msg_failure = response.data;
           console.error('Erro ao buscar dados:', error);
         });
     }, 
     consultarAgendamentos() {
-
       const token = sessionStorage.getItem('token');
       
       const dataAgendamento = this.dataAgendamento;        
@@ -100,21 +99,46 @@ export default {
 
       axios.get('http://localhost:8080/agendamento/list-by-data?dataAgendamento='+dataAgendamento+'&id='+statusAgendamento, config)
         .then(response => {
-            this.msg_failure = "";
-            
-            this.resultados = response.data; 
+          this.msg_failure = "";
+          
+          this.resultados = response.data; 
 
-            if(this.resultados.length < 1) {
-              this.msg_failure = 'Não foram localizados agendamentos com os parâmetros informados.'
-            }
+          if(this.resultados.length < 1) {
+            this.msg_failure = 'Não foram localizados agendamentos com os parâmetros informados.'
+          }
 
-            this.limparCampos();
+          this.limparCampos();
         })
         .catch(error => {
-          //this.msg_failure = response.data;          
+          this.msg_failure = error.response.data;           
           console.error('Erro ao buscar dados:', error);
         });
 
+    },
+    iniciarAgendamento(agendamentoId) {
+      this.agendamentoId = agendamentoId;      
+
+      const token = sessionStorage.getItem('token');
+        
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      axios.post('http://localhost:8080/agendamento/iniciar-agendamento?id='+this.agendamentoId, config)
+        .then(response => {           
+          this.msg_failure = '';                                           
+          this.msg = response.data;  
+          this.limparCampos();          
+        })
+        .catch(error => {                  
+          this.msg = '';                   
+          this.msg_failure = error.response.data; 
+          this.limparCampos();
+        }); 
+        
+        this.showModal = false;
     },
     formatarData(data) {
       //Convertendo data para formato brasileiro.
@@ -122,6 +146,7 @@ export default {
       return `${dia}/${mes}/${ano}`;
     },
     limparCampos() {
+      setTimeout(() => this.msg = "", 5000);
       setTimeout(() => this.msg_failure = "", 5000);
     }  
   },

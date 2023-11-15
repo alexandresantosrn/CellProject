@@ -60,8 +60,7 @@ import axios from 'axios';
             this.ordens = response.data;               
           })
           .catch(error => {
-            this.msg_failure = 'Falha na obtenção do token. Por gentileza, realize novamente sua autenticação.'
-            console.log(this.msg_failure);
+            this.msg_failure = error.response.data;
             console.error('Erro ao buscar dados:', error);
           });
       }

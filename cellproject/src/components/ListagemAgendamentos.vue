@@ -103,7 +103,7 @@ export default {
         }
       }; 
 
-      axios.post('http://localhost:8080/agendamento/cancelar-agendamento?id='+agendamentoId, null, config)
+      axios.post('http://localhost:8080/agendamento/cancelar-agendamento?id='+agendamentoId, config)
         .then(response => {           
           this.msg_failure = '';                                           
           this.msg = response.data;  
