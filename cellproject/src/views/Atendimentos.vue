@@ -6,13 +6,13 @@
       </div>   
       
       <AtendimentosBanner v-on:adicionarAgendamento="showFormAgendamentos" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
-      
-      <div v-show="exibirFormAgendamento">
-          <AgendarAtendimento />
-      </div>   
-      
+             
       <div v-show="exibirListagemAgendamento">
           <AtenderAgendamentos />
+      </div> 
+
+      <div v-show="exibirFormAgendamento">
+          <CadastrarCliente />
       </div> 
 
       <div v-show="exibirListagemOS">
@@ -28,6 +28,7 @@ import AgendarAtendimento from '@/components/AgendarAtendimento.vue';
 import ListagemOS from '@/components/ListagemOS.vue';
 import Instrucoes from '@/components/Instrucoes.vue';
 import AtenderAgendamentos from '../components/AtenderAgendamentos.vue';
+import CadastrarCliente from '../components/CadastrarCliente.vue';
 
 export default {
   name: 'Atendimentos',
@@ -45,7 +46,8 @@ export default {
       AgendarAtendimento,      
       ListagemOS,
       AtenderAgendamentos,
-      Instrucoes
+      Instrucoes,
+      CadastrarCliente
   },
   methods: {
     showFormAgendamentos(value) {            

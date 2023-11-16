@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar :logo="logo_src" :alt="app_name" :allowLinks="viewLinks"/>
+    <Navbar :logo="logo_src" :alt="app_name" />
     <router-view/>
     <router-link to="/atendimentos"></router-link>
     <Footer />
@@ -23,13 +23,7 @@ export default {
   data() {
     return {
       logo_src: '/img/logo.png',
-      app_name: 'Cell Project',
-      viewLinks: false
-    }
-  },
-  methods: {
-    linksOn(value) {
-      this.viewLinks = true;
+      app_name: 'Cell Project'
     }
   }  
 }

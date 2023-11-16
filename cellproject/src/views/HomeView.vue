@@ -37,7 +37,6 @@ export default {
     },
     showLinks() {
       this.linksOn = true;
-      this.$emit('showLinks', this.linksOn);
     }
   },
   mounted() {
