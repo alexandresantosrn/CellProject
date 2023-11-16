@@ -6,25 +6,39 @@
       <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
 
       <form @submit.prevent="realizarCadastro" id="form">
+      <div class="row">  
         <div class="form-group">
           <label for="name">Nome Completo:</label>
           <input type="text" id="name" v-model="nome" class="form-control" required>
         </div>
   
-        <div class="form-group">
+        <div class="col-md-6">
+          <label for="sexo">Sexo:</label>
+          <select v-model="sexo" class="form-control" id="sexo" required>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>        
+          </select>
+        </div>         
+
+        <div class="col-md-6">
+          <label for="dataNascimento">Data de Nascimento:</label>
+          <input v-model="dataNascimento" type="date" class="form-control" id="dataNascimento" required>
+        </div> 
+          
+        <div class="col-md-6">
           <label for="cpf">CPF:</label>
           <input type="text" id="cpf" v-model="cpf" class="form-control" placeholder="___.___.___-__" maxlength = "11" required>
         </div>
+          
+        <div class="col-md-6">
+          <label for="phone">Telefone:</label>
+          <input type="tel" id="telefone" v-model="telefone" class="form-control" placeholder="(  )" maxlength = "11" required>
+        </div>   
   
         <div class="form-group">
           <label for="email">E-mail:</label>
           <input type="email" id="email" v-model="email" class="form-control" required>
-        </div>
-  
-        <div class="form-group">
-          <label for="phone">Telefone:</label>
-          <input type="tel" id="telefone" v-model="telefone" class="form-control" placeholder="(  )" maxlength = "11" required>
-        </div>       
+        </div> 
   
         <div class="form-group">
           <label for="password">Senha:</label>
@@ -32,6 +46,7 @@
         </div>
   
         <button type="submit" class="btn btn-primary">Confirmar Cadastro</button>
+      </div>  
       </form>
     </div>
   </template>
@@ -55,7 +70,9 @@ export default {
       cpf: '',
       email: '',
       telefone: '',         
-      senha: '',          
+      senha: '', 
+      sexo: '',
+      dataNascimento: '',         
       texto: 'Prezado usuário, preencha abaixo todos os seus dados completos, para efetivação do seu cadastro:',
       msg: '',
       msg_failure: ''
@@ -68,7 +85,9 @@ export default {
         nome: this.nome,
         cpf: this.cpf,
         email: this.email,
-        telefone: this.telefone       
+        telefone: this.telefone,
+        sexo: this.sexo,
+        dataNascimento: this.dataNascimento
       }         
       
       axios.post('http://localhost:8080/pessoa/cadastrar-pessoa', pessoa)

@@ -1,5 +1,6 @@
 package br.com.cellprojectback.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,6 +21,12 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@Column(name = "sexo")
+	private String sexo;
+
+	@Column(name = "data_nascimento")
+	private LocalDate dataNascimento;
+
 	@Column(name = "cpf")
 	private String cpf;
 
@@ -36,26 +43,28 @@ public class Pessoa {
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
 
-	public Pessoa() {
-		super();
-	}
-
-	public Pessoa(int id, String cpf, String nome, String email, String telefone, Date dataCadastro) {
-		super();
-		this.id = id;
-		this.cpf = cpf;
-		this.nome = nome;
-		this.email = email;
-		this.telefone = telefone;
-		this.dataCadastro = dataCadastro;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getCpf() {
@@ -100,7 +109,7 @@ public class Pessoa {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, dataCadastro, email, id, nome, telefone);
+		return Objects.hash(cpf, dataCadastro, dataNascimento, email, id, nome, sexo, telefone);
 	}
 
 	@Override
@@ -113,7 +122,8 @@ public class Pessoa {
 			return false;
 		Pessoa other = (Pessoa) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(dataCadastro, other.dataCadastro)
-				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(nome, other.nome)
+				&& Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(email, other.email)
+				&& id == other.id && Objects.equals(nome, other.nome) && Objects.equals(sexo, other.sexo)
 				&& Objects.equals(telefone, other.telefone);
 	}
 
