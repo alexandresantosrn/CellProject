@@ -2,6 +2,10 @@
   <div id="agendamentos">
     <h2>Listar/Atender Agendamentos</h2>
 
+    <div id = "instrucoes">
+          <Instrucoes :texto="texto" />
+    </div>  
+
     <Message :msg="msg" v-show="msg" />
     <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
 
@@ -56,12 +60,14 @@
 import Message from './Message.vue';
 import MessageFailure from './MessageFailure.vue';
 import axios from 'axios';  
+import Instrucoes from './Instrucoes.vue';
 
 export default {
   name: 'AtenderAgendamentos',
   components: {
     Message,
-    MessageFailure
+    MessageFailure,
+    Instrucoes
   },
   data() {
     return {
@@ -71,7 +77,8 @@ export default {
       agendamentoId: '',
       dataAgendamento: new Date().toISOString().split('T')[0], // Define a data atual
       msg: '',
-      msg_failure: ''
+      msg_failure: '',
+      texto: 'Prezado(a) usuário(a), selecione a data desejada e o status para consulta dos agendamentos realizados.'
     };
   },
   methods: {
@@ -169,7 +176,10 @@ export default {
     width: 500px;       
     margin: auto; 
   }
-
+  #instrucoes {
+      width: 500px;
+      margin: auto;        
+  }
   .table {
     width: 1200px;
     margin: auto;      

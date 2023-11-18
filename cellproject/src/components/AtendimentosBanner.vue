@@ -11,8 +11,8 @@
             </router-link>            
 
             <router-link to="/atendimentos">
-                <div id="add-agendamento" @click="adicionarAgendamento(), mudarCorAgendamento()" :style="{ backgroundColor: corAgendamento}">                    
-                    <img :src="add_agendamento_src" :alt="add_agendamento_alt" class="img-user">                
+                <div id="add-client" @click="adicionarCliente(), mudarCorClient()" :style="{ backgroundColor: corAgendamento}">                    
+                    <img :src="add_client_src" :alt="add_client_alt" class="img-user">                
                     <p>CADASTRAR</p>
                     <p>CLIENTE</p>                                
                 </div>
@@ -50,10 +50,10 @@ export default {
     name: 'AtendimentosBanner',
     data() {
         return {
-            add_agendamento_src: '/img/adicionar-cliente.png',
-            add_agendamento_alt: 'Agendar Atendimentos',
             list_agendamentos_src: '/img/listar-agendamentos.png',
-            list_agendamentos_alt: 'Listar Agendamentos',
+            list_agendamentos_alt: 'Listar/Atender Agendamentos',
+            add_client_src: '/img/adicionar-cliente.png',
+            add_client_alt: 'Cadastrar Cliente',
             list_os_src: '/img/listar-os.png',
             list_os_alt: 'Listar Ordens de Serviço',
             showFormAgendamentos: false,
@@ -65,11 +65,11 @@ export default {
         }
     },
     methods: {
-        adicionarAgendamento() {
+        adicionarCliente() {
             this.showFormAgendamentos = true;
             this.showListarAgendamentos = false;
             this.showListarOs = false;           
-            this.$emit('adicionarAgendamento', this.showFormAgendamentos);
+            this.$emit('adicionarCliente', this.showFormAgendamentos);
         },
         listarAgendamentos(){
             this.showFormAgendamentos = false;
@@ -84,7 +84,7 @@ export default {
             
             this.$emit('listarOs', this.showListarOs);
         },
-        mudarCorAgendamento() {
+        mudarCorClient() {
             this.corAgendamento = '#FFFFE0', 
             this.corListagemAgendamento = 'White',
             this.corListagemOs = 'White'          
@@ -122,7 +122,7 @@ export default {
         text-decoration: none;
     }      
 
-    #add-agendamento, 
+    #add-client, 
     #list-agendamentos,
     #list-os {
         border: 2px solid black;

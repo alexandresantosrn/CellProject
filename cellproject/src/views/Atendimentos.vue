@@ -5,13 +5,13 @@
           <Instrucoes :texto="texto" />
       </div>   
       
-      <AtendimentosBanner v-on:adicionarAgendamento="showFormAgendamentos" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
+      <AtendimentosBanner v-on:adicionarCliente="showFormCliente" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
              
       <div v-show="exibirListagemAgendamento">
           <AtenderAgendamentos />
       </div> 
 
-      <div v-show="exibirFormAgendamento">
+      <div v-show="exibirFormCliente">
           <CadastrarCliente />
       </div> 
 
@@ -34,7 +34,7 @@ export default {
   name: 'Atendimentos',
   data() {
       return {
-          exibirFormAgendamento: false,
+          exibirFormCliente: false,
           exibirListagemAgendamento: false,
           exibirListagemOS: false,
           texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:',
@@ -50,24 +50,24 @@ export default {
       CadastrarCliente
   },
   methods: {
-    showFormAgendamentos(value) {            
-        this.exibirFormAgendamento = value;
+    showFormCliente(value) {            
+        this.exibirFormCliente = value;
         this.exibirListagemAgendamento = false;
         this.exibirListagemOS = false;
     },
     showListarAgendamentos(value) {
-        this.exibirFormAgendamento = false;
+        this.exibirFormCliente = false;
         this.exibirListagemAgendamento = value;     
         this.exibirListagemOS = false;
     },
     showListarOs(value) {
-        this.exibirFormAgendamento = false;
+        this.exibirFormCliente = false;
         this.exibirListagemAgendamento = false;
         this.exibirListagemOS = value;
     },
     getToken() {            
         this.token = sessionStorage.getItem('token');       
-        console.log(this.token);
+        
         if (this.token === null) {
             this.$router.push('/');
         }
@@ -84,8 +84,7 @@ export default {
       margin: auto;        
       text-align: center;
       margin-bottom: 20px;       
-  }  
-
+  } 
   #instrucoes {
       width: 500px;
       margin: auto;        
