@@ -34,6 +34,12 @@ public class StatusAgendamentoService {
 		return statusAgendamentoRepository.findByDescricao(descricao);
 	}
 	
+	/**
+	 * Retorna um status de agendamento através do seu id.
+	 * 
+	 * @param id<Int> - Id do status do agendamento.
+	 * @return StatusAgendamento - Status de agendamento recuperado.
+	 */
 	public Optional<StatusAgendamento> buscarStatusAgendamentoporId(int id) {
 		return statusAgendamentoRepository.findById(id);
 	}

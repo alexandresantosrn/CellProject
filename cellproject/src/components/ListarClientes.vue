@@ -65,10 +65,7 @@ components: {
 },
 data() {
     return {
-        pessoa: '',
-        comboStatusAgendamento: [],
-        selectedStatusAgendamento: '',
-        agendamentoId: '',
+        pessoa: '',        
         cpf: '',
         nome: '',
         msg: '',

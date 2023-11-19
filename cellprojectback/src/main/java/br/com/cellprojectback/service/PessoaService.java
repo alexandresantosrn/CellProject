@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.PessoaRepository;
@@ -37,7 +36,7 @@ public class PessoaService {
 	public Pessoa salvarPessoa(Pessoa pessoa) {
 
 		if (pessoa.getNome() == null || pessoa.getCpf() == null || pessoa.getEmail() == null
-				|| pessoa.getTelefone() == null) {
+				|| pessoa.getTelefone() == null || pessoa.getDataNascimento() == null || pessoa.getSexo() == null) {
 			throw new ServiceException("Campos obrigatórios não informados.");
 		}
 
@@ -62,7 +61,7 @@ public class PessoaService {
 	 * Retorna uma pessoa através do seu cpf.
 	 * 
 	 * @param cpf<String> - CPF informado.
-	 * @return - Pessoa com o cpf informado.
+	 * @return Pessoa - Pessoa com o cpf informado.
 	 */
 	public Pessoa findPessoabyCPF(String cpf) {
 		return pessoaRepository.findByCpf(cpf);
@@ -72,14 +71,44 @@ public class PessoaService {
 	 * Retorna uma pessoa através do seu e-mail.
 	 * 
 	 * @param email<String> - E-mail informado.
-	 * @return - Pessoa com o email informado.
+	 * @return Pessoa - Pessoa com o email informado.
 	 */
 	public Pessoa findPessoaByEmail(String email) {
 		return pessoaRepository.findByEmail(email);
 	}
 	
+	/**
+	 * Retorna uma pessoa através do seu id.
+	 * 
+	 * @param id<Int> - Id da pessoa.
+	 * @return Pessoa - Pessoa com o id informado.
+	 */
 	public Optional<Pessoa> findPessoaById(int id) {
 		return pessoaRepository.findById(id);
+	}
+	
+	/**
+	 * Atualiza os dados da pessoa informada.
+	 * 
+	 * @param pessoa<Pessoa> - Pessoa informada.
+	 * @return Pessoa - Pessoa com dados atualizados.
+	 */
+	public Pessoa updatePessoa(Pessoa pessoa) {
+		
+		if (pessoa.getNome() == null || pessoa.getCpf() == null || pessoa.getEmail() == null
+				|| pessoa.getTelefone() == null || pessoa.getDataNascimento() == null || pessoa.getSexo() == null) {
+			throw new ServiceException("Campos obrigatórios não informados.");
+		}
+		
+		Pessoa pessoaAtualizada = findPessoaById(pessoa.getId()).orElseThrow();
+		
+		pessoaAtualizada.setCpf(pessoa.getCpf());
+		pessoaAtualizada.setNome(pessoa.getNome());
+		pessoaAtualizada.setDataNascimento(pessoa.getDataNascimento());
+		pessoaAtualizada.setSexo(pessoa.getSexo());
+		pessoaAtualizada.setTelefone(pessoa.getTelefone());
+		
+		return pessoaRepository.save(pessoaAtualizada);
 	}
 
 }

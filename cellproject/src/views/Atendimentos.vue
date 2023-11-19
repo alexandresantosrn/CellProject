@@ -5,7 +5,7 @@
           <Instrucoes :texto="texto" />
       </div>   
       
-      <AtendimentosBanner v-on:adicionarCliente="showFormCliente" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarOs="showListarOs"/>
+      <AtendimentosBanner v-on:adicionarCliente="showFormCliente" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarCliente="showListarCliente"/>
              
       <div v-show="exibirListagemAgendamento">
           <AtenderAgendamentos />
@@ -15,8 +15,8 @@
           <CadastrarCliente />
       </div> 
 
-      <div v-show="exibirListagemOS">
-          <listar-clientes />
+      <div v-show="exibirListagemClientes">
+          <ListarClientes />
       </div>
   </div>    
 </template>
@@ -37,7 +37,7 @@ export default {
       return {
           exibirFormCliente: false,
           exibirListagemAgendamento: false,
-          exibirListagemOS: false,
+          exibirListagemClientes: false,
           texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:',
           token: ''
       }
@@ -55,17 +55,17 @@ export default {
     showFormCliente(value) {            
         this.exibirFormCliente = value;
         this.exibirListagemAgendamento = false;
-        this.exibirListagemOS = false;
+        this.exibirListagemClientes = false;
     },
     showListarAgendamentos(value) {
         this.exibirFormCliente = false;
         this.exibirListagemAgendamento = value;     
-        this.exibirListagemOS = false;
+        this.exibirListagemClientes = false;
     },
-    showListarOs(value) {
+    showListarCliente(value) {
         this.exibirFormCliente = false;
         this.exibirListagemAgendamento = false;
-        this.exibirListagemOS = value;
+        this.exibirListagemClientes = value;
     },
     getToken() {            
         this.token = sessionStorage.getItem('token');       

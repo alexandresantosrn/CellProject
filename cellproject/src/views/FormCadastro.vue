@@ -121,16 +121,18 @@ export default {
             
         });                
    },
-   limparCampos() {
+    limparCampos() {
 
-    setTimeout(() => this.msg = "", 5000);
+      setTimeout(() => this.msg = "", 5000);
 
-    this.nome = "";
-    this.cpf = "";
-    this.telefone = "";
-    this.senha = "";
-    this.email = "";
-   }
+      this.nome = "";
+      this.cpf = "";
+      this.telefone = "";
+      this.senha = "";
+      this.email = "";
+      this.dataNascimento = "";
+      this.sexo = "";
+    }
   }
 }
 </script>

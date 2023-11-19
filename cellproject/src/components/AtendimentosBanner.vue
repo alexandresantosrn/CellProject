@@ -19,26 +19,26 @@
             </router-link>
 
             <router-link to="/atendimentos">
-                <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
-                    <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
+                <div id="list-os" @click="listarCliente(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
+                    <img :src="list_client_src" :alt="list_client_alt" class="img-user"> 
                     <p>LISTAR / ALTERAR</p>
                     <p>CLIENTE</p>
                 </div>
             </router-link>
 
             <router-link to="/atendimentos">
-                <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
+                <div id="list-os" @click="listarCliente(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
                     <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
-                    <p>LISTAR</p>
-                    <p>ORDENS DE SERVIÇO</p>
+                    <p>CADASTRAR</p>
+                    <p>ORDEM DE SERVIÇO</p>
                 </div>
             </router-link>
 
             <router-link to="/atendimentos">
-                <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
+                <div id="list-os" @click="listarCliente(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
                     <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
-                    <p>LISTAR</p>
-                    <p>ORDENS DE SERVIÇO</p>
+                    <p>LISTAR / CONSULTAR</p>
+                    <p>ORDEM DE SERVIÇO</p>
                 </div>
             </router-link>
         </div>
@@ -54,11 +54,11 @@ export default {
             list_agendamentos_alt: 'Listar/Atender Agendamentos',
             add_client_src: '/img/adicionar-cliente.png',
             add_client_alt: 'Cadastrar Cliente',
-            list_os_src: '/img/listar-cliente.png',
-            list_os_alt: 'Lista/Alterar Cliente',
-            showFormAgendamentos: false,
+            list_client_src: '/img/listar-cliente.png',
+            list_client_alt: 'Lista/Alterar Cliente',
+            showFormCliente: false,
             showListarAgendamentos: false,
-            showListarOs: false,
+            showListarCliente: false,
             corAgendamento: 'white',
             corListagemAgendamento: 'white',
             corListagemOs: 'white'           
@@ -66,23 +66,23 @@ export default {
     },
     methods: {
         adicionarCliente() {
-            this.showFormAgendamentos = true;
+            this.showFormCliente = true;
             this.showListarAgendamentos = false;
-            this.showListarOs = false;           
-            this.$emit('adicionarCliente', this.showFormAgendamentos);
+            this.showListarCliente = false;           
+            this.$emit('adicionarCliente', this.showFormCliente);
         },
         listarAgendamentos(){
-            this.showFormAgendamentos = false;
+            this.showFormCliente = false;
             this.showListarAgendamentos = true;
-            this.showListarOs = false;                  
+            this.showListarCliente = false;                  
             this.$emit('listarAgendamentos', this.showListarAgendamentos);
         },
-        listarOs(){
-            this.showFormAgendamentos = false;
+        listarCliente(){
+            this.showFormCliente = false;
             this.showListarAgendamentos = false;
-            this.showListarOs = true; 
+            this.showListarCliente = true; 
             
-            this.$emit('listarOs', this.showListarOs);
+            this.$emit('listarCliente', this.showListarCliente);
         },
         mudarCorClient() {
             this.corAgendamento = '#FFFFE0', 

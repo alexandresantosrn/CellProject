@@ -95,7 +95,7 @@ public class UsuarioService {
 	}
 
 	/**
-	 * Realizar o registro do login do usuário no sistema.
+	 * Realiza o registro do login do usuário no sistema.
 	 * 
 	 * @param login<String> - E-mail/login informado.
 	 * @param senha<String  - Senha do usuário.

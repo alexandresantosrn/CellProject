@@ -60,7 +60,14 @@ public class AgendamentoService {
 
 		return listaAgendamentos;
 	}
-
+	
+	/**
+	 * Retorna a listagem de agendamentos através da data de agendamento e status.
+	 * 
+	 * @param dataAgendamento - Data informada.
+	 * @param idStatusAgendamento - Id do status informado.
+	 * @return List<Agendamento> - Agendamentos desejados.
+	 */
 	public List<Agendamento> listarAgendamentosAtivosByDataStatus(String dataAgendamento, int idStatusAgendamento) {
 
 		// Convertendo a data informada em LocalDate.
@@ -178,7 +185,7 @@ public class AgendamentoService {
 	 */
 	public Agendamento cancelarAgendamento(int id) {
 
-		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
+		Agendamento agendamento = findAgendamentoById(id).orElseThrow();
 
 		// Não permite cancelar agendamentos já atendidos.
 		if (isAgendamentoAtendido(agendamento)) {
@@ -213,7 +220,7 @@ public class AgendamentoService {
 	 * @param id<Int> - Id do agendamento.
 	 * @return Optional<Agendamento> - Agendamento localizado.
 	 */
-	private Optional<Agendamento> buscarAgendamentoporId(int id) {
+	private Optional<Agendamento> findAgendamentoById(int id) {
 		return agendamentoRepository.findById(id);
 	}
 
@@ -291,9 +298,15 @@ public class AgendamentoService {
 		return agendamentoRepository.findByDataAgendamento(dataAgendamento);
 	}
 
+	/**
+	 * Inicia um agendamento, setando seu status para atendido.
+	 * 
+	 * @param id<Int> - Id do agendamento.
+	 * @return Agendamento - Agendamento é atualizado.
+	 */
 	public Agendamento iniciarAgendamento(int id) {
 
-		Agendamento agendamento = buscarAgendamentoporId(id).orElseThrow();
+		Agendamento agendamento = findAgendamentoById(id).orElseThrow();
 
 		// Não permite iniciar agendamentos já atendidos.
 		if (isAgendamentoAtendido(agendamento)) {

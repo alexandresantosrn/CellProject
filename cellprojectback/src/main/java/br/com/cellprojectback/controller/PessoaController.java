@@ -52,4 +52,17 @@ public class PessoaController {
 		return new ResponseEntity<>(pessoa, HttpStatus.OK);
 	}
 
+	@PostMapping("atualizar-pessoa")
+	public ResponseEntity<String> atualizarPessoa(@RequestBody Pessoa pessoa) {
+
+		try {
+			pessoaService.updatePessoa(pessoa);
+			return ResponseEntity.ok("Dados atualizados com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}
+
 }

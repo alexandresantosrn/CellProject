@@ -9,7 +9,7 @@
       <div class="row">
         <div class="form-group">
           <label for="name">Nome Completo:</label>
-          <input type="text" id="name" v-model="nome" class="form-control" :placeholder="name" required>
+          <input type="text" id="name" v-model="nome" class="form-control" required>
         </div>
 
         <div class="col-md-6">
@@ -22,22 +22,22 @@
 
         <div class="col-md-6">
           <label for="dataNascimento">Data de Nascimento:</label>
-          <input v-model="dataNascimento" type="date" class="form-control" id="dataNascimento" :placeholder="date" required>
+          <input v-model="dataNascimento" type="date" class="form-control" id="dataNascimento" required>
         </div> 
         
         <div class="col-md-6">
           <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" v-model="cpf" class="form-control" :placeholder="code" maxlength = "11" required>
+          <input type="text" id="cpf" v-model="cpf" class="form-control" maxlength = "11" required>
         </div>
         
         <div class="col-md-6">
           <label for="phone">Telefone:</label>
-          <input type="tel" id="telefone" v-model="telefone" class="form-control" placeholder="(  )" maxlength = "11" required>
+          <input type="tel" id="telefone" v-model="telefone" class="form-control" maxlength = "11" required>
         </div>   
   
         <div class="form-group">
           <label for="email">E-mail:</label>
-          <input type="email" id="email" v-model="email" class="form-control" :placeholder="mail"  required>
+          <input type="email" id="email" v-model="email" class="form-control" required>
         </div>    
     
         <button type="submit" class="btn btn-primary">Atualizar Cadastro</button>
@@ -78,7 +78,9 @@ export default {
       name: '',
       date: '',
       mail: '',
-      code: ''
+      code: '',
+      phone: '',
+      sex: '',
     };
   },
   methods: {
@@ -97,12 +99,14 @@ export default {
             .then(response => {   
 
             this.msg_failure = '';                                  
-
-            this.name = response.data.nome;  
-            this.mail = response.data.email;
-            this.code = response.data.cpf;
-
-            this.limparCampos();          
+            
+            this.nome = response.data.nome; 
+            this.email = response.data.email;
+            this.cpf = response.data.cpf;
+            this.telefone = response.data.telefone;
+            this.sexo = response.data.sexo;
+            this.date = response.data.dataNascimento;
+            this.dataNascimento = new Date(this.date).toISOString().split('T')[0];                    
         })
         .catch(error => {                    
             this.msg = '';                    
@@ -119,6 +123,7 @@ export default {
         };  
 
         const pessoa = {
+            id: this.pessoaId,
             nome: this.nome,
             cpf: this.cpf,
             email: this.email,
@@ -127,7 +132,7 @@ export default {
             sexo: this.sexo
         }         
       
-        axios.post('http://localhost:8080/pessoa/cadastrar-pessoa', pessoa, config)
+        axios.post('http://localhost:8080/pessoa/atualizar-pessoa', pessoa, config)
             .then(response => {         
             this.msg_failure = '';                                  
             this.msg = response.data;          
@@ -139,21 +144,21 @@ export default {
             this.msg_failure = error.response.data;   
         });
     },    
-   limparCampos() {
+    limparCampos() {
+        setTimeout(() => this.msg = "", 5000);
 
-    setTimeout(() => this.msg = "", 5000);
-
-    this.nome = "";
-    this.cpf = "";
-    this.telefone = "";
-    this.senha = "";
-    this.email = "";
-   }
+        this.nome = "";
+        this.cpf = "";
+        this.telefone = "";
+        this.senha = "";
+        this.email = "";
+        this.dataNascimento = "";
+        this.sexo = "";
+    }    
   },
   mounted() {
     this.getPessoa();
-  }
-
+  },
 }
 </script>
 
