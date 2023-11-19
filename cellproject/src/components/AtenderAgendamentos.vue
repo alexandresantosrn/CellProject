@@ -151,9 +151,7 @@ export default {
           this.msg = '';                   
           this.msg_failure = error.response.data; 
           this.limparCampos();
-        }); 
-        
-        this.showModal = false;
+        });         
     },
     formatarData(data) {
       //Convertendo data para formato brasileiro.

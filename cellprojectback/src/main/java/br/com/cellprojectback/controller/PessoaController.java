@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.service.PessoaService;
@@ -37,6 +38,18 @@ public class PessoaController {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
 		}
 
+	}
+
+	@GetMapping("pessoa-by-cpf")
+	public ResponseEntity<Pessoa> listarPessoaByCPF(@RequestParam String cpf) {
+		Pessoa pessoa = pessoaService.findPessoabyCPF(cpf);
+		return new ResponseEntity<>(pessoa, HttpStatus.OK);
+	}
+
+	@GetMapping("pessoa-by-id")
+	public ResponseEntity<Pessoa> listarPessoaById(@RequestParam int id) {
+		Pessoa pessoa = pessoaService.findPessoaById(id).orElseThrow();
+		return new ResponseEntity<>(pessoa, HttpStatus.OK);
 	}
 
 }

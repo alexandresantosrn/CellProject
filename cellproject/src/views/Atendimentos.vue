@@ -16,7 +16,7 @@
       </div> 
 
       <div v-show="exibirListagemOS">
-          <ListagemOS />
+          <listar-clientes />
       </div>
   </div>    
 </template>
@@ -29,6 +29,7 @@ import ListagemOS from '@/components/ListagemOS.vue';
 import Instrucoes from '@/components/Instrucoes.vue';
 import AtenderAgendamentos from '../components/AtenderAgendamentos.vue';
 import CadastrarCliente from '../components/CadastrarCliente.vue';
+import ListarClientes from '../components/ListarClientes.vue';
 
 export default {
   name: 'Atendimentos',
@@ -47,7 +48,8 @@ export default {
       ListagemOS,
       AtenderAgendamentos,
       Instrucoes,
-      CadastrarCliente
+      CadastrarCliente,
+      ListarClientes
   },
   methods: {
     showFormCliente(value) {            

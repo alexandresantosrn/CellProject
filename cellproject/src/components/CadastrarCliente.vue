@@ -77,6 +77,13 @@ export default {
   },
   methods: {
     realizarCadastro() {
+      const token = sessionStorage.getItem('token');
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
 
       const pessoa = {
         nome: this.nome,
@@ -87,7 +94,7 @@ export default {
         sexo: this.sexo
       }         
       
-      axios.post('http://localhost:8080/pessoa/cadastrar-pessoa', pessoa)
+      axios.post('http://localhost:8080/pessoa/cadastrar-pessoa', pessoa, config)
         .then(response => {         
           this.msg_failure = '';                                  
           this.msg = response.data;          

@@ -21,8 +21,8 @@
             <router-link to="/atendimentos">
                 <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
                     <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
-                    <p>LISTAR</p>
-                    <p>ORDENS DE SERVIÇO</p>
+                    <p>LISTAR / ALTERAR</p>
+                    <p>CLIENTE</p>
                 </div>
             </router-link>
 
@@ -54,8 +54,8 @@ export default {
             list_agendamentos_alt: 'Listar/Atender Agendamentos',
             add_client_src: '/img/adicionar-cliente.png',
             add_client_alt: 'Cadastrar Cliente',
-            list_os_src: '/img/listar-os.png',
-            list_os_alt: 'Listar Ordens de Serviço',
+            list_os_src: '/img/listar-cliente.png',
+            list_os_alt: 'Lista/Alterar Cliente',
             showFormAgendamentos: false,
             showListarAgendamentos: false,
             showListarOs: false,

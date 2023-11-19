@@ -2,10 +2,12 @@ package br.com.cellprojectback.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.PessoaRepository;
@@ -74,6 +76,10 @@ public class PessoaService {
 	 */
 	public Pessoa findPessoaByEmail(String email) {
 		return pessoaRepository.findByEmail(email);
+	}
+	
+	public Optional<Pessoa> findPessoaById(int id) {
+		return pessoaRepository.findById(id);
 	}
 
 }
