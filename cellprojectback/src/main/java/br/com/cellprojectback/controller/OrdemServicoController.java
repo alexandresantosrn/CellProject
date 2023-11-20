@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,19 @@ public class OrdemServicoController {
 		try {
 			ordemServicoService.removerOrdemServico(id);
 			return ResponseEntity.ok("Ordem de serviço removida com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}
+	
+	@PostMapping("cadastrar-ordem")
+	public ResponseEntity<String> cadastrarOrdemServico(@RequestBody OrdemServico ordem) {
+
+		try {
+			ordemServicoService.salvarOrdemServico(ordem);
+			return ResponseEntity.ok("Cadastro realizado com sucesso.");
 
 		} catch (ServiceException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());

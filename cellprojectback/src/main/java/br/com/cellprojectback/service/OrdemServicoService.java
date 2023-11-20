@@ -39,8 +39,18 @@ public class OrdemServicoService {
 	 * @param id<Int> - Id da ordem de serviço.
 	 */
 	public void removerOrdemServico(int id) {
-
 		ordemServicoRepository.deleteById(id);
+	}
+
+	/**
+	 * Salva uma nova ordem de serviço na base de dados.
+	 * 
+	 * @param ordem<OrdemServico> - Nova ordem de serviço.
+	 * @return OrdemServico - Nova ordem criada.
+	 */
+	public OrdemServico salvarOrdemServico(OrdemServico ordem) {
+
+		return ordemServicoRepository.save(ordem);
 	}
 
 }

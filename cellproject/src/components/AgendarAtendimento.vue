@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    async getTipoServico() {
+    getTipoServico() {
 
       const token = sessionStorage.getItem('token');
         
