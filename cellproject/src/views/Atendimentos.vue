@@ -5,7 +5,8 @@
           <Instrucoes :texto="texto" />
       </div>   
       
-      <AtendimentosBanner v-on:adicionarCliente="showFormCliente" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarCliente="showListarCliente"/>
+      <AtendimentosBanner v-on:adicionarCliente="showFormCliente" v-on:listarAgendamentos="showListarAgendamentos" v-on:listarCliente="showListarCliente"
+      v-on:listarOs="ShowListarOs"/>
              
       <div v-show="exibirListagemAgendamento">
           <AtenderAgendamentos />
@@ -17,6 +18,10 @@
 
       <div v-show="exibirListagemClientes">
           <ListarClientes />
+      </div>
+
+      <div v-show="exibirListagemOs">
+          <ConsultarOs />
       </div>
   </div>    
 </template>
@@ -30,6 +35,7 @@ import Instrucoes from '@/components/Instrucoes.vue';
 import AtenderAgendamentos from '../components/AtenderAgendamentos.vue';
 import CadastrarCliente from '../components/CadastrarCliente.vue';
 import ListarClientes from '../components/ListarClientes.vue';
+import ConsultarOs from '../components/ConsultarOs.vue';
 
 export default {
   name: 'Atendimentos',
@@ -38,6 +44,7 @@ export default {
           exibirFormCliente: false,
           exibirListagemAgendamento: false,
           exibirListagemClientes: false,
+          exibirListagemOs: false,
           texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:',
           token: ''
       }
@@ -49,23 +56,33 @@ export default {
       AtenderAgendamentos,
       Instrucoes,
       CadastrarCliente,
-      ListarClientes
+      ListarClientes,
+      ConsultarOs
   },
   methods: {
     showFormCliente(value) {            
         this.exibirFormCliente = value;
         this.exibirListagemAgendamento = false;
         this.exibirListagemClientes = false;
+        this.exibirListagemOs = false;
     },
     showListarAgendamentos(value) {
         this.exibirFormCliente = false;
         this.exibirListagemAgendamento = value;     
         this.exibirListagemClientes = false;
+        this.exibirListagemOs = false;
     },
     showListarCliente(value) {
         this.exibirFormCliente = false;
         this.exibirListagemAgendamento = false;
         this.exibirListagemClientes = value;
+        this.exibirListagemOs = false;
+    },
+    ShowListarOs(value) {
+        this.exibirFormCliente = false;
+        this.exibirListagemAgendamento = false;
+        this.exibirListagemClientes = false;
+        this.exibirListagemOs = value;
     },
     getToken() {            
         this.token = sessionStorage.getItem('token');       

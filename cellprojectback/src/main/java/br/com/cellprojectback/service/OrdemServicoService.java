@@ -10,7 +10,7 @@ import br.com.cellprojectback.repository.OrdemServicoRepository;
 
 @Service
 public class OrdemServicoService {
-	
+
 	@Autowired
 	private OrdemServicoRepository ordemServicoRepository;
 
@@ -21,6 +21,26 @@ public class OrdemServicoService {
 	 */
 	public List<OrdemServico> listarOrdensServico() {
 		return ordemServicoRepository.findAll();
+	}
+
+	/**
+	 * Retorna a ordem de serviço através do seu id.
+	 * 
+	 * @param codigo<String> - Código da ordem de serviço.
+	 * @return OrdemServico - Ordem de serviço retornada.
+	 */
+	public OrdemServico findOrdembyCodigo(String codigo) {
+		return ordemServicoRepository.findByCodigo(codigo);
+	}
+
+	/**
+	 * Remove a ordem de serviço através do seu id.
+	 * 
+	 * @param id<Int> - Id da ordem de serviço.
+	 */
+	public void removerOrdemServico(int id) {
+
+		ordemServicoRepository.deleteById(id);
 	}
 
 }

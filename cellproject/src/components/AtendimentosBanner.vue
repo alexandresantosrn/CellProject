@@ -11,7 +11,7 @@
             </router-link>            
 
             <router-link to="/atendimentos">
-                <div id="add-client" @click="adicionarCliente(), mudarCorClient()" :style="{ backgroundColor: corAgendamento}">                    
+                <div id="add-client" @click="adicionarCliente(), mudarCorClient()" :style="{ backgroundColor: corCliente}">                    
                     <img :src="add_client_src" :alt="add_client_alt" class="img-user">                
                     <p>CADASTRAR</p>
                     <p>CLIENTE</p>                                
@@ -19,7 +19,7 @@
             </router-link>
 
             <router-link to="/atendimentos">
-                <div id="list-os" @click="listarCliente(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
+                <div id="list-os" @click="listarCliente(), mudarCorListagemCliente()" :style="{ backgroundColor: corListagemCliente}">
                     <img :src="list_client_src" :alt="list_client_alt" class="img-user"> 
                     <p>LISTAR / ALTERAR</p>
                     <p>CLIENTE</p>
@@ -27,15 +27,15 @@
             </router-link>
 
             <router-link to="/atendimentos">
-                <div id="list-os" @click="listarCliente(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
-                    <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
+                <div id="list-os" @click="adicionarOs(), mudarCorOs()" :style="{ backgroundColor: corOs}">
+                    <img :src="add_os_src" :alt="add_os_alt" class="img-user"> 
                     <p>CADASTRAR</p>
                     <p>ORDEM DE SERVIÇO</p>
                 </div>
             </router-link>
 
             <router-link to="/atendimentos">
-                <div id="list-os" @click="listarCliente(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
+                <div id="list-os" @click="listarOs(), mudarCorListagemOs()" :style="{ backgroundColor: corListagemOs}">
                     <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
                     <p>LISTAR / CONSULTAR</p>
                     <p>ORDEM DE SERVIÇO</p>
@@ -56,11 +56,19 @@ export default {
             add_client_alt: 'Cadastrar Cliente',
             list_client_src: '/img/listar-cliente.png',
             list_client_alt: 'Lista/Alterar Cliente',
+            add_os_src: '/img/adicionar-os.png',
+            add_os_alt: 'Lista/Consultar Ordem de Serviço',
+            list_os_src: '/img/listar-os.png',
+            list_os_alt: 'Lista/Consultar Ordem de Serviço',
             showFormCliente: false,
             showListarAgendamentos: false,
             showListarCliente: false,
-            corAgendamento: 'white',
+            ShowFormOs: false,
+            ShowListarOs: false,
+            corCliente: 'white',
             corListagemAgendamento: 'white',
+            corListagemCliente: 'white',
+            corOs: 'white',
             corListagemOs: 'white'           
         }
     },
@@ -68,36 +76,77 @@ export default {
         adicionarCliente() {
             this.showFormCliente = true;
             this.showListarAgendamentos = false;
-            this.showListarCliente = false;           
-            this.$emit('adicionarCliente', this.showFormCliente);
+            this.showListarCliente = false;   
+            this.ShowFormOs = false;
+            this.ShowListarOs = false;        
+            this.$emit('adicionarCliente', this.showFormCliente);            
         },
         listarAgendamentos(){
             this.showFormCliente = false;
             this.showListarAgendamentos = true;
-            this.showListarCliente = false;                  
+            this.showListarCliente = false;
+            this.ShowFormOs = false;
+            this.ShowListarOs = false;                  
             this.$emit('listarAgendamentos', this.showListarAgendamentos);
         },
         listarCliente(){
             this.showFormCliente = false;
             this.showListarAgendamentos = false;
             this.showListarCliente = true; 
-            
+            this.ShowFormOs = false;
+            this.ShowListarOs = false;
             this.$emit('listarCliente', this.showListarCliente);
         },
+        adicionarOs() {
+            this.showFormCliente = false;
+            this.showListarAgendamentos = false;
+            this.showListarCliente = false; 
+            this.ShowFormOs = true;
+            this.ShowListarOs = false;
+            this.$emit('adicionarOs', this.ShowFormOs);
+        },
+        listarOs(){
+            this.showFormCliente = false;
+            this.showListarAgendamentos = false;
+            this.showListarCliente = false; 
+            this.ShowFormOs = false;
+            this.ShowListarOs = true;
+            this.$emit('listarOs', this.ShowListarOs);
+        },
         mudarCorClient() {
-            this.corAgendamento = '#FFFFE0', 
+            this.corCliente = '#FFFFE0', 
             this.corListagemAgendamento = 'White',
-            this.corListagemOs = 'White'          
+            this.corListagemCliente = 'White'
+            this.corOs = 'White',      
+            this.corListagemOs = 'White'              
         },
         mudarCorAgendamentos() {
-            this.corAgendamento = 'White',
+            this.corCliente = 'White',
             this.corListagemAgendamento = '#FFFFE0', 
-            this.corListagemOs = 'White'          
+            this.corListagemCliente = 'White',  
+            this.corOs = 'White',      
+            this.corListagemOs = 'White'    
         },
-        mudarCorOs() {
-            this.corAgendamento = 'White', 
+        mudarCorListagemCliente() {
+            this.corCliente = 'White', 
             this.corListagemAgendamento = 'White',
-            this.corListagemOs = '#FFFFE0'          
+            this.corListagemCliente = '#FFFFE0'      
+            this.corOs = 'White',      
+            this.corListagemOs = 'White'        
+        },
+        mudarCorOs(){
+            this.corCliente = 'White', 
+            this.corListagemAgendamento = 'White',
+            this.corListagemCliente = 'White'      
+            this.corOs = '#FFFFE0',      
+            this.corListagemOs = 'White'  
+        },
+        mudarCorListagemOs(){
+            this.corCliente = 'White', 
+            this.corListagemAgendamento = 'White',
+            this.corListagemCliente = 'White'      
+            this.corOs = 'White',      
+            this.corListagemOs = '#FFFFE0'
         }
     }
 }

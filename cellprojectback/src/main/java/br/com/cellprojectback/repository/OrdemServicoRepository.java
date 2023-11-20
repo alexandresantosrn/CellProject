@@ -6,4 +6,6 @@ import br.com.cellprojectback.domain.OrdemServico;
 
 public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Integer> {
 
+	OrdemServico findByCodigo(String codigo);
+
 }

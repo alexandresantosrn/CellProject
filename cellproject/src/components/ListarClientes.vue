@@ -138,10 +138,6 @@ td {
     vertical-align: middle;
 }
 
-tr {
-    width: 1500px;
-}
-
 label {              
     margin-bottom: 5px;
     margin-top: 5px;

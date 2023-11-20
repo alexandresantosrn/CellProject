@@ -51,9 +51,9 @@ public class PessoaService {
 		else if (findPessoaByEmail(pessoa.getEmail()) != null) {
 			throw new ServiceException("Já existe um cadastro com o email informado.");
 		}
-		
+
 		pessoa.setDataCadastro(new Date());
-		
+
 		return pessoaRepository.save(pessoa);
 	}
 
@@ -76,7 +76,7 @@ public class PessoaService {
 	public Pessoa findPessoaByEmail(String email) {
 		return pessoaRepository.findByEmail(email);
 	}
-	
+
 	/**
 	 * Retorna uma pessoa através do seu id.
 	 * 
@@ -86,7 +86,7 @@ public class PessoaService {
 	public Optional<Pessoa> findPessoaById(int id) {
 		return pessoaRepository.findById(id);
 	}
-	
+
 	/**
 	 * Atualiza os dados da pessoa informada.
 	 * 
@@ -94,20 +94,32 @@ public class PessoaService {
 	 * @return Pessoa - Pessoa com dados atualizados.
 	 */
 	public Pessoa updatePessoa(Pessoa pessoa) {
-		
+
 		if (pessoa.getNome() == null || pessoa.getCpf() == null || pessoa.getEmail() == null
 				|| pessoa.getTelefone() == null || pessoa.getDataNascimento() == null || pessoa.getSexo() == null) {
 			throw new ServiceException("Campos obrigatórios não informados.");
 		}
-		
+
+		else if (!PessoaUtil.isCPFValido(pessoa.getCpf())) {
+			throw new ServiceException("Informe um cpf válido.");
+		}
+
+		else if (findPessoabyCPF(pessoa.getCpf()) != null) {
+			throw new ServiceException("Já existe um cadastro com o cpf informado.");
+		}
+
+		else if (findPessoaByEmail(pessoa.getEmail()) != null) {
+			throw new ServiceException("Já existe um cadastro com o email informado.");
+		}
+
 		Pessoa pessoaAtualizada = findPessoaById(pessoa.getId()).orElseThrow();
-		
+
 		pessoaAtualizada.setCpf(pessoa.getCpf());
 		pessoaAtualizada.setNome(pessoa.getNome());
 		pessoaAtualizada.setDataNascimento(pessoa.getDataNascimento());
 		pessoaAtualizada.setSexo(pessoa.getSexo());
 		pessoaAtualizada.setTelefone(pessoa.getTelefone());
-		
+
 		return pessoaRepository.save(pessoaAtualizada);
 	}
 
