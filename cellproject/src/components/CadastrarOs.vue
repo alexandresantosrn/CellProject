@@ -27,10 +27,29 @@
             </select>
         </div>
   
-        <div class="form-group">
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" v-model="email" class="form-control" required>
+        <div class="col-md-6">
+            <label for="fabricante">Fabricante:</label>
+            <select class="form-control" id="fabricante" v-model="selectedFabricante" required>
+              <option v-for="tipo in comboFabricante" :key="tipo.id" :value="tipo.id">{{ tipo.descricao }}</option>           
+            </select>
         </div>    
+
+        <div class="col-md-6">
+            <label for="modelo">Modelo:</label>
+            <select class="form-control" id="modelo" v-model="selectedModelo" required>
+              <option v-for="tipo in comboModelo" :key="tipo.id" :value="tipo.id">{{ tipo.descricao }}</option>           
+            </select>
+        </div>  
+        
+        <div class="form-group">
+          <label for="cpf">IMEI:</label>
+          <input type="text" id="imedi" v-model="imed" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="problemas">Problemas Apresentados:</label>
+          <textarea class="form-control" id="problemas" rows="3"></textarea>
+        </div>
     
         <button type="submit" class="btn btn-primary">Confirmar Cadastro</button>
       </div>
@@ -68,23 +87,23 @@ export default {
   },
   methods: {
     getTipoServico() {
-        const token = sessionStorage.getItem('token');
-  
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }; 
+      const token = sessionStorage.getItem('token');
 
-        axios.get('http://localhost:8080/tiposervico', config)
-        .then(response => {
-            this.comboTipoServico = response.data;
-        })
-        .catch(error => {
-            this.msg_failure = error.response.data;
-            console.error('Erro ao buscar dados:', error);
-        });
-        },  
+      const config = {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      }; 
+
+      axios.get('http://localhost:8080/tiposervico', config)
+      .then(response => {
+          this.comboTipoServico = response.data;
+      })
+      .catch(error => {
+          this.msg_failure = error.response.data;
+          console.error('Erro ao buscar dados:', error);
+      });
+    },  
     realizarCadastro() {
       const token = sessionStorage.getItem('token');
 
@@ -117,13 +136,13 @@ export default {
     },    
    limparCampos() {
 
-        setTimeout(() => this.msg = "", 5000);
+      setTimeout(() => this.msg = "", 5000);
 
-        this.nome = "";
-        this.cpf = "";
-        this.telefone = "";
-        this.senha = "";
-        this.email = "";
+      this.nome = "";
+      this.cpf = "";
+      this.telefone = "";
+      this.senha = "";
+      this.email = "";
    }
   },
   mounted() {
