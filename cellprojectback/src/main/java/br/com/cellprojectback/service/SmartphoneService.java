@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.Smartphone;
 import br.com.cellprojectback.repository.SmartphoneRepository;
 
@@ -25,7 +24,13 @@ public class SmartphoneService {
 	public List<Smartphone> listarSmartphones() {
 		return smartphoneRepository.findAll();
 	}
-
+	
+	/**
+	 * Retorna a listagem de modelos por fabricante informado.
+	 * 
+	 * @param id<Int> - id do fabricante
+	 * @return List<Smartphone> - Lista dos smartphones do tipo de fabricante informado.
+	 */
 	public List<Smartphone> listarModelosByFabricante(int id) {
 
 		List<Smartphone> smartphones = smartphoneRepository.findAll(Sort.by(Sort.Direction.ASC, "modelo"));

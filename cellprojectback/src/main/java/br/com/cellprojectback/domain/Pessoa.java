@@ -43,6 +43,28 @@ public class Pessoa {
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
 
+	public Pessoa() {
+		super();
+	}
+
+	public Pessoa(int id) {
+		super();
+		this.id = id;
+	}
+
+	public Pessoa(int id, String sexo, LocalDate dataNascimento, String cpf, String nome, String email, String telefone,
+			Date dataCadastro) {
+		super();
+		this.id = id;
+		this.sexo = sexo;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.dataCadastro = dataCadastro;
+	}
+
 	public int getId() {
 		return id;
 	}

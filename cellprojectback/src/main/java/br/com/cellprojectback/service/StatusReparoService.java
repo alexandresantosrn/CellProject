@@ -22,5 +22,17 @@ public class StatusReparoService {
 	public List<StatusReparo> listarStatusReparo() {
 		return statusRepository.findAll();
 	}
+
+	/**
+	 * Retorna status do reparo conforme a descrição informada.
+	 * 
+	 * @param descricao
+	 * @return
+	 */
+	public StatusReparo findStatusByDescricao(String descricao) {
+		return statusRepository.findByDescricao(descricao);
+	}
+	
+	
 }
 

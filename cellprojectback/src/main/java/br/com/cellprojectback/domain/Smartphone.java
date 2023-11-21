@@ -30,6 +30,11 @@ public class Smartphone {
 		super();
 	}
 
+	public Smartphone(int id) {
+		super();
+		this.id = id;
+	}
+
 	public Smartphone(int id, String modelo, Fabricante fabricante) {
 		super();
 		this.id = id;

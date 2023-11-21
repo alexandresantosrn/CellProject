@@ -6,4 +6,6 @@ import br.com.cellprojectback.domain.StatusReparo;
 
 public interface StatusReparoRepository extends JpaRepository<StatusReparo, Integer>{
 
+	StatusReparo findByDescricao(String descricao);
+
 }

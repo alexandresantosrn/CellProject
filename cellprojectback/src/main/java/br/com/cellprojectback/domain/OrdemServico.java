@@ -22,7 +22,7 @@ public class OrdemServico {
 
 	@Column(name = "codigo")
 	private String codigo;
-	
+
 	@Column(name = "data_entrada")
 	private LocalDate dataEntrada;
 
@@ -34,6 +34,9 @@ public class OrdemServico {
 	@JoinColumn(name = "smartphone_id")
 	private Smartphone smartphone;
 
+	@Column(name = "imei")
+	private String imei;
+
 	@ManyToOne
 	@JoinColumn(name = "tipoServico_id")
 	private TipoServico tipoServico;
@@ -41,23 +44,12 @@ public class OrdemServico {
 	@ManyToOne
 	@JoinColumn(name = "status_reparo")
 	private StatusReparo statusReparo;
+
+	@Column(name = "preco_total")
 	private Double precoTotal;
 
 	public OrdemServico() {
 		super();
-	}
-
-	public OrdemServico(int id, String codigo, LocalDate dataEntrada, Pessoa pessoa, Smartphone smartphone,
-			TipoServico tipoServico, StatusReparo statusReparo, Double precoTotal) {
-		super();
-		this.id = id;
-		this.codigo = codigo;
-		this.dataEntrada = dataEntrada;
-		this.pessoa = pessoa;
-		this.smartphone = smartphone;
-		this.tipoServico = tipoServico;
-		this.statusReparo = statusReparo;
-		this.precoTotal = precoTotal;
 	}
 
 	public int getId() {
@@ -76,11 +68,11 @@ public class OrdemServico {
 		this.codigo = codigo;
 	}
 
-	public LocalDate getdataEntrada() {
+	public LocalDate getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setdataEntrada(LocalDate dataEntrada) {
+	public void setDataEntrada(LocalDate dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
@@ -98,6 +90,14 @@ public class OrdemServico {
 
 	public void setSmartphone(Smartphone smartphone) {
 		this.smartphone = smartphone;
+	}
+
+	public String getImei() {
+		return imei;
+	}
+
+	public void setImei(String imei) {
+		this.imei = imei;
 	}
 
 	public TipoServico getTipoServico() {
@@ -126,7 +126,7 @@ public class OrdemServico {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, dataEntrada, id, pessoa, precoTotal, smartphone, statusReparo, tipoServico);
+		return Objects.hash(codigo, dataEntrada, id, imei, pessoa, precoTotal, smartphone, statusReparo, tipoServico);
 	}
 
 	@Override
@@ -138,8 +138,8 @@ public class OrdemServico {
 		if (getClass() != obj.getClass())
 			return false;
 		OrdemServico other = (OrdemServico) obj;
-		return Objects.equals(codigo, other.codigo) && Objects.equals(dataEntrada, other.dataEntrada)
-				&& id == other.id && Objects.equals(pessoa, other.pessoa)
+		return Objects.equals(codigo, other.codigo) && Objects.equals(dataEntrada, other.dataEntrada) && id == other.id
+				&& Objects.equals(imei, other.imei) && Objects.equals(pessoa, other.pessoa)
 				&& Objects.equals(precoTotal, other.precoTotal) && Objects.equals(smartphone, other.smartphone)
 				&& Objects.equals(statusReparo, other.statusReparo) && Objects.equals(tipoServico, other.tipoServico);
 	}

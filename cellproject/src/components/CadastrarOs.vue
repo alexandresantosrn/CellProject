@@ -7,7 +7,7 @@
       <Message :msg="msg" v-show="msg" />
       <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
 
-      <form @submit.prevent="realizarCadastro" id="form">
+      <form @submit.prevent="cadastrarOs" id="form">
 
       <div class="row">       
         <div class="col-md-6">
@@ -47,8 +47,8 @@
         </div>  
         
         <div class="form-group">
-          <label for="cpf">IMEI:</label>
-          <input type="text" id="imedi" v-model="imed" class="form-control" required>
+          <label for="imei">IMEI:</label>
+          <input type="text" id="imei" v-model="imei" class="form-control" required>
         </div>
 
         <div class="form-group">
@@ -77,21 +77,20 @@ export default {
   }, 
   data() {
     return {         
-      nome: '',
       cpf: '',
-      email: '',
-      telefone: '',         
-      sexo: '',
-      dataNascimento: '',
+      imei: '',
       selectedTipoServico: '',
       selectedFabricante: '',
+      selectedModelo: '',
       comboTipoServico: [], 
       comboFabricante: [], 
-      comboModelo: [],        
+      comboModelo: [],
+      problemas: '',        
       texto: 'Prezado(a) usuário(a), informe abaixo todos os dados para efetivação do cadastro da ordem de serviço.',
       msg: '',
       msg_failure: '',
       pessoa: '',
+      pessoaId: '',
       found: false
     };
   },
@@ -110,7 +109,7 @@ export default {
       axios.get('http://localhost:8080/pessoa/pessoa-by-cpf?cpf='+cpf, config)
       .then(response => {
         this.pessoa = response.data;
-
+        this.pessoaId = response.data.id;   
         this.found = true;
 
         if(this.pessoa.length < 1) {            
@@ -178,29 +177,28 @@ export default {
           console.error('Erro ao buscar dados:', error);
       });
 
-    },   
-    realizarCadastro() {
+    },  
+    cadastrarOs() {
       const token = sessionStorage.getItem('token');
-
+      console.log(this.imei);
       const config = {
         headers: {
           Authorization: `Bearer ${token}`
         }
       };
 
-      const pessoa = {
-        nome: this.nome,
-        cpf: this.cpf,
-        email: this.email,
-        telefone: this.telefone, 
-        dataNascimento: this.dataNascimento,
-        sexo: this.sexo
-      }         
+      const ordem = {
+        problemas: this.problemas,
+        tipoServico: this.selectedTipoServico,
+        smartphone: this.selectedModelo,
+        pessoa: this.pessoaId,
+        imei: this.imei
+      }           
       
-      axios.post('http://localhost:8080/pessoa/cadastrar-pessoa', pessoa, config)
+      axios.post('http://localhost:8080/ordemservico/cadastrar-ordem', ordem, config)
         .then(response => {         
           this.msg_failure = '';                                  
-          this.msg = response.data;          
+          this.msg = response.data;                  
           
           this.limparCampos();          
         })
@@ -208,17 +206,18 @@ export default {
           this.msg = '';                    
           this.msg_failure = error.response.data;   
         });
-    },    
-   limparCampos() {
+    },
+    limparCampos() {
 
       setTimeout(() => this.msg = "", 5000);
 
-      this.nome = "";
       this.cpf = "";
-      this.telefone = "";
-      this.senha = "";
-      this.email = "";
-   }
+      this.imei = "";
+      this.problemas = "";
+      this.selectedFabricante = "";
+      this.selectedModelo = "";
+      this.selectedTipoServico = "";
+  }
   },
   mounted() {
     this.getTipoServico();
