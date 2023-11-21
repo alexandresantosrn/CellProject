@@ -16,8 +16,13 @@
         </div>
 
         <div class="col-md-6">
-            <button type="submit" class="btn btn-primary">Consultar Cliente</button>
-            <h6>Cliente não localizado.</h6>
+            <button type="submit" class="btn btn-primary" @click="consultarCliente()">Consultar Cliente</button>
+              <div v-if="found">
+                <h7>Cliente: {{ pessoa.nome }}</h7>
+              </div>
+              <div v-else>
+                <h6>Cliente não localizado.</h6>
+              </div>
         </div>  
         
         <div class="form-group">
@@ -29,15 +34,15 @@
   
         <div class="col-md-6">
             <label for="fabricante">Fabricante:</label>
-            <select class="form-control" id="fabricante" v-model="selectedFabricante" required>
-              <option v-for="tipo in comboFabricante" :key="tipo.id" :value="tipo.id">{{ tipo.descricao }}</option>           
+            <select class="form-control" id="fabricante" v-model="selectedFabricante" required @change="getModelo">
+              <option v-for="tipo in comboFabricante" :key="tipo.id" :value="tipo.id">{{ tipo.denominacao }}</option>           
             </select>
         </div>    
 
         <div class="col-md-6">
             <label for="modelo">Modelo:</label>
             <select class="form-control" id="modelo" v-model="selectedModelo" required>
-              <option v-for="tipo in comboModelo" :key="tipo.id" :value="tipo.id">{{ tipo.descricao }}</option>           
+              <option v-for="tipo in comboModelo" :key="tipo.id" :value="tipo.id">{{ tipo.modelo }}</option>           
             </select>
         </div>  
         
@@ -79,20 +84,51 @@ export default {
       sexo: '',
       dataNascimento: '',
       selectedTipoServico: '',
-      comboTipoServico: [],          
+      selectedFabricante: '',
+      comboTipoServico: [], 
+      comboFabricante: [], 
+      comboModelo: [],        
       texto: 'Prezado(a) usuário(a), informe abaixo todos os dados para efetivação do cadastro da ordem de serviço.',
       msg: '',
-      msg_failure: ''
+      msg_failure: '',
+      pessoa: '',
+      found: false
     };
   },
   methods: {
+    consultarCliente() {
+      const cpf = this.cpf;
+
+      const token = sessionStorage.getItem('token');
+
+      const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      axios.get('http://localhost:8080/pessoa/pessoa-by-cpf?cpf='+cpf, config)
+      .then(response => {
+        this.pessoa = response.data;
+
+        this.found = true;
+
+        if(this.pessoa.length < 1) {            
+          this.found = false;
+        }
+      })
+      .catch(error => {
+        this.msg_failure = error.response.data;
+        console.error('Erro ao buscar dados:', error);
+      });
+    },
     getTipoServico() {
       const token = sessionStorage.getItem('token');
 
       const config = {
-          headers: {
-              Authorization: `Bearer ${token}`
-          }
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }; 
 
       axios.get('http://localhost:8080/tiposervico', config)
@@ -103,7 +139,46 @@ export default {
           this.msg_failure = error.response.data;
           console.error('Erro ao buscar dados:', error);
       });
-    },  
+    },
+    getFabricante() {
+      const token = sessionStorage.getItem('token');
+
+      const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      axios.get('http://localhost:8080/fabricante', config)
+      .then(response => {
+          this.comboFabricante = response.data;
+      })
+      .catch(error => {
+          this.msg_failure = error.response.data;
+          console.error('Erro ao buscar dados:', error);
+      });
+    }, 
+    getModelo() {
+      const token = sessionStorage.getItem('token');
+
+      const id = this.selectedFabricante;
+
+      const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      axios.get('http://localhost:8080/smartphone/modelo-by-fabricante?id='+id, config)
+      .then(response => {
+          this.comboModelo = response.data;
+      })
+      .catch(error => {
+          this.msg_failure = error.response.data;
+          console.error('Erro ao buscar dados:', error);
+      });
+
+    },   
     realizarCadastro() {
       const token = sessionStorage.getItem('token');
 
@@ -147,6 +222,7 @@ export default {
   },
   mounted() {
     this.getTipoServico();
+    this.getFabricante();
   }
 }
 </script>
@@ -164,13 +240,17 @@ export default {
   }
 
   label {             
-      margin-bottom: 5px;
-      margin-top: 5px;
-      color: #222;        
-      border-left: 4px solid ;
-      width: 500px;
-      text-align: left;
-      padding: 8px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: #222;        
+    border-left: 4px solid ;
+    width: 500px;
+    text-align: left;
+    padding: 8px;
+  }
+
+  h6 {
+    color: red;
   }
   
   input {
