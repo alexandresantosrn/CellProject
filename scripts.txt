@@ -1,0 +1,92 @@
+INSERT INTO public.tiposervico
+(id, descricao)
+VALUES(nextval('tiposervico_id_seq'::regclass), 'Conserto em Garantia');
+
+INSERT INTO public.tiposervico
+(id, descricao)
+VALUES(nextval('tiposervico_id_seq'::regclass), 'Conserto Fora de Garantia');
+
+INSERT INTO public.statusagendamento
+(id, descricao)
+VALUES(nextval('statusagendamento_id_seq'::regclass), 'Confirmado');
+
+INSERT INTO public.statusagendamento
+(id, descricao)
+VALUES(nextval('statusagendamento_id_seq'::regclass), 'Atendido');
+
+INSERT INTO public.statusagendamento
+(id, descricao)
+VALUES(nextval('statusagendamento_id_seq'::regclass), 'Cancelado');
+
+INSERT INTO public.fabricante
+(id, denominacao)
+VALUES(nextval('fabricante_id_seq'::regclass), 'Samsung');
+
+INSERT INTO public.fabricante
+(id, denominacao)
+VALUES(nextval('fabricante_id_seq'::regclass), 'Apple');
+
+INSERT INTO public.smartphone
+(id, modelo, fabricante_id)
+VALUES(nextval('smartphone_id_seq'::regclass), 'A22', 1);
+
+
+INSERT INTO public.smartphone
+(id, modelo, fabricante_id)
+VALUES(nextval('smartphone_id_seq'::regclass), 'Iphone 15', 2);
+
+INSERT INTO public.smartphone
+(id, modelo, fabricante_id)
+VALUES(nextval('smartphone_id_seq'::regclass), 'Iphone 14', 2);
+
+INSERT INTO public.statusreparo
+(id, descricao)
+VALUES(nextval('statusreparo_id_seq'::regclass), 'Pendente');
+
+INSERT INTO public.statusreparo
+(id, descricao)
+VALUES(nextval('statusreparo_id_seq'::regclass), 'Em Andamento');
+
+INSERT INTO public.statusreparo
+(id, descricao)
+VALUES(nextval('statusreparo_id_seq'::regclass), 'Aguardando Peças');
+
+INSERT INTO public.statusreparo
+(id, descricao)
+VALUES(nextval('statusreparo_id_seq'::regclass), 'Aguardando Retirada');
+
+INSERT INTO public.statusreparo
+(id, descricao)
+VALUES(nextval('statusreparo_id_seq'::regclass), 'Finalizado');
+
+INSERT INTO public.ordemservico
+(id, codigo, data_entrada, preco_total, pessoa_id, smartphone_id, status_reparo, tipo_servico_id)
+VALUES(nextval('ordemservico_id_seq'::regclass), 'OS202300005', '2023-10-10', 0, 1, 1, 5, 1);
+
+drop table public.pessoa cascade;
+
+drop table public.usuario;
+
+drop table public.agendamento;
+
+drop table public.fabricante cascade;
+
+drop table public.ordemservico;
+
+drop table public.smartphone;
+
+drop table public.statusagendamento;
+
+drop table public.statusreparo;
+
+drop table public.tiposervico;
+
+drop table public.dispositivo cascade;
+
+delete from public.ordemservico;
+
+
+select * from public.ordemservico;
+
+
+
