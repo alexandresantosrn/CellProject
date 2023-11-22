@@ -6,11 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.OrdemServico;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.OrdemServicoRepository;
-import br.com.cellprojectback.util.AgendamentoUtil;
 import br.com.cellprojectback.util.OrdemServicoUtil;
 
 @Service

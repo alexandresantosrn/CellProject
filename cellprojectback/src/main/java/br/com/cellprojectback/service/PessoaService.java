@@ -95,6 +95,9 @@ public class PessoaService {
 	 */
 	public Pessoa updatePessoa(Pessoa pessoa) {
 
+		Pessoa pessoaCPF = findPessoabyCPF(pessoa.getCpf());
+		Pessoa pessoaEmail = findPessoaByEmail(pessoa.getEmail());
+
 		if (pessoa.getNome() == null || pessoa.getCpf() == null || pessoa.getEmail() == null
 				|| pessoa.getTelefone() == null || pessoa.getDataNascimento() == null || pessoa.getSexo() == null) {
 			throw new ServiceException("Campos obrigatórios não informados.");
@@ -104,11 +107,11 @@ public class PessoaService {
 			throw new ServiceException("Informe um cpf válido.");
 		}
 
-		else if (findPessoabyCPF(pessoa.getCpf()) != null) {
+		else if (findPessoabyCPF(pessoa.getCpf()) != null && pessoaCPF.getId() != pessoa.getId()) {
 			throw new ServiceException("Já existe um cadastro com o cpf informado.");
 		}
 
-		else if (findPessoaByEmail(pessoa.getEmail()) != null) {
+		else if (findPessoaByEmail(pessoa.getEmail()) != null && pessoaEmail.getId() != pessoa.getId()) {
 			throw new ServiceException("Já existe um cadastro com o email informado.");
 		}
 
