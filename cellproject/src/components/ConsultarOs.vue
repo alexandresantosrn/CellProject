@@ -33,7 +33,7 @@
                     <td>{{ ordem.codigo }}</td>
                     <td>{{ ordem.pessoa.nome }}</td>  
                     <td>{{ ordem.tipoServico.descricao }}</td>  
-                    <td>{{ ordem.dataEntrada }}</td>    
+                    <td>{{ formatarData(ordem.dataEntrada) }}</td>    
                     <td>{{ ordem.statusReparo.descricao }}</td>           
                     <td>
                         <button class="btn btn-danger" @click="removerOrdem(ordem.id)">
@@ -125,6 +125,11 @@ methods: {
             this.msg_failure = error.response.data; 
             this.limparCampos();
         });
+    },
+    formatarData(data) {
+      //Convertendo data para formato brasileiro.
+      const [ano, mes, dia] = data.split('-');
+      return `${dia}/${mes}/${ano}`;
     },   
     limparCampos() {
         setTimeout(() => this.msg = "", 5000);

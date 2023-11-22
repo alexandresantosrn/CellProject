@@ -19,7 +19,7 @@
         <tr v-for="ordem in ordens" :key="ordem.id">
           <td>{{ ordem.codigo }}</td>
           <td>{{ ordem.tipoServico.descricao }}</td>  
-          <td>{{ ordem.dataEntrada }}</td>     
+          <td>{{ formatarData(ordem.dataEntrada) }}</td>     
           <td>{{ ordem.smartphone.modelo }}</td>
           <td>{{ ordem.statusReparo.descricao }}</td>
           <td>R$ {{ ordem.precoTotal }}</td>
@@ -63,8 +63,13 @@ import axios from 'axios';
             this.msg_failure = error.response.data;
             console.error('Erro ao buscar dados:', error);
           });
-      }
-    },
+      },
+      formatarData(data) {
+        //Convertendo data para formato brasileiro.
+        const [ano, mes, dia] = data.split('-');
+        return `${dia}/${mes}/${ano}`;
+      },
+    },    
     mounted() {
       this.getOrdensServico();
     }
