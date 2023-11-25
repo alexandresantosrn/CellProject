@@ -18,19 +18,19 @@ public class SecurityUtils {
 		var token = request.getHeader(HEADER_STRING);
 		var secret = "segredo";
 
-		if (token == null && secret == null) {
+//		if (token == null && secret == null) {
+//			return null;
+//		} else if (token != null) {
+//			token = token.replace("Bearer ", "");
+//		} else if (token == null) {
+//			token = secret;
+//		}
+		
+		if (token == null) {
 			return null;
-		} else if (token != null) {
-			token = token.replace("Bearer ", "");
-		} else if (token == null) {
-			token = secret;
 		}
 		
-//		if (token == null) {
-//			return null;
-//		}
-//		
-//		token = token.replace("Bearer ", "");
+		token = token.replace("Bearer ", "");
 
 		logger.info(token);
 		return parseTokenSubject(token);
