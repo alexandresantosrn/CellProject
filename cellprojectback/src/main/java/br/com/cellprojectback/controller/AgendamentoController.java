@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.service.AgendamentoService;
+import security.JwtUtil;
 
 @RestController
 @CrossOrigin
@@ -26,6 +27,14 @@ public class AgendamentoController {
 		return new ResponseEntity<>(agendamentos, HttpStatus.OK);
 	}
 
+	@GetMapping("agendamento-by-user")
+	public ResponseEntity<List<Agendamento>> listarAgendamentosByUser(@RequestHeader("Authorization") String header) {
+		String token = header.replace("Bearer ", "");
+		String username = JwtUtil.getUsernameByToken(token);
+		List<Agendamento> agendamentos = agendamentoService.listarAgendamentosByUser(username);
+		return new ResponseEntity<>(agendamentos, HttpStatus.OK);
+	}
+
 	@GetMapping("list-by-data")
 	public ResponseEntity<List<Agendamento>> listarAgendamentosByDataStatus(@RequestParam String dataAgendamento,
 			int id) {
@@ -35,10 +44,14 @@ public class AgendamentoController {
 	}
 
 	@PostMapping("cadastrar-agendamento")
-	public ResponseEntity<String> cadastrarAgendamento(@RequestBody Agendamento agendamento) {
-
+	public ResponseEntity<String> cadastrarAgendamento(@RequestBody Agendamento agendamento,
+			@RequestHeader("Authorization") String header) {
+		
+		String token = header.replace("Bearer ", "");
+		String username = JwtUtil.getUsernameByToken(token);
+		
 		try {
-			agendamentoService.salvarAgendamento(agendamento);
+			agendamentoService.salvarAgendamento(agendamento, username);
 			return ResponseEntity.ok("Agendamento realizado com sucesso.");
 
 		} catch (ServiceException e) {

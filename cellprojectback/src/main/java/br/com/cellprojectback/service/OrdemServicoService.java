@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.OrdemServico;
+import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.OrdemServicoRepository;
 import br.com.cellprojectback.util.OrdemServicoUtil;
@@ -18,9 +19,12 @@ public class OrdemServicoService {
 	private OrdemServicoRepository ordemServicoRepository;
 
 	private StatusReparoService statusReparoService;
+	
+	private PessoaService pessoaService;
 
-	public OrdemServicoService(StatusReparoService statusReparoService) {
+	public OrdemServicoService(StatusReparoService statusReparoService, PessoaService pessoaService) {
 		this.statusReparoService = statusReparoService;
+		this.pessoaService = pessoaService;
 	}
 
 	/**
@@ -95,6 +99,11 @@ public class OrdemServicoService {
 		}
 
 		return maxId;
+	}
+
+	public List<OrdemServico> listarOrdensServicoByUser(String username) {		
+		Pessoa pessoa = pessoaService.findPessoaByEmail(username);			
+		return ordemServicoRepository.findByPessoa(pessoa);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.cellprojectback.domain.OrdemServico;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.service.OrdemServicoService;
+import security.JwtUtil;
 
 @RestController
 @CrossOrigin
@@ -30,6 +32,14 @@ public class OrdemServicoController {
 	@GetMapping
 	public ResponseEntity<List<OrdemServico>> listarOrdensServico() {
 		List<OrdemServico> ordensServico = ordemServicoService.listarOrdensServico();
+		return new ResponseEntity<>(ordensServico, HttpStatus.OK);
+	}
+
+	@GetMapping("ordem-by-user")
+	public ResponseEntity<List<OrdemServico>> listarOrdensServicoByUser(@RequestHeader("Authorization") String header) {
+		String token = header.replace("Bearer ", "");
+		String username = JwtUtil.getUsernameByToken(token);
+		List<OrdemServico> ordensServico = ordemServicoService.listarOrdensServicoByUser(username);
 		return new ResponseEntity<>(ordensServico, HttpStatus.OK);
 	}
 
@@ -51,7 +61,7 @@ public class OrdemServicoController {
 		}
 
 	}
-	
+
 	@PostMapping("cadastrar-ordem")
 	public ResponseEntity<String> cadastrarOrdemServico(@RequestBody OrdemServico ordem) {
 

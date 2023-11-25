@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.Agendamento;
+import br.com.cellprojectback.domain.Pessoa;
 import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.AgendamentoRepository;
@@ -60,11 +61,11 @@ public class AgendamentoService {
 
 		return listaAgendamentos;
 	}
-	
+
 	/**
 	 * Retorna a listagem de agendamentos através da data de agendamento e status.
 	 * 
-	 * @param dataAgendamento - Data informada.
+	 * @param dataAgendamento     - Data informada.
 	 * @param idStatusAgendamento - Id do status informado.
 	 * @return List<Agendamento> - Agendamentos desejados.
 	 */
@@ -96,7 +97,9 @@ public class AgendamentoService {
 	 * @param agendamento<Agendamento> - Novo agendamento informado.
 	 * @return Agendamento - Novo agendamento criado.
 	 */
-	public Agendamento salvarAgendamento(Agendamento agendamento) {
+	public Agendamento salvarAgendamento(Agendamento agendamento, String username) {
+		
+		Pessoa pessoa = pessoaService.findPessoaByEmail(username);
 
 		if (agendamento.getTipoServico() == null || agendamento.getDataAgendamento() == null
 				|| agendamento.getHorarioAgendamento() == null) {
@@ -122,7 +125,7 @@ public class AgendamentoService {
 		}
 
 		agendamento.setCodigo(AgendamentoUtil.gerarCodigoAgendamento(getIdMaximoAgendamento()));
-		agendamento.setPessoa(pessoaService.findPessoabyCPF("05641479403"));
+		agendamento.setPessoa(pessoa);
 		agendamento.setStatusAgendamento(statusAgendamentoService.findStatusByDescricao("Confirmado"));
 		agendamento.setDataCadastro(new Date());
 
@@ -331,5 +334,20 @@ public class AgendamentoService {
 		agendamento.setStatusAgendamento(statusAgendamentoService.findStatusByDescricao("Atendido"));
 
 		return agendamentoRepository.save(agendamento);
+	}
+
+	public List<Agendamento> listarAgendamentosByUser(String username) {
+		Pessoa pessoa = pessoaService.findPessoaByEmail(username);
+		List<Agendamento> agendamentos = agendamentoRepository.findByPessoa(pessoa);		
+		List<Agendamento> listaAgendamentos = new ArrayList<>();
+
+		for (Agendamento agendamento : agendamentos) {
+
+			if (!isAgendamentoCancelado(agendamento)) {
+				listaAgendamentos.add(agendamento);
+			}
+		}
+
+		return listaAgendamentos;
 	}
 }
