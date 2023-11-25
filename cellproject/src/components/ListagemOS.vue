@@ -55,7 +55,7 @@ import axios from 'axios';
           }
         }; 
         
-        axios.get('http://localhost:8080/ordemservico', config)
+        axios.get('http://localhost:8080/ordemservico/ordem-by-user', config)
           .then(response => {
             this.ordens = response.data;               
           })

@@ -83,7 +83,7 @@ export default {
         }
       };
 
-      axios.get('http://localhost:8080/agendamento', config)
+      axios.get('http://localhost:8080/agendamento/agendamento-by-user', config)
         .then(response => {
           this.agendamentos = response.data;               
         })
