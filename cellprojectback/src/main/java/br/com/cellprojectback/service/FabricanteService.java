@@ -16,7 +16,8 @@ public class FabricanteService {
 	private FabricanteRepository fabricanteRepository;
 
 	/**
-	 * Retorna a listagem de todos os fabricantes ordenados através da denominação.
+	 * Retorna a listagem de todos os fabricantes ordenados através da sua
+	 * denominação.
 	 * 
 	 * @return List<Fabricante> - Todos os fabricantes existentes.
 	 */

@@ -8,6 +8,7 @@
             <router-link to="/">Home</router-link> |
             <router-link to="/usuario">Área do Usuário</router-link> 
             <router-link to="/atendimentos">Atendimentos</router-link>
+            <router-link to="/almoxarifado">Almoxarifado</router-link>
             <router-link to="/sair">Sair</router-link>            
         </div>
        
