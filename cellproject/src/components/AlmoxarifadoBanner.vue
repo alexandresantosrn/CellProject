@@ -12,8 +12,8 @@
             <router-link to="/almoxarifado">
                 <div id="list-agendamentos" @click="listarAgendamentos(), mudarCorAgendamentos()" :style="{ backgroundColor: corListagemAgendamento}">
                     <img :src="list_agendamentos_src" :alt="list_agendamentos_alt" class="img-user"> 
-                    <p>LISTAR</p> 
-                    <p>AGENDAMENTOS</p>
+                    <p>LISTAR / ATENDER</p> 
+                    <p>REQUISIÇÕES</p>
                 </div>
             </router-link>
 
@@ -21,7 +21,7 @@
                 <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
                     <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
                     <p>LISTAR</p>
-                    <p>ORDENS DE SERVIÇO</p>
+                    <p>PRODUTOS</p>
                 </div>
             </router-link>
         </div>

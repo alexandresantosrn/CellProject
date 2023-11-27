@@ -180,7 +180,7 @@ export default {
     },  
     cadastrarOs() {
       const token = sessionStorage.getItem('token');
-      console.log(this.imei);
+
       const config = {
         headers: {
           Authorization: `Bearer ${token}`

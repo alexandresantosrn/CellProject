@@ -83,8 +83,7 @@ export default {
       axios.post('http://localhost:8080/produto/cadastrar-produto', produto, config)
         .then(response => {         
           this.msg_failure = '';                                  
-          this.msg = response.data;         
-        
+          this.msg = response.data;       
           this.limparCampos();          
         })
         .catch(error => {                    
@@ -93,13 +92,11 @@ export default {
         });
     },    
     limparCampos() {
-
-        setTimeout(() => this.msg = "", 5000);
-
-        this.codigo = '';
-        this.dataEntrada = '';
-        this.quantidade = '';
-        this.denominacao = '';        
+      setTimeout(() => this.msg = "", 5000);
+      this.codigo = "";
+      this.dataEntrada = "";
+      this.quantidade = "";
+      this.denominacao = "";        
     }
   }
 }
