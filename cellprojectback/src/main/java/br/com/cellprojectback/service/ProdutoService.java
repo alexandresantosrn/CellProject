@@ -3,6 +3,7 @@ package br.com.cellprojectback.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.Produto;
@@ -16,12 +17,23 @@ public class ProdutoService {
 	private ProdutoRepository produtoRepository;
 
 	/**
-	 * Retorna a listagem de todas os produtos.
+	 * Retorna a listagem de todas os produtos ordenados pela denominação do
+	 * produto.
 	 * 
 	 * @return List<Pessoa> - Todos os produtos existentes. '
 	 */
 	public List<Produto> listarProdutos() {
-		return produtoRepository.findAll();
+		return produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "denominacao"));
+	}
+	
+	/**
+	 * Retorna a listagem de todas os produtos ordenados pela denominação do
+	 * produto.
+	 * 
+	 * @return List<Pessoa> - Todos os produtos existentes. '
+	 */
+	public List<Produto> listarProdutosPorQuantitativo() {
+		return produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "quantidade"));
 	}
 
 	/**
