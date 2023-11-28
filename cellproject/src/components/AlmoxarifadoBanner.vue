@@ -37,7 +37,7 @@ export default {
             add_agendamento_alt: 'Cadastrar Produto',
             list_agendamentos_src: '/img/listar-agendamentos.png',
             list_agendamentos_alt: 'Listar Agendamentos',
-            list_os_src: '/img/listar-os.png',
+            list_os_src: '/img/produtos.png',
             list_os_alt: 'Listar Ordens de Serviço',
             showFormAgendamentos: false,
             showListarAgendamentos: false,

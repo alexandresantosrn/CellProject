@@ -16,17 +16,17 @@
             </div> 
 
             <div v-show="exibirListagemOS">
-                <ListagemOS />
+                <ConsultarEstoque />
             </div>
     </div> 
 </template>
 
 <script>
 import ListagemAgendamentos from '@/components/ListagemAgendamentos.vue';
-import ListagemOS from '@/components/ListagemOS.vue';
 import Instrucoes from '@/components/Instrucoes.vue';
 import AlmoxarifadoBanner from '../components/AlmoxarifadoBanner.vue';
 import CadastrarProduto from '../components/CadastrarProduto.vue';
+import ConsultarEstoque from '../components/ConsultarEstoque.vue';
 
 export default {
     name: 'Usuario',
@@ -43,7 +43,7 @@ export default {
         AlmoxarifadoBanner,
         CadastrarProduto,
         ListagemAgendamentos,
-        ListagemOS,
+        ConsultarEstoque,
         Instrucoes
     },
     methods: {
