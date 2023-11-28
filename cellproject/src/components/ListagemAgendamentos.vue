@@ -93,8 +93,6 @@ export default {
         });
     },
     cancelarAgendamento() {
-      const agendamentoId = this.agendamentoId;
-
       const token = sessionStorage.getItem('token');
         
       const config = {
@@ -102,8 +100,12 @@ export default {
           Authorization: `Bearer ${token}`
         }
       }; 
+      
+      const agendamento = {
+        id: this.agendamentoId        
+      }  
 
-      axios.post('http://localhost:8080/agendamento/cancelar-agendamento?id='+agendamentoId, config)
+      axios.post('http://localhost:8080/agendamento/cancelar-agendamento', agendamento, config)
         .then(response => {           
           this.msg_failure = '';                                           
           this.msg = response.data;  

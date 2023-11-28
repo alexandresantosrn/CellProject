@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     getTipoServico() {
-
       const token = sessionStorage.getItem('token');
         
       const config = {
@@ -98,8 +97,17 @@ export default {
         });    
     },
     carregarHorarios() {
-      const dataAgendamento = this.dataAgendamento;     
-      axios.get('http://localhost:8080/agendamento/carregar-horarios?dataAgendamento='+dataAgendamento)
+      const token = sessionStorage.getItem('token');
+        
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      const dataAgendamento = this.dataAgendamento; 
+          
+      axios.get('http://localhost:8080/agendamento/carregar-horarios?dataAgendamento='+dataAgendamento, config)
         .then(response => {                                 
           this.comboHorarioAgendamento = response.data;         
         })

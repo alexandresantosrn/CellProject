@@ -53,7 +53,7 @@ import Message from '@/components/Message.vue';
 import MessageFailure from '@/components/MessageFailure.vue';
 
 export default {
-  name: 'Cadastrar Cliente',   
+  name: 'Alterar Pessoa',   
   props: {
     pessoaId: ''
   },

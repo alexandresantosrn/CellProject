@@ -108,13 +108,16 @@ methods: {
 
         const token = sessionStorage.getItem('token');
         
+        const ordem = {
+            id : this.ordemId
+        }
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }; 
 
-        axios.post('http://localhost:8080/ordemservico/remover-ordem?id='+ordemId, config)
+        axios.post('http://localhost:8080/ordemservico/remover-ordem', ordem, config)
             .then(response => {           
             this.msg_failure = '';                                           
             this.msg = response.data;  

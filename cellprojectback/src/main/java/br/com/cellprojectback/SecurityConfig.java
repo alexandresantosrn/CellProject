@@ -23,6 +23,8 @@ public class SecurityConfig {
 	            authorizeConfig -> {	
 	              authorizeConfig.requestMatchers("/logon/**").permitAll();	     
 	              authorizeConfig.requestMatchers(HttpMethod.OPTIONS).permitAll();
+	              authorizeConfig.requestMatchers(HttpMethod.POST, "/pessoa/**").permitAll();
+	              authorizeConfig.requestMatchers(HttpMethod.POST, "/usuario/**").permitAll();
 	              authorizeConfig.anyRequest().authenticated();	              
 	            })
 	        .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

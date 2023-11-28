@@ -50,10 +50,10 @@ public class OrdemServicoController {
 	}
 
 	@PostMapping("remover-ordem")
-	public ResponseEntity<String> cancelarAgendamento(@RequestParam int id) {
+	public ResponseEntity<String> cancelarAgendamento(@RequestBody OrdemServico ordem) {
 
 		try {
-			ordemServicoService.removerOrdemServico(id);
+			ordemServicoService.removerOrdemServico(ordem.getId());
 			return ResponseEntity.ok("Ordem de serviço removida com sucesso.");
 
 		} catch (ServiceException e) {

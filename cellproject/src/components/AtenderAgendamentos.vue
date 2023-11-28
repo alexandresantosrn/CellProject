@@ -141,7 +141,11 @@ export default {
         }
       }; 
 
-      axios.post('http://localhost:8080/agendamento/iniciar-agendamento?id='+this.agendamentoId, config)
+      const agendamento = {
+        id: agendamentoId
+      }  
+      
+      axios.post('http://localhost:8080/agendamento/iniciar-agendamento', agendamento, config)
         .then(response => {           
           this.msg_failure = '';                                           
           this.msg = response.data;  

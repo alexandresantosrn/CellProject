@@ -61,10 +61,10 @@ public class AgendamentoController {
 	}
 
 	@PostMapping("cancelar-agendamento")
-	public ResponseEntity<String> cancelarAgendamento(@RequestParam int id) {
+	public ResponseEntity<String> cancelarAgendamento(@RequestBody Agendamento agendamento) {
 
 		try {
-			agendamentoService.cancelarAgendamento(id);
+			agendamentoService.cancelarAgendamento(agendamento.getId());
 			return ResponseEntity.ok("Agendamento cancelado com sucesso.");
 
 		} catch (ServiceException e) {
@@ -80,10 +80,10 @@ public class AgendamentoController {
 	}
 
 	@PostMapping("iniciar-agendamento")
-	public ResponseEntity<String> iniciarAgendamento(@RequestParam int id) {
+	public ResponseEntity<String> iniciarAgendamento(@RequestBody Agendamento agendamento) {
 
 		try {
-			agendamentoService.iniciarAgendamento(id);
+			agendamentoService.iniciarAgendamento(agendamento.getId());
 			return ResponseEntity.ok("Agendamento iniciado com sucesso.");
 
 		} catch (ServiceException e) {
