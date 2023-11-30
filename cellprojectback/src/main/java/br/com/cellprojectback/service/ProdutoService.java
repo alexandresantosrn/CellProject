@@ -27,7 +27,7 @@ public class ProdutoService {
 	}
 	
 	/**
-	 * Retorna a listagem de todas os produtos ordenados pela denominação do
+	 * Retorna a listagem de todas os produtos ordenados pelo quantitativo do
 	 * produto.
 	 * 
 	 * @return List<Pessoa> - Todos os produtos existentes. '

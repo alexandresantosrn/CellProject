@@ -6,6 +6,8 @@
             <Instrucoes :texto="texto" />
         </div> 
         
+        <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
+
         <form @submit.prevent="consultarEstoque" id="form">  
             <div class = "content">
                 <div class="form-check form-check-inline">
@@ -49,10 +51,12 @@
 <script>
 import axios from 'axios';
 import Instrucoes from './Instrucoes.vue';
+import MessageFailure from './MessageFailure.vue';
 
 export default {
     components: {
-        Instrucoes
+        Instrucoes,
+        MessageFailure
     },
     data() {
         return {
@@ -96,25 +100,25 @@ export default {
 </script>
 
 <style scoped>   
-    #instrucoes {
-      width: 500px;
-      margin: auto;        
-    }
+#instrucoes {
+    width: 500px;
+    margin: auto;        
+}
 
-    .content{
-        width: 500px;
-        margin: auto; 
-    }
+.content{
+    width: 500px;
+    margin: auto; 
+}
 
-    .result {
-        width: 800px;
-        margin: auto;
-    }
-    input {
-        margin-bottom: 10px;
-    }
+.result {
+    width: 800px;
+    margin: auto;
+}
+input {
+    margin-bottom: 10px;
+}
 
-    button {
-        margin: 10px
-    } 
+button {
+    margin: 10px
+} 
 </style>

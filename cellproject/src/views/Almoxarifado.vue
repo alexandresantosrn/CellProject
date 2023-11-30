@@ -12,7 +12,7 @@
             </div>   
             
             <div v-show="exibirListagemAgendamento">
-                <ListagemAgendamentos />
+                <AtenderRequisicoes />
             </div> 
 
             <div v-show="exibirListagemOS">
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import ListagemAgendamentos from '@/components/ListagemAgendamentos.vue';
 import Instrucoes from '@/components/Instrucoes.vue';
 import AlmoxarifadoBanner from '../components/AlmoxarifadoBanner.vue';
 import CadastrarProduto from '../components/CadastrarProduto.vue';
 import ConsultarEstoque from '../components/ConsultarEstoque.vue';
+import AtenderRequisicoes from '@/components/AtenderRequisicoes.vue';
 
 export default {
     name: 'Usuario',
@@ -42,9 +42,9 @@ export default {
     components: {
         AlmoxarifadoBanner,
         CadastrarProduto,
-        ListagemAgendamentos,
         ConsultarEstoque,
-        Instrucoes
+        Instrucoes,
+        AtenderRequisicoes
     },
     methods: {
         showFormAgendamentos(value) {            

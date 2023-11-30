@@ -20,8 +20,8 @@
             <router-link to="/almoxarifado">
                 <div id="list-os" @click="listarOs(), mudarCorOs()" :style="{ backgroundColor: corListagemOs}">
                     <img :src="list_os_src" :alt="list_os_alt" class="img-user"> 
-                    <p>LISTAR</p>
-                    <p>PRODUTOS</p>
+                    <p>CONSULTAR</p>
+                    <p>ESTOQUE</p>
                 </div>
             </router-link>
         </div>

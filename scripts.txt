@@ -35,9 +35,11 @@ INSERT INTO public.smartphone
 (id, modelo, fabricante_id)
 VALUES(nextval('smartphone_id_seq'::regclass), 'Iphone 15', 2);
 
+
 INSERT INTO public.smartphone
 (id, modelo, fabricante_id)
 VALUES(nextval('smartphone_id_seq'::regclass), 'Iphone 14', 2);
+
 
 INSERT INTO public.statusreparo
 (id, descricao)
@@ -58,6 +60,19 @@ VALUES(nextval('statusreparo_id_seq'::regclass), 'Aguardando Retirada');
 INSERT INTO public.statusreparo
 (id, descricao)
 VALUES(nextval('statusreparo_id_seq'::regclass), 'Finalizado');
+
+INSERT INTO public.statusrequisicao
+(id, descricao)
+VALUES(nextval('statusrequisicao_id_seq'::regclass), 'Pendente');
+
+INSERT INTO public.statusrequisicao
+(id, descricao)
+VALUES(nextval('statusrequisicao_id_seq'::regclass), 'Autorizada');
+
+INSERT INTO public.statusrequisicao
+(id, descricao)
+VALUES(nextval('statusrequisicao_id_seq'::regclass), 'Negada');
+
 
 INSERT INTO public.ordemservico
 (id, codigo, data_entrada, preco_total, pessoa_id, smartphone_id, status_reparo, tipo_servico_id)
@@ -81,12 +96,9 @@ drop table public.statusreparo;
 
 drop table public.tiposervico;
 
-drop table public.dispositivo cascade;
+select * from public.agendamento a 
 
-delete from public.ordemservico;
-
-
-select * from public.ordemservico;
+delete from pessoa where id > 1;
 
 
 
