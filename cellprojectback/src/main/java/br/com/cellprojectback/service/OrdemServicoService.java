@@ -83,7 +83,7 @@ public class OrdemServicoService {
 	/**
 	 * Retorna o id máximo da listagem de ordens de serviço existentes.
 	 * 
-	 * @return int - Id máximo de agendamento.
+	 * @return int - Id máximo da ordem de serviço.
 	 */
 	private int getIdMaximoOrdemServico() {
 

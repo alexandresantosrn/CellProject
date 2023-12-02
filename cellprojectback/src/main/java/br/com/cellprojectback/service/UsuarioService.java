@@ -70,7 +70,7 @@ public class UsuarioService {
 	 * @param login<String> - E-mail/login informado.
 	 * @return Usuario - Usuário com o email/usuário informado.
 	 */
-	private Usuario findUsuarioByEmail(String login) {
+	public Usuario findUsuarioByEmail(String login) {
 		return usuarioRepository.findByLogin(login);
 	}
 

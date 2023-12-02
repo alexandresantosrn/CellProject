@@ -112,8 +112,8 @@ methods: {
         this.update = true;  
     },   
     limparCampos() {
-        setTimeout(() => this.msg = "", 5000);
-        setTimeout(() => this.msg_failure = "", 5000);
+        setTimeout(() => this.msg = "", 10000);
+        setTimeout(() => this.msg_failure = "", 10000);
     }  
 }
 };

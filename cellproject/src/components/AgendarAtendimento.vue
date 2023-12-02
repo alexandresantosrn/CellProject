@@ -116,7 +116,8 @@ export default {
         }); 
     },
     limparCampos(){
-      setTimeout(() => this.msg = "", 5000);
+      setTimeout(() => this.msg = "", 10000);
+     
       this.selectedTipoServico = "";
       this.dataAgendamento = "";
       this.horarioAgendamento = "";

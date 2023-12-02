@@ -122,6 +122,7 @@ public class PessoaService {
 		pessoaAtualizada.setDataNascimento(pessoa.getDataNascimento());
 		pessoaAtualizada.setSexo(pessoa.getSexo());
 		pessoaAtualizada.setTelefone(pessoa.getTelefone());
+		pessoaAtualizada.setTelefone(pessoa.getEmail());
 
 		return pessoaRepository.save(pessoaAtualizada);
 	}

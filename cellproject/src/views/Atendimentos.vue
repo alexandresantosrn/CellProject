@@ -41,18 +41,20 @@ import CadastrarCliente from '../components/CadastrarCliente.vue';
 import ListarClientes from '../components/ListarClientes.vue';
 import ConsultarOs from '../components/ConsultarOs.vue';
 import CadastrarOs from '../components/CadastrarOs.vue';
+import axios from 'axios';
 
 export default {
   name: 'Atendimentos',
   data() {
       return {
-          exibirFormCliente: false,
-          exibirListagemAgendamento: false,
-          exibirListagemClientes: false,
-          exibirFormOs: false, 
-          exibirListagemOs: false,
-          texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:',
-          token: ''
+        acess: false,
+        exibirFormCliente: false,
+        exibirListagemAgendamento: false,
+        exibirListagemClientes: false,
+        exibirFormOs: false, 
+        exibirListagemOs: false,
+        texto: 'Prezado usuário(a), selecione abaixo uma das opções desejadas:',
+        token: ''
       }
   },            
   components: {
@@ -108,10 +110,31 @@ export default {
         if (this.token === null) {
             this.$router.push('/');
         }
+    },
+    getAcess() {
+        const token = sessionStorage.getItem('token');       
+            
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+
+            axios.get('http://localhost:8080/authorization/atendimento', config)
+                .then(response => {
+                   if (response.status === 401) {
+                    this.$router.push('/proibido');
+                   }              
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar dados:', error);                    
+                    this.$router.push('/proibido');                              
+                });
     }
   },
   mounted() {
     this.getToken();
+    this.getAcess();
   }
 }
 </script>
