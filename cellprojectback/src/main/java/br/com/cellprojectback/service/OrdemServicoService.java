@@ -1,13 +1,16 @@
 package br.com.cellprojectback.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.OrdemServico;
 import br.com.cellprojectback.domain.Pessoa;
+import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.domain.StatusReparo;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.OrdemServicoRepository;
@@ -107,9 +110,27 @@ public class OrdemServicoService {
 		return ordemServicoRepository.findByPessoa(pessoa);
 	}
 
-	public OrdemServico iniciarReparo(OrdemServico ordem) {	
+	public OrdemServico iniciarReparo(OrdemServico ordem) {
 		ordem.setStatusReparo(statusReparoService.findStatusByDescricao("Em Andamento"));
 		return ordemServicoRepository.save(ordem);
+	}
+
+	public List<OrdemServico> listarOrdensServicoByStatus(int id) {
+
+		// Retornando o status do reparo através do seu id.
+		StatusReparo statusReparo = statusReparoService.buscarStatusReparoporId(id).orElseThrow();
+
+		List<OrdemServico> ordens = listarOrdensServico();
+		List<OrdemServico> listaordens = new ArrayList<>();
+
+		for (OrdemServico ordem : ordens) {
+
+			if (ordem.getStatusReparo().getDescricao().equals(statusReparo.getDescricao())) {
+				listaordens.add(ordem);
+			}
+		}
+
+		return listaordens;
 	}
 
 }

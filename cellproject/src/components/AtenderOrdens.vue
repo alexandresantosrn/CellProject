@@ -29,6 +29,7 @@
                 <th>Data de Entrada</th>            
                 <th>Modelo</th>
                 <th>Status do Conserto</th>
+                <th>Ações</th>
             </tr>
           </thead>
           <tbody>
