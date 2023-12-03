@@ -32,7 +32,20 @@ public class AuthorizationController {
 			return ResponseEntity.ok("Acesso ok.");
 		}
 
-		return new ResponseEntity<>("Você não está autorizado a acessar este recurso", HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>("Você não está autorizado a acessar este recurso.", HttpStatus.UNAUTHORIZED);
+	}
+	
+	@GetMapping("almoxarifado")
+	public ResponseEntity<String> acessoAlmoxarifado(@RequestHeader("Authorization") String header) {
+
+		String token = header.replace("Bearer ", "");
+		String username = JwtUtil.getUsernameByToken(token);
+
+		if (permissaoService.hasPermissaoAlmoxarifado(username)) {
+			return ResponseEntity.ok("Acesso ok.");
+		}
+
+		return new ResponseEntity<>("Você não está autorizado a acessar este recurso.", HttpStatus.UNAUTHORIZED);
 	}
 
 }

@@ -27,9 +27,10 @@ import AlmoxarifadoBanner from '../components/AlmoxarifadoBanner.vue';
 import CadastrarProduto from '../components/CadastrarProduto.vue';
 import ConsultarEstoque from '../components/ConsultarEstoque.vue';
 import AtenderRequisicoes from '@/components/AtenderRequisicoes.vue';
+import axios from 'axios';
 
 export default {
-    name: 'Usuario',
+    name: 'Almoxarifado',
     data() {
         return {
             exibirFormAgendamento: false,
@@ -68,10 +69,31 @@ export default {
             if (this.token === null) {
                 this.$router.push('/');
             }
-        }
+        },
+        getAcess() {
+            const token = sessionStorage.getItem('token');       
+                
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                };
+
+                axios.get('http://localhost:8080/authorization/almoxarifado', config)
+                    .then(response => {
+                    if (response.status === 401) {
+                        this.$router.push('/proibido');
+                    }              
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar dados:', error);                    
+                        this.$router.push('/proibido');                              
+                    });
+        }        
     },
     mounted() {
         this.getToken();
+        this.getAcess();
     }
 }
 </script>

@@ -330,7 +330,7 @@ public class AgendamentoService {
 					"Não é possível iniciar atendimentos marcados para datas futuras e/ou passadas.");
 		}
 
-		// Seta o agendamento para o status cancelado.
+		// Seta o agendamento para o status atendido.
 		agendamento.setStatusAgendamento(statusAgendamentoService.findStatusByDescricao("Atendido"));
 
 		return agendamentoRepository.save(agendamento);

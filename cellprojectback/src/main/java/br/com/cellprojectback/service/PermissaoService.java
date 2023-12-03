@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cellprojectback.domain.Papel;
 import br.com.cellprojectback.domain.Usuario;
 import br.com.cellprojectback.domain.Permissao;
 import br.com.cellprojectback.repository.PermissaoRepository;

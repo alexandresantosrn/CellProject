@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.OrdemServico;
 import br.com.cellprojectback.domain.Pessoa;
+import br.com.cellprojectback.domain.StatusReparo;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.OrdemServicoRepository;
 import br.com.cellprojectback.util.OrdemServicoUtil;
@@ -19,7 +20,7 @@ public class OrdemServicoService {
 	private OrdemServicoRepository ordemServicoRepository;
 
 	private StatusReparoService statusReparoService;
-	
+
 	private PessoaService pessoaService;
 
 	public OrdemServicoService(StatusReparoService statusReparoService, PessoaService pessoaService) {
@@ -101,9 +102,14 @@ public class OrdemServicoService {
 		return maxId;
 	}
 
-	public List<OrdemServico> listarOrdensServicoByUser(String username) {		
-		Pessoa pessoa = pessoaService.findPessoaByEmail(username);			
+	public List<OrdemServico> listarOrdensServicoByUser(String username) {
+		Pessoa pessoa = pessoaService.findPessoaByEmail(username);
 		return ordemServicoRepository.findByPessoa(pessoa);
+	}
+
+	public OrdemServico iniciarReparo(OrdemServico ordem) {	
+		ordem.setStatusReparo(statusReparoService.findStatusByDescricao("Em Andamento"));
+		return ordemServicoRepository.save(ordem);
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.OrdemServico;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.service.OrdemServicoService;
@@ -31,6 +32,12 @@ public class OrdemServicoController {
 
 	@GetMapping
 	public ResponseEntity<List<OrdemServico>> listarOrdensServico() {
+		List<OrdemServico> ordensServico = ordemServicoService.listarOrdensServico();
+		return new ResponseEntity<>(ordensServico, HttpStatus.OK);
+	}
+	
+	@GetMapping("ordem-by-status")
+	public ResponseEntity<List<OrdemServico>> listarOrdensByStatus(@RequestParam int id) {
 		List<OrdemServico> ordensServico = ordemServicoService.listarOrdensServico();
 		return new ResponseEntity<>(ordensServico, HttpStatus.OK);
 	}
@@ -74,5 +81,17 @@ public class OrdemServicoController {
 		}
 
 	}
+	
+	@PostMapping("iniciar-reparo")
+	public ResponseEntity<String> iniciarReparo(@RequestBody OrdemServico ordem) {
 
+		try {
+			ordemServicoService.iniciarReparo(ordem);
+			return ResponseEntity.ok("Agendamento iniciado com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}	
 }
