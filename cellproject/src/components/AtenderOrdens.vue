@@ -10,10 +10,7 @@
       <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
   
       <form @submit.prevent="consultarAgendamentos">
-        <div class="form-group">
-          <label for="dataAgendamento">Data de Agendamento:</label>
-          <input type="date" id="dataAgendamento" v-model="dataAgendamento" class="form-control" />
-        </div>
+        
         <div class="form-group">
               <label for="statusagendamento">Status de Agendamento:</label>
               <select class="form-control" id="statusagendamento" v-model="selectedStatusAgendamento" required>
@@ -27,21 +24,20 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nº Agendamento</th>
-              <th scope="col">Nome do Cliente</th>
-              <th scope="col">Data</th>
-              <th scope="col">Horário</th>
-              <th scope="col">Status</th>
-              <th scope="col">Ações</th>
+                <th>N&#186 Ordem de Serviço</th>                  
+                <th>Tipo de Serviço</th>
+                <th>Data de Entrada</th>            
+                <th>Modelo</th>
+                <th>Status do Conserto</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(agendamento, index) in resultados" :key="index">
-              <td>{{ agendamento.codigo }}</td>
-              <td>{{ agendamento.pessoa.nome }}</td>
-              <td>{{ formatarData(agendamento.dataAgendamento) }}</td>
-              <td>{{ agendamento.horarioAgendamento }}</td>
-              <td>{{ agendamento.statusAgendamento.descricao }}</td>
+            <tr v-for="(ordem, index) in resultados" :key="index">
+                <td>{{ ordem.codigo }}</td>
+                <td>{{ ordem.tipoServico.descricao }}</td>  
+                <td>{{ formatarData(ordem.dataEntrada) }}</td>     
+                <td>{{ ordem.smartphone.modelo }}</td>
+                <td>{{ ordem.statusReparo.descricao }}</td>
               <td>
                 <button class="btn btn-primary" @click="iniciarAgendamento(agendamento.id)">
                   Iniciar Atendimento
@@ -75,7 +71,6 @@
         comboStatusAgendamento: [],
         selectedStatusAgendamento: '',
         agendamentoId: '',
-        dataAgendamento: new Date().toISOString().split('T')[0], // Define a data atual
         msg: '',
         msg_failure: '',
         texto: 'Prezado(a) usuário(a), selecione a data desejada e o status para consulta das ordens de serviços realizadas.'
@@ -104,7 +99,9 @@
         const token = sessionStorage.getItem('token');
         
         const dataAgendamento = this.dataAgendamento;        
-        const statusAgendamento = this.selectedStatusAgendamento;        
+        const statusAgendamento = this.selectedStatusAgendamento;      
+        
+        console.log(statusAgendamento);
         
         const config = {
           headers: {
@@ -112,16 +109,16 @@
           }
         };
   
-        axios.get('http://localhost:8080/agendamento/list-by-data?dataAgendamento='+dataAgendamento+'&id='+statusAgendamento, config)
+        axios.get('http://localhost:8080/ordemservico/ordem-by-status?id='+statusAgendamento, config)
           .then(response => {
             this.msg_failure = "";
             
             this.resultados = response.data; 
-  
+            console.log(this.resultados);
             if(this.resultados.length < 1) {
               this.msg_failure = 'Não foram localizadas ordens de serviço com os parâmetros informados.'
             }
-  
+            
             this.limparCampos();
           })
           .catch(error => {
