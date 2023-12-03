@@ -85,8 +85,21 @@ public class OrdemServicoController {
 	public ResponseEntity<String> iniciarReparo(@RequestBody OrdemServico ordem) {
 
 		try {
-			ordemServicoService.iniciarReparo(ordem);
+			ordemServicoService.iniciarReparo(ordem.getId());
 			return ResponseEntity.ok("Agendamento iniciado com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}	
+	
+	@PostMapping("finalizar-reparo")
+	public ResponseEntity<String> finalizarReparo(@RequestBody OrdemServico ordem) {
+
+		try {
+			ordemServicoService.finalizarReparo(ordem.getId());
+			return ResponseEntity.ok("Conserto finalizado com sucesso.");
 
 		} catch (ServiceException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());

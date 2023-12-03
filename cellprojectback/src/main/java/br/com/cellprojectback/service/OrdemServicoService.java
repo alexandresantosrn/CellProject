@@ -3,6 +3,7 @@ package br.com.cellprojectback.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,7 +111,14 @@ public class OrdemServicoService {
 		return ordemServicoRepository.findByPessoa(pessoa);
 	}
 
-	public OrdemServico iniciarReparo(OrdemServico ordem) {
+	public OrdemServico iniciarReparo(int id) {
+
+		OrdemServico ordem = findOrdemById(id).orElseThrow();
+
+		if (!ordem.getStatusReparo().getDescricao().equals("Pendente")) {
+			throw new ServiceException("Ordem de serviço não se encontra com status pendente.");
+		}
+
 		ordem.setStatusReparo(statusReparoService.findStatusByDescricao("Em Andamento"));
 		return ordemServicoRepository.save(ordem);
 	}
@@ -131,6 +139,24 @@ public class OrdemServicoService {
 		}
 
 		return listaordens;
+	}
+
+	/**
+	 * Retorna uma ordem de serviço através do seu id.
+	 * 
+	 * @param id<Int> - Id da ordem de serviço.
+	 * @return Optional<Agendamento> - Ordem de serviço localizada.
+	 */
+	private Optional<OrdemServico> findOrdemById(int id) {
+		return ordemServicoRepository.findById(id);
+	}
+
+	public OrdemServico finalizarReparo(int id) {
+
+		OrdemServico ordem = findOrdemById(id).orElseThrow();
+
+		ordem.setStatusReparo(statusReparoService.findStatusByDescricao("Aguardando Retirada"));
+		return ordemServicoRepository.save(ordem);
 	}
 
 }

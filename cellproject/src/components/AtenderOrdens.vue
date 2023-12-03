@@ -1,6 +1,6 @@
 <template>
     <div id="agendamentos">
-      <h2>Listar/Atender Agendamentos</h2>
+      <h2>Listar/Atender Ordens de Serviço</h2>
   
       <div id = "instrucoes">
             <Instrucoes :texto="texto" />
@@ -40,7 +40,7 @@
                 <td>{{ ordem.smartphone.modelo }}</td>
                 <td>{{ ordem.statusReparo.descricao }}</td>
               <td>
-                <button class="btn btn-primary" @click="iniciarAgendamento(agendamento.id)">
+                <button class="btn btn-primary" @click="iniciarAgendamento(ordem.id)">
                   Iniciar Atendimento
                 </button>
               </td>
@@ -74,7 +74,7 @@
         agendamentoId: '',
         msg: '',
         msg_failure: '',
-        texto: 'Prezado(a) usuário(a), selecione a data desejada e o status para consulta das ordens de serviços realizadas.'
+        texto: 'Prezado(a) usuário(a), selecione status desejado para consulta das ordens de serviços realizadas.'
       };
     },
     methods: {
@@ -99,10 +99,7 @@
       consultarAgendamentos() {
         const token = sessionStorage.getItem('token');
         
-        const dataAgendamento = this.dataAgendamento;        
-        const statusAgendamento = this.selectedStatusAgendamento;      
-        
-        console.log(statusAgendamento);
+        const statusAgendamento = this.selectedStatusAgendamento;              
         
         const config = {
           headers: {
@@ -115,7 +112,7 @@
             this.msg_failure = "";
             
             this.resultados = response.data; 
-            console.log(this.resultados);
+
             if(this.resultados.length < 1) {
               this.msg_failure = 'Não foram localizadas ordens de serviço com os parâmetros informados.'
             }
@@ -143,7 +140,7 @@
           id: agendamentoId
         }  
         
-        axios.post('http://localhost:8080/agendamento/iniciar-agendamento', agendamento, config)
+        axios.post('http://localhost:8080/ordemservico/iniciar-reparo', agendamento, config)
           .then(response => {           
             this.msg_failure = '';                                           
             this.msg = response.data;  

@@ -17,7 +17,7 @@
         </div> 
   
         <div v-show="exibirListagemClientes">
-            <ListarClientes />
+            <CadastrarConserto />
         </div>
   
         <div v-show="exibirFormOs">
@@ -25,7 +25,7 @@
         </div>
   
         <div v-show="exibirListagemOs">
-            <ConsultarOs />
+            <ConsultarOs2 />
         </div>
     </div>    
   </template>
@@ -38,8 +38,8 @@
   import Instrucoes from '@/components/Instrucoes.vue';
   import AtenderOrdens from '../components/AtenderOrdens.vue';
   import CadastrarCliente from '../components/CadastrarCliente.vue';
-  import ListarClientes from '../components/ListarClientes.vue';
-  import ConsultarOs from '../components/ConsultarOs.vue';
+  import CadastrarConserto from '../components/CadastrarConserto.vue';
+  import ConsultarOs2 from '../components/ConsultarOs2.vue';
   import CadastrarOs from '../components/CadastrarOs.vue';
   import axios from 'axios';
   
@@ -64,8 +64,8 @@
         AtenderOrdens,
         Instrucoes,
         CadastrarCliente,
-        ListarClientes,
-        ConsultarOs,
+        CadastrarConserto,
+        ConsultarOs2,
         CadastrarOs
     },
     methods: {

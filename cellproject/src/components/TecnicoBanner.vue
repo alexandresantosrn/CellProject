@@ -21,8 +21,8 @@
             <router-link to="/tecnico">
                 <div id="list-os" @click="listarCliente(), mudarCorListagemCliente()" :style="{ backgroundColor: corListagemCliente}">
                     <img :src="list_client_src" :alt="list_client_alt" class="img-user"> 
-                    <p>LISTAR / ALTERAR</p>
-                    <p>CLIENTE</p>
+                    <p>CADASTRAR</p>
+                    <p>CONSERTO</p>
                 </div>
             </router-link>
 

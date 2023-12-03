@@ -25,8 +25,7 @@
                 <th scope="col">Nome do Cliente</th>         
                 <th scope="col">Tipo de Serviço</th>
                 <th scope="col">Data de Entrada</th>   
-                <th scope="col">Status do Conserto</th>
-                <th scope="col">Ações</th>
+                <th scope="col">Status do Conserto</th>               
             </tr>
             </thead>
             <tbody>
@@ -35,12 +34,7 @@
                     <td>{{ ordem.pessoa.nome }}</td>  
                     <td>{{ ordem.tipoServico.descricao }}</td>  
                     <td>{{ formatarData(ordem.dataEntrada) }}</td>    
-                    <td>{{ ordem.statusReparo.descricao }}</td>           
-                    <td>
-                        <button class="btn btn-danger" @click="removerOrdem(ordem.id)">
-                            Remover
-                        </button>
-                    </td>    
+                    <td>{{ ordem.statusReparo.descricao }}</td>          
                 </tr>           
             </tbody>
         </table>
@@ -103,32 +97,6 @@ methods: {
                 this.msg_failure = error.response.data;           
                 console.error('Erro ao buscar dados:', error);
             });
-        },
-    removerOrdem(ordemId) {
-        this.ordemId = ordemId;      
-
-        const token = sessionStorage.getItem('token');
-        
-        const ordem = {
-            id : this.ordemId
-        }
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }; 
-
-        axios.post('http://localhost:8080/ordemservico/remover-ordem', ordem, config)
-            .then(response => {           
-            this.msg_failure = '';                                           
-            this.msg = response.data;  
-            this.limparCampos();          
-        })
-            .catch(error => {                  
-            this.msg = '';                   
-            this.msg_failure = error.response.data; 
-            this.limparCampos();
-        });
     },
     formatarData(data) {
       //Convertendo data para formato brasileiro.
