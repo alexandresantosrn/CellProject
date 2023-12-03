@@ -6,4 +6,6 @@ import br.com.cellprojectback.domain.StatusRequisicao;
 
 public interface StatusRequisicaoRepository extends JpaRepository<StatusRequisicao, Integer> {
 
+	StatusRequisicao findByDescricao(String descricao);
+
 }

@@ -20,7 +20,7 @@ public class ProdutoService {
 	 * Retorna a listagem de todas os produtos ordenados pela denominação do
 	 * produto.
 	 * 
-	 * @return List<Pessoa> - Todos os produtos existentes. '
+	 * @return List<Produto> - Todos os produtos existentes. '
 	 */
 	public List<Produto> listarProdutos() {
 		return produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "denominacao"));
@@ -30,7 +30,7 @@ public class ProdutoService {
 	 * Retorna a listagem de todas os produtos ordenados pelo quantitativo do
 	 * produto.
 	 * 
-	 * @return List<Pessoa> - Todos os produtos existentes. '
+	 * @return List<Produto> - Todos os produtos existentes. '
 	 */
 	public List<Produto> listarProdutosPorQuantitativo() {
 		return produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "quantidade"));

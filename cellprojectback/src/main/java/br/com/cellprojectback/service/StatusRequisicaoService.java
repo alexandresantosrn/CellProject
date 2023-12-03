@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.cellprojectback.domain.StatusReparo;
 import br.com.cellprojectback.domain.StatusRequisicao;
 import br.com.cellprojectback.repository.StatusRequisicaoRepository;
 
@@ -21,6 +22,16 @@ public class StatusRequisicaoService {
 	 */
 	public List<StatusRequisicao> listarTodosStatusRequisicao() {
 		return statusRequisicaoRepository.findAll();
+	}
+	
+	/**
+	 * Retorna status do reparo conforme a descrição informada.
+	 * 
+	 * @param descricao
+	 * @return
+	 */
+	public StatusRequisicao findStatusByDescricao(String descricao) {
+		return statusRequisicaoRepository.findByDescricao(descricao);
 	}
 
 }

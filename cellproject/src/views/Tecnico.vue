@@ -12,16 +12,12 @@
             <AtenderOrdens />
         </div> 
   
-        <div v-show="exibirFormCliente">
-            <CadastrarCliente />
-        </div> 
-  
         <div v-show="exibirListagemClientes">
             <CadastrarConserto />
         </div>
   
         <div v-show="exibirFormOs">
-            <CadastrarOs />
+            <RequisitarPecas />
         </div>
   
         <div v-show="exibirListagemOs">
@@ -36,11 +32,10 @@
   import AgendarAtendimento from '@/components/AgendarAtendimento.vue';
   import ListagemOS from '@/components/ListagemOS.vue';
   import Instrucoes from '@/components/Instrucoes.vue';
-  import AtenderOrdens from '../components/AtenderOrdens.vue';
-  import CadastrarCliente from '../components/CadastrarCliente.vue';
+  import AtenderOrdens from '../components/AtenderOrdens.vue';  
   import CadastrarConserto from '../components/CadastrarConserto.vue';
   import ConsultarOs2 from '../components/ConsultarOs2.vue';
-  import CadastrarOs from '../components/CadastrarOs.vue';
+  import RequisitarPecas from '../components/RequisitarPecas.vue';
   import axios from 'axios';
   
   export default {
@@ -62,11 +57,10 @@
         AgendarAtendimento,      
         ListagemOS,
         AtenderOrdens,
-        Instrucoes,
-        CadastrarCliente,
+        Instrucoes,  
         CadastrarConserto,
         ConsultarOs2,
-        CadastrarOs
+        RequisitarPecas
     },
     methods: {
       showFormCliente(value) {            

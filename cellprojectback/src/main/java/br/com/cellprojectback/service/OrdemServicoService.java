@@ -8,10 +8,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cellprojectback.domain.Agendamento;
 import br.com.cellprojectback.domain.OrdemServico;
 import br.com.cellprojectback.domain.Pessoa;
-import br.com.cellprojectback.domain.StatusAgendamento;
 import br.com.cellprojectback.domain.StatusReparo;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.OrdemServicoRepository;
@@ -156,6 +154,15 @@ public class OrdemServicoService {
 		OrdemServico ordem = findOrdemById(id).orElseThrow();
 
 		ordem.setStatusReparo(statusReparoService.findStatusByDescricao("Aguardando Retirada"));
+		return ordemServicoRepository.save(ordem);
+	}
+
+	public OrdemServico atualizarOrdem(int id) {
+
+		OrdemServico ordem = findOrdemById(id).orElseThrow();
+
+		ordem.setStatusReparo(statusReparoService.findStatusByDescricao("Aguardando Peças"));
+		
 		return ordemServicoRepository.save(ordem);
 	}
 

@@ -29,19 +29,25 @@ public class ProdutoController {
 
 	@GetMapping
 	public ResponseEntity<List<Produto>> listarProdutos(@RequestParam String criterioOrdenacao) {
-		
+
 		if (criterioOrdenacao.equals("denominacao")) {
 			List<Produto> produtos = produtoService.listarProdutos();
 			return new ResponseEntity<>(produtos, HttpStatus.OK);
 		}
-		
+
 		List<Produto> produtos = produtoService.listarProdutosPorQuantitativo();
-		return new ResponseEntity<>(produtos, HttpStatus.OK);		
-		
+		return new ResponseEntity<>(produtos, HttpStatus.OK);
+
+	}
+
+	@GetMapping("listar-produtos")
+	public ResponseEntity<List<Produto>> listarTodosProdutos() {
+		List<Produto> produtos = produtoService.listarProdutos();
+		return new ResponseEntity<>(produtos, HttpStatus.OK);
 	}
 
 	@PostMapping("cadastrar-produto")
-	public ResponseEntity<String> cadastrarAgendamento(@RequestBody Produto produto) {
+	public ResponseEntity<String> cadastrarProduto(@RequestBody Produto produto) {
 
 		try {
 			produtoService.salvarProduto(produto);

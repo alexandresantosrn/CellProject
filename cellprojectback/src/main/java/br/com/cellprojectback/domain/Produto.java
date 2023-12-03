@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "produto")
 public class Produto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -32,6 +32,11 @@ public class Produto {
 
 	public Produto() {
 		super();
+	}
+
+	public Produto(int id) {
+		super();
+		this.id = id;
 	}
 
 	public Produto(int id, int codigo, LocalDate dataEntrada, int quantidade, String denominacao) {

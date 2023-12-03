@@ -52,6 +52,25 @@ public class OrdemServico {
 		super();
 	}
 
+	public OrdemServico(int id) {
+		super();
+		this.id = id;
+	}
+
+	public OrdemServico(int id, String codigo, LocalDate dataEntrada, Pessoa pessoa, Smartphone smartphone, String imei,
+			TipoServico tipoServico, StatusReparo statusReparo, Double precoTotal) {
+		super();
+		this.id = id;
+		this.codigo = codigo;
+		this.dataEntrada = dataEntrada;
+		this.pessoa = pessoa;
+		this.smartphone = smartphone;
+		this.imei = imei;
+		this.tipoServico = tipoServico;
+		this.statusReparo = statusReparo;
+		this.precoTotal = precoTotal;
+	}
+
 	public int getId() {
 		return id;
 	}

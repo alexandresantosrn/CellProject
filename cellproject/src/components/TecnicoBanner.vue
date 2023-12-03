@@ -10,13 +10,7 @@
                 </div>
             </router-link>            
 
-            <router-link to="/tecnico">
-                <div id="add-client" @click="adicionarCliente(), mudarCorClient()" :style="{ backgroundColor: corCliente}">                    
-                    <img :src="add_client_src" :alt="add_client_alt" class="img-user">                
-                    <p>CADASTRAR</p>
-                    <p>CLIENTE</p>                                
-                </div>
-            </router-link>
+           
 
             <router-link to="/tecnico">
                 <div id="list-os" @click="listarCliente(), mudarCorListagemCliente()" :style="{ backgroundColor: corListagemCliente}">
@@ -29,8 +23,8 @@
             <router-link to="/tecnico">
                 <div id="list-os" @click="adicionarOs(), mudarCorOs()" :style="{ backgroundColor: corOs}">
                     <img :src="add_os_src" :alt="add_os_alt" class="img-user"> 
-                    <p>CADASTRAR</p>
-                    <p>ORDEM DE SERVIÇO</p>
+                    <p>REQUISITAR</p>
+                    <p>PEÇAS</p>
                 </div>
             </router-link>
 
@@ -54,7 +48,7 @@ export default {
             list_agendamentos_alt: 'Listar/Atender Agendamentos',
             add_client_src: '/img/adicionar-cliente.png',
             add_client_alt: 'Cadastrar Cliente',
-            list_client_src: '/img/listar-cliente.png',
+            list_client_src: '/img/conserto.png',
             list_client_alt: 'Lista/Alterar Cliente',
             add_os_src: '/img/adicionar-os.png',
             add_os_alt: 'Lista/Consultar Ordem de Serviço',

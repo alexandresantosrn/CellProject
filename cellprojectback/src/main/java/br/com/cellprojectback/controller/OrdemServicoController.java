@@ -106,4 +106,19 @@ public class OrdemServicoController {
 		}
 
 	}	
+	
+	@PostMapping("atualizar-ordem")
+	public ResponseEntity<String> atualizarOrdem(@RequestBody OrdemServico ordem) {
+
+		try {
+			ordemServicoService.atualizarOrdem(ordem.getId());
+			return ResponseEntity.ok("Ordem atualizada com sucesso.");
+
+		} catch (ServiceException e) {
+			return ResponseEntity.unprocessableEntity().body(e.getMessage());
+		}
+
+	}	
+	
+	
 }
