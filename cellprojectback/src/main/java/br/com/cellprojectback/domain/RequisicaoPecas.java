@@ -28,9 +28,12 @@ public class RequisicaoPecas {
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
 
+	@Column(name = "quantidade")
+	private int quantidade;
+
 	@Column(name = "data_solicitacao")
 	private LocalDate dataSolicitacao;
-	
+
 	@Column(name = "data_autorizacao")
 	private LocalDate dataAutorizacao;
 
@@ -40,6 +43,18 @@ public class RequisicaoPecas {
 
 	public RequisicaoPecas() {
 		super();
+	}
+
+	public RequisicaoPecas(int id, OrdemServico ordemServico, Produto produto, int quantidade,
+			LocalDate dataSolicitacao, LocalDate dataAutorizacao, StatusRequisicao statusRequisicao) {
+		super();
+		this.id = id;
+		this.ordemServico = ordemServico;
+		this.produto = produto;
+		this.quantidade = quantidade;
+		this.dataSolicitacao = dataSolicitacao;
+		this.dataAutorizacao = dataAutorizacao;
+		this.statusRequisicao = statusRequisicao;
 	}
 
 	public int getId() {
@@ -64,6 +79,14 @@ public class RequisicaoPecas {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public LocalDate getDataSolicitacao() {
@@ -92,7 +115,7 @@ public class RequisicaoPecas {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dataAutorizacao, dataSolicitacao, id, ordemServico, produto, statusRequisicao);
+		return Objects.hash(dataAutorizacao, dataSolicitacao, id, ordemServico, produto, quantidade, statusRequisicao);
 	}
 
 	@Override
@@ -107,7 +130,7 @@ public class RequisicaoPecas {
 		return Objects.equals(dataAutorizacao, other.dataAutorizacao)
 				&& Objects.equals(dataSolicitacao, other.dataSolicitacao) && id == other.id
 				&& Objects.equals(ordemServico, other.ordemServico) && Objects.equals(produto, other.produto)
-				&& Objects.equals(statusRequisicao, other.statusRequisicao);
+				&& quantidade == other.quantidade && Objects.equals(statusRequisicao, other.statusRequisicao);
 	}
 
 }

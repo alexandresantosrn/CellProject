@@ -25,7 +25,12 @@
               </div>
         </div>  
         
-        <div class="form-group">
+        <div class="col-md-2">
+          <label for="quantidade">Qtd:</label>
+          <input type="text" id="quantidade" v-model="quantidade" class="form-control" required>
+        </div>
+
+        <div class="col-md-10">
             <label for="tipoServico">Peça / Produto:</label>
             <select class="form-control" id="tipoServico" v-model="selectedTipoServico" required>
               <option v-for="tipo in comboTipoServico" :key="tipo.id" :value="tipo.id">{{ tipo.denominacao }}</option>           
@@ -56,8 +61,7 @@ export default {
       cpf: '',
       imei: '',
       selectedTipoServico: '',
-      selectedFabricante: '',
-      selectedModelo: '',
+      quantidade: '',
       comboTipoServico: [], 
       problemas: '',        
       texto: 'Prezado(a) usuário(a), informe abaixo todos os dados para efetivação do cadastro da requisição da peça.',
@@ -150,7 +154,8 @@ export default {
 
       const requisicao = {     
         ordemServico: this.pessoaId,
-        produto: this.selectedTipoServico             
+        produto: this.selectedTipoServico, 
+        quantidade: this.quantidade            
       }           
       
       axios.post('http://localhost:8080/requisicaopecas/cadastrar-requisicao', requisicao, config)

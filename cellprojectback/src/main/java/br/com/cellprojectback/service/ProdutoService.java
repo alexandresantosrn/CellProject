@@ -1,12 +1,14 @@
 package br.com.cellprojectback.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.Produto;
+import br.com.cellprojectback.domain.RequisicaoPecas;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.ProdutoRepository;
 
@@ -64,5 +66,9 @@ public class ProdutoService {
 	 */
 	public Produto findProdutoByCodigo(int codigo) {
 		return produtoRepository.findByCodigo(codigo);
+	}
+	
+	public Optional<Produto> findProdutoById(int id) {
+		return produtoRepository.findById(id);
 	}
 }

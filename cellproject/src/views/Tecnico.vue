@@ -114,7 +114,7 @@
                   }
               };
   
-              axios.get('http://localhost:8080/authorization/atendimento', config)
+              axios.get('http://localhost:8080/authorization/tecnico', config)
                   .then(response => {
                      if (response.status === 401) {
                       this.$router.push('/proibido');

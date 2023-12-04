@@ -9,7 +9,7 @@
         <Message :msg="msg" v-show="msg" />
         <MessageFailure :msg_failure="msg_failure" v-show="msg_failure" />
 
-        <form @submit.prevent="consultarAgendamentos">
+        <form @submit.prevent="consultarRequisicoes">
        
             <div class="form-group">
                     <label for="statusagendamento">Status da Requisição:</label>
@@ -25,24 +25,28 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Nº Agendamento</th>
-                <th scope="col">Nome do Cliente</th>
-                <th scope="col">Data</th>
-                <th scope="col">Horário</th>
+                <th scope="col">Nº Ordem de Serviço</th>
+                <th scope="col">Data da Solicitação</th>                
                 <th scope="col">Status</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Peça / Item Solicitado</th>
                 <th scope="col">Ações</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(agendamento, index) in resultados" :key="index">
-                <td>{{ agendamento.codigo }}</td>
-                <td>{{ agendamento.pessoa.nome }}</td>
-                <td>{{ formatarData(agendamento.dataAgendamento) }}</td>
-                <td>{{ agendamento.horarioAgendamento }}</td>
-                <td>{{ agendamento.statusAgendamento.descricao }}</td>
+            <tr v-for="(requisicao, index) in resultados" :key="index">
+              <td>{{ requisicao.ordemServico.codigo }}</td>
+              <td>{{ formatarData(requisicao.dataSolicitacao) }}</td>    
+              <td>{{ requisicao.statusRequisicao.descricao }}</td> 
+              <td>{{ requisicao.quantidade }}</td> 
+              <td>{{ requisicao.produto.denominacao }}</td> 
                 <td>
-                <button class="btn btn-primary" @click="iniciarAgendamento(agendamento.id)">
-                    Iniciar Atendimento
+                <button class="btn btn-primary" @click="autorizarRequisicao(requisicao.id)">
+                    Autorizar Requisição
+                </button>
+
+                <button class="btn btn-danger" @click="negarRequisicao(requisicao.id)">
+                    Negar Requisição
                 </button>
                 </td>
             </tr>
@@ -73,7 +77,6 @@ export default {
       comboStatusAgendamento: [],
       selectedStatusAgendamento: '',
       agendamentoId: '',
-      dataAgendamento: new Date().toISOString().split('T')[0], // Define a data atual
       msg: '',
       msg_failure: '',
       texto: 'Prezado(a) usuário(a), selecione abaixo o status da requisição para efetivação da consulta.'
@@ -98,11 +101,10 @@ export default {
           console.error('Erro ao buscar dados:', error);
         });
     }, 
-    consultarAgendamentos() {
+    consultarRequisicoes() {
       const token = sessionStorage.getItem('token');
       
-      const dataAgendamento = this.dataAgendamento;        
-      const statusAgendamento = this.selectedStatusAgendamento;        
+      const id = this.selectedStatusAgendamento;        
       
       const config = {
         headers: {
@@ -110,14 +112,15 @@ export default {
         }
       };
 
-      axios.get('http://localhost:8080/agendamento/list-by-data?dataAgendamento='+dataAgendamento+'&id='+statusAgendamento, config)
+      axios.get('http://localhost:8080/requisicaopecas/requisicao-by-status?id='+id, config)
         .then(response => {
           this.msg_failure = "";
           
           this.resultados = response.data; 
+          console.log(this.resultados);
 
           if(this.resultados.length < 1) {
-            this.msg_failure = 'Não foram localizados agendamentos com os parâmetros informados.'
+            this.msg_failure = 'Não foram localizadas requisições com os parâmetros informados.'
           }
 
           this.limparCampos();
@@ -128,7 +131,7 @@ export default {
         });
 
     },
-    iniciarAgendamento(agendamentoId) {
+    autorizarRequisicao(agendamentoId) {
       this.agendamentoId = agendamentoId;      
 
       const token = sessionStorage.getItem('token');
@@ -139,11 +142,38 @@ export default {
         }
       }; 
 
-      const agendamento = {
+      const requisicao = {
         id: agendamentoId
       }  
       
-      axios.post('http://localhost:8080/agendamento/iniciar-agendamento', agendamento, config)
+      axios.post('http://localhost:8080/requisicaopecas/autorizar-requisicao', requisicao, config)
+        .then(response => {           
+          this.msg_failure = '';                                           
+          this.msg = response.data;  
+          this.limparCampos();          
+        })
+        .catch(error => {                  
+          this.msg = '';                   
+          this.msg_failure = error.response.data; 
+          this.limparCampos();
+        });         
+    },
+    negarRequisicao(agendamentoId) {
+      this.agendamentoId = agendamentoId;      
+
+      const token = sessionStorage.getItem('token');
+        
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }; 
+
+      const requisicao = {
+        id: agendamentoId
+      }  
+      
+      axios.post('http://localhost:8080/requisicaopecas/negar-requisicao', requisicao, config)
         .then(response => {           
           this.msg_failure = '';                                           
           this.msg = response.data;  
@@ -161,8 +191,8 @@ export default {
       return `${dia}/${mes}/${ano}`;
     },
     limparCampos() {
-      setTimeout(() => this.msg = "", 5000);
-      setTimeout(() => this.msg_failure = "", 5000);
+      setTimeout(() => this.msg = "", 10000);
+      setTimeout(() => this.msg_failure = "", 10000);
     }  
   },
   mounted() {
