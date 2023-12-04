@@ -50,7 +50,7 @@ export default {
             add_client_alt: 'Cadastrar Cliente',
             list_client_src: '/img/conserto.png',
             list_client_alt: 'Lista/Alterar Cliente',
-            add_os_src: '/img/adicionar-os.png',
+            add_os_src: '/img/pedido.png',
             add_os_alt: 'Lista/Consultar Ordem de Serviço',
             list_os_src: '/img/listar-os.png',
             list_os_alt: 'Lista/Consultar Ordem de Serviço',
