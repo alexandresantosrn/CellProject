@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cellprojectback.domain.OrdemServico;
-import br.com.cellprojectback.domain.StatusReparo;
 import br.com.cellprojectback.domain.StatusRequisicao;
 import br.com.cellprojectback.repository.StatusRequisicaoRepository;
 

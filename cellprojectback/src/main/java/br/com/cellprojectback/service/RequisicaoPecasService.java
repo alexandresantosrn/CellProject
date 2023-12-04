@@ -45,7 +45,7 @@ public class RequisicaoPecasService {
 	}
 
 	public List<RequisicaoPecas> listarRequisicoesByStatus(int id) {
-		System.out.println(id);
+		
 		// Retornando o status da requisição através do seu id.
 		StatusRequisicao statusRequisicao = statusRequisicaoService.findStatusRequisicaoById(id).orElseThrow();
 
@@ -92,6 +92,11 @@ public class RequisicaoPecasService {
 		else if (produto.getQuantidade() < requisicao.getQuantidade()) {
 			throw new ServiceException("Não há saldo em estoque suficiente para autorização da requisição.");
 		}
+
+		int novoSaldo = produto.getQuantidade() - requisicao.getQuantidade();
+		produto.setQuantidade(novoSaldo);
+
+		produtoService.atualizarProduto(produto);
 
 		requisicao.setStatusRequisicao(statusRequisicaoService.findStatusByDescricao("Autorizada"));
 

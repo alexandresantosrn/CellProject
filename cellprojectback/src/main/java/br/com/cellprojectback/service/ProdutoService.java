@@ -8,7 +8,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.cellprojectback.domain.Produto;
-import br.com.cellprojectback.domain.RequisicaoPecas;
 import br.com.cellprojectback.exception.ServiceException;
 import br.com.cellprojectback.repository.ProdutoRepository;
 
@@ -27,7 +26,7 @@ public class ProdutoService {
 	public List<Produto> listarProdutos() {
 		return produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "denominacao"));
 	}
-	
+
 	/**
 	 * Retorna a listagem de todas os produtos ordenados pelo quantitativo do
 	 * produto.
@@ -67,8 +66,12 @@ public class ProdutoService {
 	public Produto findProdutoByCodigo(int codigo) {
 		return produtoRepository.findByCodigo(codigo);
 	}
-	
+
 	public Optional<Produto> findProdutoById(int id) {
 		return produtoRepository.findById(id);
+	}
+
+	public Produto atualizarProduto(Produto produto) {
+		return produtoRepository.save(produto);		
 	}
 }
