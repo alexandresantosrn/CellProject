@@ -86,7 +86,7 @@ public class OrdemServicoController {
 
 		try {
 			ordemServicoService.iniciarReparo(ordem.getId());
-			return ResponseEntity.ok("Agendamento iniciado com sucesso.");
+			return ResponseEntity.ok("Atendimento iniciado com sucesso.");
 
 		} catch (ServiceException e) {
 			return ResponseEntity.unprocessableEntity().body(e.getMessage());
